@@ -58,6 +58,7 @@ public class Pong {
             }
             ret += "\n";
         }
+        return ret;
     }
     
     public void play() {
