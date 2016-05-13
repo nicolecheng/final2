@@ -49,18 +49,38 @@ public class Pong {
         }
     }
     
+    public String toString() {
+        String ret = "";
+        for (int r = 0; r < board.length; r++) {
+            for (int c = 0; c < board.length; c++) {
+                ret += (String)board[r][c];
+            }
+            ret += "\n";
+        }
+    }
+    
+    public void play() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+        System.out.println(this);
+    }
+    
     //Thanks to Graham King from darkcoding.net for the lesson on making the terminal interactive
     private static String ttyConfig;
 
     public static void main(String[] args) {
+    Pong p = new Pong(0);
 	try {
 	    setTerminalToCBreak();
 	    while (true) {
-		if (System.in.available() != 0) { //if a button is pressed:
-		    int key = System.in.read();
-		    System.out.println(exitKey);
-		    move(key);
-		}
+		  if (System.in.available() != 0) { //if a button is pressed:
+              int key = System.in.read();
+              if (key == 0x1B) {
+                  break;
+              }
+              p.move(key);
+		  }
+          p.play();
 	    }
 	} catch (IOException e) {
 	    System.out.println("IOException");
