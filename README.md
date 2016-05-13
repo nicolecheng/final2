@@ -5,9 +5,9 @@ final project semester 2 <br> <br>
 Nicole Cheng & Noah Fichter <br>
 MKS22X / Period 6 <br> <br>
 
-Team <name> <br> <br>
+Team ____ <br> <br>
 
-<Project name> That 80s Game <br>
+ That 80s Game <br>
 This is a series of terminal-based 80s games. <br>
 The user will be able to make an account to keep track of high scores and stats <br>
 (or the high scores and the names will be displayed like in arcade games). <br><br>
