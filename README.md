@@ -19,21 +19,21 @@ Development Log <br><ul><li>
 Project plan/outline including your goals prioritized by importance and chronology <br>
 (things to do + things already done)<br>
 Things to do: <br><ul><li>
-	- individual games (for demo)<li>
-		- which games are we going to recreate?</li><li>
-		- tetris: create class of shapes, user terminal input / controls, score keeping </li><li>
-		- pacman: series of boards, class of pacman and other little monster thingies</li><li>
-		- space invaders: class of alien ships, damage/score records, shooting</li><li>
-		- nintendogs: def need to keep track of user's dog and whatnot</li><li>
-		- pingpong: AI of some sort?</li><li>
-		- pinball: utilize physics! perhaps a simplified board with less controls</li></li><li>
-	- a welding factor for the various components</li><li>
-	- mechanism to output scores and names into a file</li><li>
-	- user accounts</li><li>
-	- powerups and cheat codes</li>
+	individual games (for demo)<li>
+		which games are we going to recreate?</li><li>
+		tetris: create class of shapes, user terminal input / controls, score keeping </li><li>
+		pacman: series of boards, class of pacman and other little monster thingies</li><li>
+		space invaders: class of alien ships, damage/score records, shooting</li><li>
+		nintendogs: def need to keep track of user's dog and whatnot</li><li>
+		pingpong: AI of some sort?</li><li>
+		pinball: utilize physics! perhaps a simplified board with less controls</li></li><li>
+	a welding factor for the various components</li><li>
+	mechanism to output scores and names into a file</li><li>
+	user accounts</li><li>
+	powerups and cheat codes</li>
 </ul><br>
 Things already done:<br><ul><li>
-	- zilch </li>
+	zilch </li>
 </ul><br><br>
 
 Links to the Demo versions, <br> 
