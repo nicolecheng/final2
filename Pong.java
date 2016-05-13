@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.*;
 
 //Resources
 //https://msdn.microsoft.com/en-us/library/windows/desktop/dd375731(v=vs.85).aspx
@@ -53,7 +54,7 @@ public class Pong {
         String ret = "";
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board.length; c++) {
-                ret += (String)board[r][c];
+                ret += String.valueOf(board[r][c]);
             }
             ret += "\n";
         }
