@@ -62,7 +62,8 @@ public class Pong {
     }
     
     public void play() {
-        System.out.println(CLEAR_SCREEN);
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
         System.out.println(this);
     }
     

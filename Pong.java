@@ -62,8 +62,7 @@ public class Pong {
     }
     
     public void play() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        System.out.println(CLEAR_SCREEN);
         System.out.println(this);
     }
     
@@ -76,11 +75,11 @@ public class Pong {
 	    setTerminalToCBreak();
 	    while (true) {
 		  if (System.in.available() != 0) { //if a button is pressed:
-              int key = System.in.read();
-              if (key == 0x1B) {
-                  break;
-              }
-              p.move(key);
+		      int key = System.in.read();
+		      if (key == 0x1B) {
+			  break;
+		      }
+		      p.move(key);
 		  }
           p.play();
 	    }
