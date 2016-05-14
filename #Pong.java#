@@ -44,8 +44,8 @@ public class Pong {
             pos1++;
         }
         if (key == 0x73) {
-            board[pos1][0] = ' ';
-            board[pos1+4][0] = '#';
+            board[0][pos1] = ' ';
+            board[0][pos1+4] = '#';
             pos1++;
         }
     }
@@ -65,14 +65,6 @@ public class Pong {
         System.out.println(CLEAR_SCREEN);
         System.out.println(this);
     }
-
-    public void wait(int millis){
-	try {
-	    Thread.sleep(millis);
-	}
-	catch (InterruptedException e) {
-	}
-    }
     
     //Thanks to Graham King from darkcoding.net for the lesson on making the terminal interactive
     private static String ttyConfig;
@@ -88,7 +80,6 @@ public class Pong {
 			  break;
 		      }
 		      p.move(key);
-		      p.wait(500);
 		  }
 		  p.play();
 	    }
