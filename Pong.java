@@ -62,7 +62,7 @@ public class Pong {
     }
     
     public void play() {
-        System.out.println(CLEAR_SCREEN);
+        System.out.println("\033[2J");
         System.out.println(this);
     }
 
