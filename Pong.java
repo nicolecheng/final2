@@ -88,8 +88,8 @@ public class Pong {
 			  break;
 		      }
 		      p.move(key);
-		      p.wait(500);
 		  }
+		  p.wait(500);
 		  p.play();
 	    }
 	} catch (IOException e) {
