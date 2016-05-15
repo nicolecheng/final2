@@ -17,15 +17,15 @@ public class Pong {
     
     public Pong(int difficulty) {
         //initialize the board to by an empty 9 by 25 board
-        board = new char[9][55];
+        board = new char[15][75];
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c++) {
                 board[r][c] = ' ';
             }
         }
         //create the paddles at each end of the board
-        pos1 = 3;
-        pos2 = 3;
+        pos1 = 6;
+        pos2 = 6;
         for (int i = pos1; i < pos1+3; i++) {
             board[i][0] = '#';
         }
@@ -43,7 +43,7 @@ public class Pong {
             board[pos1+3][0] = ' ';
             pos1--;
         }
-        if (key == 0x73 && pos1 < board.length-3) {
+        if (key == 0x73 && pos1 < 12) {
             board[pos1][0] = ' ';
             board[pos1+3][0] = '#';
             pos1++;
