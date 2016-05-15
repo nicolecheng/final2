@@ -77,7 +77,7 @@ public class Pong {
     }
 
     public static boolean inBounds(int pos, char[][] board) {
-	return (pos >= 0 && pos <= board.length);
+	return (pos >= 0 && pos < board.length);
     }
     
     //Thanks to Graham King from darkcoding.net for the lesson on making the terminal interactive
