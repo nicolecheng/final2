@@ -12,20 +12,9 @@ This is a series of terminal-based 80s games. <br>
 The user will be able to make an account to keep track of high scores and stats <br>
 (or the high scores and the names will be displayed like in arcade games). <br><br>
 
-Development Log <br><ul>
-    <li>
-      05/11/16: We decided on a project idea and the games that would be included.
-    </li>
-    <li>
-      05/12/16: Start of README.md -- putting together the actual plan.
-    </li>
-    <li>
-      05/14/16: Noah - began Pong, mainly working on interaction with the terminal as well as frequently updating (animation)
-    </li>
-    <li>
-      05/15/16: Noah - actually worked on Pong - player's paddle movement works, need to add in ball movement + physics as well as enemy AI
-    </li>
-</ul><br><br>
+Development Log <br><ul><li>
+05/11/16: We decided on a project idea and the games that would be included.</li><li>
+05/12/16: Start of README.md -- putting together the actual plan.</li></ul><br><br>
 
 Project plan/outline including your goals prioritized by importance and chronology <br>
 (things to do + things already done)<br>
