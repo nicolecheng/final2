@@ -23,16 +23,14 @@ public class Pong {
                 board[r][c] = ' ';
             }
         }
-	board[0][0] = '-';
-	board[0][board.length-1] = '-';
         //create the paddles at each end of the board
         pos1 = 3;
         pos2 = 3;
-        for (int i = pos1; i < pos1+3; i++) {
+        for (int i = pos1; i < pos1+2; i++) {
             board[i][0] = '#';
         }
-        for (int i = pos2; i < pos2+3; i++) {
-            board[i][board.length-1] = '#';
+        for (int i = pos2; i < pos2+2; i++) {
+            board[i][board[0].length-1] = '#';
         }
         board[board.length/2][board[0].length/2] = '*';
         
@@ -45,7 +43,7 @@ public class Pong {
             board[pos1+3][0] = ' ';
             pos1--;
         }
-        if (key == 0x73 && pos1 < board.length-3) {
+        if (key == 0x73 && pos1 < board.length-4) {
             board[pos1][0] = ' ';
             board[pos1+4][0] = '#';
             pos1++;
@@ -55,7 +53,7 @@ public class Pong {
     public String toString() {
         String ret = "";
         for (int r = 0; r < board.length; r++) {
-            for (int c = 0; c < board.length; c++) {
+            for (int c = 0; c < board[0].length; c++) {
                 ret += String.valueOf(board[r][c]);
             }
             ret += "\n";
