@@ -40,10 +40,12 @@ public class Pong {
     public void move(int key) {
         if (key == 0x77 && pos1 > 0) {
             board[pos1][0] = '#';
-            board[pos1+3][0] = ' ';
+	    if (inBounds(pos1+3)) {
+		board[pos1+3][0] = ' ';
+	    }
             pos1--;
         }
-        if (key == 0x73 && pos1 < 12) {
+        if (key == 0x73 && pos1 < board.length-3) {
             board[pos1][0] = ' ';
             board[pos1+3][0] = '#';
             pos1++;
@@ -72,6 +74,10 @@ public class Pong {
 	}
 	catch (InterruptedException e) {
 	}
+    }
+
+    public static boolean inBounds(int pos, char[][] board) {
+	return (pos >= 0 && pos <= board.length);
     }
     
     //Thanks to Graham King from darkcoding.net for the lesson on making the terminal interactive
