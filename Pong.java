@@ -23,6 +23,8 @@ public class Pong {
                 board[r][c] = ' ';
             }
         }
+	board[0][0] = "-";
+	board[0][board.length-1] = "-";
         //create the paddles at each end of the board
         pos1 = 3;
         pos2 = 3;
