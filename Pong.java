@@ -17,7 +17,7 @@ public class Pong {
     
     public Pong(int difficulty) {
         //initialize the board to by an empty 9 by 25 board
-        board = new char[9][25];
+        board = new char[9][55];
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c++) {
                 board[r][c] = ' ';
@@ -26,10 +26,10 @@ public class Pong {
         //create the paddles at each end of the board
         pos1 = 3;
         pos2 = 3;
-        for (int i = pos1; i < pos1+2; i++) {
+        for (int i = pos1; i < pos1+3; i++) {
             board[i][0] = '#';
         }
-        for (int i = pos2; i < pos2+2; i++) {
+        for (int i = pos2; i < pos2+3; i++) {
             board[i][board[0].length-1] = '#';
         }
         board[board.length/2][board[0].length/2] = '*';
@@ -39,13 +39,13 @@ public class Pong {
     
     public void move(int key) {
         if (key == 0x77 && pos1 > 0) {
-            board[pos1-1][0] = '#';
+            board[pos1][0] = '#';
             board[pos1+3][0] = ' ';
             pos1--;
         }
-        if (key == 0x73 && pos1 < board.length-4) {
+        if (key == 0x73 && pos1 < board.length-3) {
             board[pos1][0] = ' ';
-            board[pos1+4][0] = '#';
+            board[pos1+3][0] = '#';
             pos1++;
         }
     }
@@ -89,7 +89,7 @@ public class Pong {
 		      }
 		      p.move(key);
 		  }
-		  p.wait(500);
+		  p.wait(50);
 		  p.play();
 	    }
 	} catch (IOException e) {
