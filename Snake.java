@@ -1,23 +1,165 @@
+import java.io.IOException;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.*;
 import java.io.*;
 
 public class Snake{
 
-    int x,y;
-    int length;
-    int xbound,ybound; // walls    
+    private boolean DEBUG = true;
+    private int x,y;
+    private int ox,oy; // xcor, ycor of obstacle
+    private int length;
+    private int rows,cols; 
+    private char[][]board;
+    private MyDeque<Integer>snake;
+    private int dir; // direction: 0 = up, 1 = down, 2 = left, 3 = right
+    private int score;
+
+    private void debug(String s){
+	if(DEBUG){
+	    System.out.println(s);
+	}
+    }
 
     public Snake(){
-	x = 0;
-	y = 0;
+	x = 1;
+	y = 1;
 	length = 1;
+        rows = 12;
+	cols = 12;
+	snake = new MyDeque<Integer>(); // keeps coords of snake
+	snake.addFirst(cols+1); // start at pt (1,1)
+	board();
+	addObstacle();
+	dir = -1;
+	score = 0;
     }
 
-    public class Obstacle{
-	int x,y;
-	
+    private void board(){ 
+	board = new char[rows][cols]; // default 10x10 board with borders
+	for(int row = 0; row < rows; row++){
+	    for(int col = 0; col < cols; col++){
+		if(row==0 || row==rows-1 || col==0 || col==cols-1){
+		    board[row][col] = '#';
+		}else{
+		    board[row][col] = ' ';
+		}
+	    }
+	}
+	board[y][x] = 'S';
     }
 
+    private void addObstacle(){
+	int r,c;
+	r = (int)(Math.random()*(rows-2))+1;
+	c = (int)(Math.random()*(cols-1))+1;
+	if(ok(r,c)){
+	    board[r][c]='!';
+	}else{
+	    addObstacle();
+	}
+    }
+
+    public String toString(){
+	// animations
+	String s = "Score: "+score+"\n";
+	for(int row = 0; row < rows; row++){
+	    for(int col = 0; col < cols; col++){
+		s += board[row][col]+" ";
+	    }
+	    s+="\n";
+	}
+	return s;
+    }
+
+    public void move(int i){
+	if(i==0x57){
+	    move('u');
+	}else if(i==0x53){
+	    move('d');
+	}else if(i==0x41){
+	    move('l');
+	}else if(i==0x44){
+	    move('r');
+	}
+    }
+
+    public boolean move(char c){ // udlr - up down left right
+	//debug(""+snake.getLast());
+	int xx = snake.getLast()%cols;
+	int yy = snake.getLast()/cols;
+	int d = dir;
+	if(c=='u' && ok(x,y-1)){
+		y--;
+		dir = 0;
+	}else if(c=='d' && ok(x,y+1)){
+		y++;
+		dir = 1;
+	}else if(c=='l' && ok(x-1,y)){
+		x--;
+		dir = 2;
+	}else if(c=='r' && ok(x+1,y)){
+		x++;
+		dir = 3;
+	}else{
+	    gameOver();
+	    return false;
+	}
+	snake.removeLast();
+	snake.addFirst(y*board.length+x);
+	check();
+	board[y][x] = 'S';
+	//debug(""+yy+" "+xx);
+	board[yy][xx] = ' ';
+        return true;
+    }
+
+    private boolean ok(int y, int x){
+	return (board[y][x]!='#' && board[y][x]!='S');
+    }
+
+    private void check(){ // checks for hitting the wall / obstacles
+	if(board[y][x]=='#'){
+	    gameOver();
+	}else if(board[y][x]=='!'){
+	    // found obstacle thing
+	    score++;
+	    addObstacle();
+	}
+    }
+
+    private void gameOver(){
+        System.out.println("\033[2J");
+	board = null;
+	System.out.println("GAME OVER. YOU LOST.");
+    }
+
+    public void run(){
+	if(dir==0){
+	    move('u');
+	}else if(dir==1){
+	    move('d');
+	}else if(dir==2){
+	    move('r');
+	}else if(dir==3){
+	    move('l');
+	}
+	System.out.println("\033[2J");
+	System.out.println(this);
+    }
+
+
+    private void wait(int millis){
+        try {
+            Thread.sleep(millis);
+        }
+        catch (InterruptedException e) {
+        }
+    }
+
+
+    /*
     //FREE STUFF!!! (creds to mr k)
 
     public void clearTerminal(){
@@ -69,7 +211,88 @@ public class Snake{
 
     
     //END FREE STUFF
+    */
 
+    
+    //Thanks to Graham King from darkcoding.net for the lesson on making the terminal interactive
+    private static String ttyConfig;
 
+    public static void main(String[] args) {
+	Snake m = new Snake();
+	try {
+	    setTerminalToCBreak();
+	    int i = 0;
+	    while (true) {
+		if (System.in.available() != 0) { //if a button is pressed:
+		    int key = System.in.read();
+		    System.out.println(key);
+		    if (key == 0x1B) { //if the button pressed is the esc key:
+			break; //stop the loop
+		    }
+		    m.move(key);
+		}
+		i++;
+		m.wait(50);
+		m.run();
+	    }
+	} catch (IOException e) {
+	    System.out.println("IOException");
+	} catch (InterruptedException e) {
+	    System.out.println("InterruptedException");
+	}
+	finally {
+	    try {
+		stty(ttyConfig.trim());
+	    } catch (Exception e) {
+		System.out.println("Exception restoring tty config");
+	    }
+	}
+    }
+
+    private static void setTerminalToCBreak() throws IOException, InterruptedException { //used in main()
+	ttyConfig = stty("-g");
+	stty("-icanon min 1"); //makes the console go character by character rather than line by line
+	stty("-echo"); //disables the terminal displaying the character pressed
+    }
+
+    private static String stty(final String args) throws IOException, InterruptedException { //used in setTerminalToCBreak()
+	String cmd = "stty " + args + " < /dev/tty";
+	
+	return exec(new String[] {
+		"sh",
+		"-c",
+		cmd
+	    });
+    }
+
+    private static String exec(final String[] cmd) throws IOException, InterruptedException { //used in stty()
+	ByteArrayOutputStream bout = new ByteArrayOutputStream();
+
+	Process p = Runtime.getRuntime().exec(cmd);
+        int c;
+        InputStream in = p.getInputStream();
+
+	while ((c = in.read()) != -1) {
+            bout.write(c);
+        }
+
+        in = p.getErrorStream();
+
+        while ((c = in.read()) != -1) {
+            bout.write(c);
+        }
+	
+        p.waitFor();
+
+        String result = new String(bout.toByteArray());
+        return result;
+    }
+    
 
 }
+
+//Resources
+//https://msdn.microsoft.com/en-us/library/windows/desktop/dd375731(v=vs.85).aspx
+//http://www.darkcoding.net/software/non-blocking-console-io-is-not-possible/
+//http://stackoverflow.com/questions/9545388/how-can-i-detect-arrow-keys-in-java-console-not-in-gui
+//https://docs.oracle.com/javase/tutorial/essential/exceptions/finally.html
