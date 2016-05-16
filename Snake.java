@@ -91,6 +91,8 @@ public class Snake{
 	    debug("MOVING LEFT");
 	    move('r');
 	    dir = 3;
+	}else{
+	    debug("NONE OF THE MOVES ARE REGISTERING");
 	}
     }
 
