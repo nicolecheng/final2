@@ -15,6 +15,7 @@ public class Snake{
     private MyDeque<Integer>snake;
     private int dir; // direction: 0 = up, 1 = down, 2 = left, 3 = right
     private int score;
+    private boolean done;
 
     private void debug(String s){
 	if(DEBUG){
@@ -63,6 +64,7 @@ public class Snake{
 
     public String toString(){
 	// animations
+	debug(""+rows+" "+cols);
 	String s = "Score: "+score+"\n";
 	for(int row = 0; row < rows; row++){
 	    for(int col = 0; col < cols; col++){
@@ -75,32 +77,33 @@ public class Snake{
 
     public void move(int i){
 	//debug("HERE");
-	if(i==0x57){
+	if(i==0x77){
 	    debug("MOVING UP");
 	    move('u');
 	    dir = 0;
-	}else if(i==0x53){
+	}else if(i==0x73){
 	    debug("MOVING DOWN");
 	    move('d');
 	    dir = 1;
-	}else if(i==0x41){
-	    debug("MOVING RIGHT");
+	}else if(i==0x61){
+	    debug("MOVING LEFT");
 	    move('l');
 	    dir = 2;
-	}else if(i==0x44){
-	    debug("MOVING LEFT");
+	}else if(i==0x64){
+	    debug("MOVING RIGHT");
 	    move('r');
 	    dir = 3;
-	}else{
-	    debug("NONE OF THE MOVES ARE REGISTERING");
-	    // this seems to be the case :(
 	}
     }
 
     public boolean move(char c){ // udlr - up down left right
 	//debug(""+snake.getLast());
-	int xx = snake.getLast()%cols;
-	int yy = snake.getLast()/cols;
+	int xx = 1;
+	int yy = 1;
+	if(snake.getLast()!=null){
+	    xx = snake.getLast()%cols;
+	    yy = snake.getLast()/cols;
+	}
 	int d = dir;
 	if(c=='u' && ok(x,y-1)){
 		y--;
@@ -115,11 +118,11 @@ public class Snake{
 		x++;
 		dir = 3;
 	}else{
-	    gameOver();
+	    //gameOver();
 	    return false;
 	}
 	snake.removeLast();
-	snake.addFirst(y*board.length+x);
+	snake.addFirst(y*cols+x);
 	check();
 	board[y][x] = 'S';
 	//debug(""+yy+" "+xx);
@@ -143,8 +146,9 @@ public class Snake{
 
     private void gameOver(){
         System.out.println("\033[2J");
-	board = null;
+	//board = null;
 	System.out.println("GAME OVER. YOU LOST.");
+	done=true;
     }
 
     public void run(){
@@ -244,7 +248,7 @@ public class Snake{
 		    m.move(key);
 		}
 		i++;
-		m.wait(50);
+		m.wait(1000);        
 		m.run();
 	    }
 	} catch (IOException e) {
