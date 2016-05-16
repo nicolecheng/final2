@@ -14,6 +14,7 @@ public class Snake{
     private char[][]board;
     private MyDeque<Integer>snake;
     private int dir; // direction: 0 = up, 1 = down, 2 = left, 3 = right
+    private int score;
 
     private void debug(String s){
 	if(DEBUG){
@@ -31,6 +32,8 @@ public class Snake{
 	snake.addFirst(cols+1); // start at pt (1,1)
 	board();
 	addObstacle();
+	dir = -1;
+	score = 0;
     }
 
     private void board(){ 
@@ -60,7 +63,7 @@ public class Snake{
 
     public String toString(){
 	// animations
-	String s = "";
+	String s = "Score: "+score+"\n";
 	for(int row = 0; row < rows; row++){
 	    for(int col = 0; col < cols; col++){
 		s += board[row][col]+" ";
@@ -68,6 +71,18 @@ public class Snake{
 	    s+="\n";
 	}
 	return s;
+    }
+
+    public void move(int i){
+	if(i==0x57){
+	    move('u');
+	}else if(i==0x53){
+	    move('d');
+	}else if(i==0x41){
+	    move('l');
+	}else if(i==0x44){
+	    move('r');
+	}
     }
 
     public boolean move(char c){ // udlr - up down left right
@@ -88,6 +103,7 @@ public class Snake{
 		x++;
 		dir = 3;
 	}else{
+	    gameOver();
 	    return false;
 	}
 	snake.removeLast();
@@ -103,29 +119,36 @@ public class Snake{
 	return (board[y][x]!='#' && board[y][x]!='S');
     }
 
-    private void check(){
+    private void check(){ // checks for hitting the wall / obstacles
 	if(board[y][x]=='#'){
 	    gameOver();
 	}else if(board[y][x]=='!'){
 	    // found obstacle thing
+	    score++;
+	    addObstacle();
 	}
     }
 
     private void gameOver(){
+        System.out.println("\033[2J");
+	board = null;
 	System.out.println("GAME OVER. YOU LOST.");
     }
 
     public void run(){
-
+	if(dir==0){
+	    move('u');
+	}else if(dir==1){
+	    move('d');
+	}else if(dir==2){
+	    move('r');
+	}else if(dir==3){
+	    move('l');
+	}
+	System.out.println("\033[2J");
+	System.out.println(this);
     }
 
-    public static void main(String[]args){
-
-	Snake m = new Snake();
-	System.out.println(m);
-	m.move('d');
-	System.out.println(m);
-    }
 
     private void wait(int millis){
         try {
@@ -190,23 +213,27 @@ public class Snake{
     //END FREE STUFF
     */
 
-    /*
+    
     //Thanks to Graham King from darkcoding.net for the lesson on making the terminal interactive
     private static String ttyConfig;
 
     public static void main(String[] args) {
+	Snake m = new Snake();
 	try {
 	    setTerminalToCBreak();
 	    int i = 0;
 	    while (true) {
 		if (System.in.available() != 0) { //if a button is pressed:
-		    int exitKey = System.in.read();
-		    System.out.println(exitKey);
-		    if (exitKey == 0x48 || exitKey == 0x61) { //if the button pressed is the up key:
+		    int key = System.in.read();
+		    System.out.println(key);
+		    if (key == 0x1B) { //if the button pressed is the esc key:
 			break; //stop the loop
 		    }
+		    m.move(key);
 		}
 		i++;
+		m.wait(50);
+		m.run();
 	    }
 	} catch (IOException e) {
 	    System.out.println("IOException");
@@ -260,7 +287,7 @@ public class Snake{
         String result = new String(bout.toByteArray());
         return result;
     }
-    */
+    
 
 }
 
