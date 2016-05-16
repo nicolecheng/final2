@@ -25,6 +25,9 @@ Development Log <br><ul>
     <li>
       05/15/16: Noah - actually worked on Pong - player's paddle movement works, need to add in ball movement + physics as well as enemy AI
     </li>
+    <li>
+      05/15/16: Nicole - got through most of Snake; need to make it a run with interactive controls
+    </li>
 </ul><br><br>
 
 Project plan/outline including your goals prioritized by importance and chronology <br>
