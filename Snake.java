@@ -93,6 +93,7 @@ public class Snake{
 	    dir = 3;
 	}else{
 	    debug("NONE OF THE MOVES ARE REGISTERING");
+	    // this seems to be the case :(
 	}
     }
 
