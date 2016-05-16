@@ -6,39 +6,56 @@ import java.io.*;
 
 public class Snake{
 
+    private boolean DEBUG = true;
     private int x,y;
+    private int ox,oy; // xcor, ycor of obstacle
     private int length;
     private int rows,cols; 
     private char[][]board;
-    private myDeque<Integer>snake;
+    private MyDeque<Integer>snake;
     private int dir; // direction: 0 = up, 1 = down, 2 = left, 3 = right
+
+    private void debug(String s){
+	if(DEBUG){
+	    System.out.println(s);
+	}
+    }
 
     public Snake(){
 	x = 1;
 	y = 1;
 	length = 1;
-        rows = 7;
-	cols = 7;
+        rows = 12;
+	cols = 12;
 	snake = new MyDeque<Integer>(); // keeps coords of snake
-	//snake[0][0]=x;
-	//snake[0][1]=y;
+	snake.addFirst(cols+1); // start at pt (1,1)
 	board();
+	addObstacle();
     }
 
-    private void board(){ // rows&cols [1,5], borders [0],[6]
-	board = new int[rows][cols]; // default 5x5 board with borders
+    private void board(){ 
+	board = new char[rows][cols]; // default 10x10 board with borders
 	for(int row = 0; row < rows; row++){
 	    for(int col = 0; col < cols; col++){
 		if(row==0 || row==rows-1 || col==0 || col==cols-1){
 		    board[row][col] = '#';
 		}else{
 		    board[row][col] = ' ';
+		}
 	    }
 	}
-    }	
-    
-    private class Obstacle{
-	int x,y;	
+	board[y][x] = 'S';
+    }
+
+    private void addObstacle(){
+	int r,c;
+	r = (int)(Math.random()*(rows-2))+1;
+	c = (int)(Math.random()*(cols-1))+1;
+	if(ok(r,c)){
+	    board[r][c]='!';
+	}else{
+	    addObstacle();
+	}
     }
 
     public String toString(){
@@ -54,6 +71,7 @@ public class Snake{
     }
 
     public boolean move(char c){ // udlr - up down left right
+	//debug(""+snake.getLast());
 	int xx = snake.getLast()%cols;
 	int yy = snake.getLast()/cols;
 	int d = dir;
@@ -74,36 +92,40 @@ public class Snake{
 	}
 	snake.removeLast();
 	snake.addFirst(y*board.length+x);
+	check();
 	board[y][x] = 'S';
+	//debug(""+yy+" "+xx);
 	board[yy][xx] = ' ';
-        reutrn true;
+        return true;
     }
 
-    private boolean ok(int x, int y){
-	return (x > 0 && x <= maxx && y > 0 && y <= maxy && board[x][y]!="#");
+    private boolean ok(int y, int x){
+	return (board[y][x]!='#' && board[y][x]!='S');
+    }
+
+    private void check(){
+	if(board[y][x]=='#'){
+	    gameOver();
+	}else if(board[y][x]=='!'){
+	    // found obstacle thing
+	}
+    }
+
+    private void gameOver(){
+	System.out.println("GAME OVER. YOU LOST.");
     }
 
     public void run(){
 
     }
 
-
     public static void main(String[]args){
 
 	Snake m = new Snake();
-	
+	System.out.println(m);
+	m.move('d');
+	System.out.println(m);
     }
-
-    private void grow(){
-	int[][]hold = new int[snake.length*2][2];
-	for(int row = 0; row < snake.length; row++){
-	    for(int col = 0; col < snake[row].length; col++){
-		hold[row][col] = snake[row][col];
-	    }
-	}
-	snake = hold;
-    }
-	
 
     private void wait(int millis){
         try {
