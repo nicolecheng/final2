@@ -14,8 +14,13 @@ public class Pong {
     private int pos1;
     private int pos2;
     private int difficulty;
+    private int ballX;
+    private int ballY;
+    private int lastDir;
+    private boolean DEBUG;
     
     public Pong(int difficulty) {
+	DEBUG = true;
         //initialize the board to by an empty 9 by 25 board
         board = new char[15][75];
         for (int r = 0; r < board.length; r++) {
@@ -23,6 +28,11 @@ public class Pong {
                 board[r][c] = ' ';
             }
         }
+	//show the border
+	for (int c = 0; c < board[0].length; c++) {
+	    board[0][c] = '-';
+	    board[board.length-1][c] = '-';
+	}
         //create the paddles at each end of the board
         pos1 = 6;
         pos2 = 6;
@@ -32,7 +42,11 @@ public class Pong {
         for (int i = pos2; i < pos2+3; i++) {
             board[i][board[0].length-1] = '#';
         }
+	//show the ball
         board[board.length/2][board[0].length/2] = '*';
+	ballX = board[0].length/2;
+	ballY = board.length/2;
+	lastDir = 4;
         
         this.difficulty = difficulty; //set difficulty
     }
@@ -40,16 +54,113 @@ public class Pong {
     public void move(int key) {
         if (key == 0x77 && pos1 > 0) {
             board[pos1][0] = '#';
-	    if (inBounds(pos1+3,board)) {
+	    if (inBounds(pos1+3,board) && pos1+3 != 14) {
 		board[pos1+3][0] = ' ';
 	    }
             pos1--;
         }
-        if (key == 0x73 && pos1 < board.length-3) {
-            board[pos1][0] = ' ';
+        if (key == 0x73 && pos1 < board.length-4) {
+	    if (pos1 != 0) {
+		board[pos1][0] = ' ';
+	    }
             board[pos1+3][0] = '#';
             pos1++;
         }
+    }
+
+    public int ballMove(int dir) {
+	if (dir == 0) {
+	    board[ballY][ballX] = ' ';
+	    ballX++;
+	    board[ballY][ballX] = '*';
+	}
+	if (dir == 1) {
+	    board[ballY][ballX] = ' ';
+	    ballX++;
+	    ballY++;
+	    board[ballY][ballX] = '*';
+	}
+	if (dir == 2) {
+	    board[ballY][ballX] = ' ';
+	    ballY++;
+	    board[ballY][ballX] = '*';
+	}
+	if (dir == 3) {
+	    board[ballY][ballX] = ' ';
+	    ballX--;
+	    ballY++;
+	    board[ballY][ballX] = '*';
+	}
+	if (dir == 4) {
+	    board[ballY][ballX] = ' ';
+	    ballX--;
+	    board[ballY][ballX] = '*';
+	}
+	if (dir == 5) {
+	    board[ballY][ballX] = ' ';
+	    ballX--;
+	    ballY--;
+	    board[ballY][ballX] = '*';
+	}
+	if (dir == 6) {
+	    board[ballY][ballX] = ' ';
+	    ballY--;
+	    board[ballY][ballX] = '*';
+	}
+	if (dir == 7) {
+	    board[ballY][ballX] = ' ';
+	    ballX++;
+	    ballY--;
+	    board[ballY][ballX] = '*';
+	}
+	return dir;
+    }
+
+    public int getDir(int lastDir) {
+	if (ballX == 1) {
+	    //hit paddle dead on
+	    if (ballY-1 == pos1) {
+		return 0;
+	    }
+	    //hit top of paddle
+	    if (ballY == pos1) {
+		return 1;
+	    }
+	    //hit bottom of paddle
+	    if (ballY-2 == pos1) {
+		return 7;
+	    }
+	} else if (ballX == board[0].length-2) {
+	    //dead on
+	    if (ballY-1 == pos2) {
+		return 4;
+	    }
+	    //top
+	    if (ballY == pos2) {
+		return 3;
+	    }
+	    //bottom
+	    if (ballY-2 == pos2) {
+		return 5;
+	    }
+	}
+	//if it hits the ceiling, reflect it in the opposite direction
+	else if (ballY == 1) {
+	    if (lastDir == 1) {
+		return 7;
+	    }
+	    if (lastDir == 3) {
+		return 5;
+	    }
+	} else if (ballY == board.length-2) {
+	    if (lastDir == 7) {
+		return 1;
+	    }
+	    if (lastDir == 5) {
+		return 3;
+	    }
+	}
+	return lastDir;
     }
     
     public String toString() {
@@ -64,8 +175,17 @@ public class Pong {
     }
     
     public void play() {
-        System.out.println("\033[2J");
-        System.out.println(this);
+	if (!DEBUG) {
+	    System.out.println("lastDir: "+lastDir);
+	    System.out.println("ballX: "+ballX);
+	    System.out.println("ballY: "+ballY);
+	    System.out.println("pos1: "+pos1);
+	    System.out.println();
+	} else {
+	    System.out.println("\033[2J");
+	    System.out.println(this);
+	    lastDir = ballMove(getDir(lastDir));
+	}
     }
 
     public void wait(int millis){
@@ -88,14 +208,14 @@ public class Pong {
 	try {
 	    setTerminalToCBreak();
 	    while (true) {
-		  if (System.in.available() != 0) { //if a button is pressed:
+		p.wait(50);
+		if (System.in.available() != 0) { //if a button is pressed:
 		      int key = System.in.read();
 		      if (key == 0x1B) {
 			  break;
 		      }
 		      p.move(key);
 		  }
-		  p.wait(50);
 		  p.play();
 	    }
 	} catch (IOException e) {
