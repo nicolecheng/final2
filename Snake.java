@@ -8,28 +8,28 @@ public class Snake{
 
     private int x,y;
     private int length;
-    private int maxx,maxy; // bounds
+    private int rows,cols; 
     private char[][]board;
-    private int[][]snake;
+    private myDeque<Integer>snake;
     private int dir; // direction: 0 = up, 1 = down, 2 = left, 3 = right
 
     public Snake(){
 	x = 1;
 	y = 1;
 	length = 1;
-        maxx = 5;
-	maxy = 5;
-	snake = new int[10][2]; // keeps coords of snake
-	snake[0][0]=x;
-	snake[0][1]=y;
+        rows = 7;
+	cols = 7;
+	snake = new MyDeque<Integer>(); // keeps coords of snake
+	//snake[0][0]=x;
+	//snake[0][1]=y;
 	board();
     }
 
     private void board(){ // rows&cols [1,5], borders [0],[6]
-	board = new int[maxx+2][maxy+y]; // default 5x5 board with borders
-	for(int row = 0; row <= maxy; row++){
-	    for(int col = 0; col <= maxx; col++){
-		if(row==0 || row==maxy || col==0 || col==maxx){
+	board = new int[rows][cols]; // default 5x5 board with borders
+	for(int row = 0; row < rows; row++){
+	    for(int col = 0; col < cols; col++){
+		if(row==0 || row==rows-1 || col==0 || col==cols-1){
 		    board[row][col] = '#';
 		}else{
 		    board[row][col] = ' ';
@@ -44,8 +44,8 @@ public class Snake{
     public String toString(){
 	// animations
 	String s = "";
-	for(int row = 0; row < board.length; row++){
-	    for(int col = 0; col < board[row].length; col++){
+	for(int row = 0; row < rows; row++){
+	    for(int col = 0; col < cols; col++){
 		s += board[row][col]+" ";
 	    }
 	    s+="\n";
@@ -54,8 +54,8 @@ public class Snake{
     }
 
     public boolean move(char c){ // udlr - up down left right
-	int xx = snake[length-1][0];
-	int yy = snake[length-1][1];
+	int xx = snake.getLast()%cols;
+	int yy = snake.getLast()/cols;
 	int d = dir;
 	if(c=='u' && ok(x,y-1)){
 		y--;
@@ -72,9 +72,10 @@ public class Snake{
 	}else{
 	    return false;
 	}
-	snake[
-	board[x][y] = 'S';
-	board[xx][yy] = ' ';
+	snake.removeLast();
+	snake.addFirst(y*board.length+x);
+	board[y][x] = 'S';
+	board[yy][xx] = ' ';
         reutrn true;
     }
 
