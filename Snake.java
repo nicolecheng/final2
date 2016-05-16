@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Snake{
 
-    private boolean DEBUG = true;
+    private boolean DEBUG = false;
     private int x,y;
     private int ox,oy; // xcor, ycor of obstacle
     private int length;
