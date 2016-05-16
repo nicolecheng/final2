@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Snake{
 
-    private boolean DEBUG = false;
+    private boolean DEBUG = true;
     private int x,y;
     private int ox,oy; // xcor, ycor of obstacle
     private int length;
@@ -74,6 +74,7 @@ public class Snake{
     }
 
     public void move(int i){
+	debug("HERE");
 	if(i==0x57){
 	    move('u');
 	    dir = 0;
@@ -229,7 +230,7 @@ public class Snake{
 	    while (true) {
 		if (System.in.available() != 0) { //if a button is pressed:
 		    int key = System.in.read();
-		    System.out.println(key);
+		    //System.out.println(key);
 		    if (key == 0x1B) { //if the button pressed is the esc key:
 			break; //stop the loop
 		    }
