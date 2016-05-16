@@ -76,16 +76,12 @@ public class Snake{
     public void move(int i){
 	if(i==0x57){
 	    move('u');
-	    dir = 0;
 	}else if(i==0x53){
 	    move('d');
-	    dir = 1;
 	}else if(i==0x41){
 	    move('l');
-	    dir = 2;
 	}else if(i==0x44){
 	    move('r');
-	    dir = 3;
 	}
     }
 
