@@ -74,17 +74,21 @@ public class Snake{
     }
 
     public void move(int i){
-	debug("HERE");
+	//debug("HERE");
 	if(i==0x57){
+	    debug("MOVING UP");
 	    move('u');
 	    dir = 0;
 	}else if(i==0x53){
+	    debug("MOVING DOWN");
 	    move('d');
 	    dir = 1;
 	}else if(i==0x41){
+	    debug("MOVING RIGHT");
 	    move('l');
 	    dir = 2;
 	}else if(i==0x44){
+	    debug("MOVING LEFT");
 	    move('r');
 	    dir = 3;
 	}
