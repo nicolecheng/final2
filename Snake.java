@@ -133,7 +133,7 @@ public class Snake{
 	//debug(""+yy+" "+xx);
 	board[yy][xx] = ' ';
 	moves++;
-	if(moves==2){
+	if(moves==3){
 	    board[1][2]=' ';
 	    board[2][1]=' ';
 	}
@@ -259,7 +259,7 @@ public class Snake{
 		    m.move(key);
 		}
 		i++;
-		m.wait(2500);        
+		m.wait(100);        
 		m.run();
 	    }
 	} catch (IOException e) {
