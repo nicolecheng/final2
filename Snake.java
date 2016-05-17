@@ -122,6 +122,7 @@ public class Snake{
 	    return false;
 	}
 	snake.removeLast();
+	System.out.println(snake);
 	snake.addFirst(y*cols+x);
 	check();
 	board[y][x] = 'S';
