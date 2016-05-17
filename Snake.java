@@ -14,7 +14,7 @@ public class Snake{
     private char[][]board;
     private MyDeque<Integer>snake;
     private int dir; // direction: 0 = up, 1 = down, 2 = left, 3 = right
-    private int score;
+    private int score,moves;
     private boolean done;
 
     private void debug(String s){
@@ -35,6 +35,7 @@ public class Snake{
 	addObstacle();
 	dir = -1;
 	score = 0;
+	moves=0;
     }
 
     private void board(){ 
@@ -129,8 +130,13 @@ public class Snake{
 	snake.addFirst(y*cols+x);
 	check();
 	board[y][x] = 'S';
-	debug(""+yy+" "+xx);
+	//debug(""+yy+" "+xx);
 	board[yy][xx] = ' ';
+	moves++;
+	if(moves==2){
+	    board[1][2]=' ';
+	    board[2][1]=' ';
+	}
         return true;
     }
 
