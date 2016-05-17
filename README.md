@@ -5,7 +5,7 @@ final project semester 2 <br> <br>
 Nicole Cheng & Noah Fichter <br>
 MKS22X / Period 6 <br> <br>
 
-Team ____ <br> <br>
+Team Nikoahla <br> <br>
 
  That 80s Game <br>
 This is a series of terminal-based 80s games. <br>
@@ -28,6 +28,12 @@ Development Log <br><ul>
     <li>
       05/15/16: Nicole - got through most of Snake; need to make it a run with interactive controls
     </li>
+    <li>
+      05/16/16: Nicole - snake working; need to make snake grow create tutorial / game over pages
+    </li>
+    <li>
+      05/16/16: We came up with a rad team name.
+    </li>
 </ul><br><br>
 
 Project plan/outline including your goals prioritized by importance and chronology <br>
@@ -46,8 +52,10 @@ Things to do: <br><ul><li>
 	user accounts</li><li>
 	powerups and cheat codes</li>
 </ul><br>
-Things already done:<br><ul><li>
-	zilch </li>
+Things already done:<br><ul>
+	<li>
+	Snake basics down (interaction, running snake, obstacles, etc.) 
+	</li>
 </ul><br><br>
 
 Links to the Demo versions, <br> 
