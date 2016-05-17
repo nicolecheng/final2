@@ -64,10 +64,14 @@ public class Pong {
 		board[3][board[0].length-5] = 'A';
 		board[3][board[0].length-4] = 'L';
 		board[3][board[0].length-3] = '!';
-		wait(300);
+		System.out.println("\033[2J");
+		System.out.println(this);
+		wait(1000);
 		for (int i = board.length-7; i < board.length-2; i++) {
 		    board[3][i] = ' ';
 		}
+		System.out.println("\033[2J");
+		System.out.println(this);
 	    }
 	    if (ballX == board[0].length-1) {
 		score1++;
@@ -76,10 +80,14 @@ public class Pong {
 		board[3][4] = 'A';
 		board[3][5] = 'L';
 		board[3][6] = '!';
-		wait(300);
+		System.out.println("\033[2J");
+		System.out.println(this);
+		wait(1000);
 		for (int i = 2; i < 7; i++) {
 		    board[3][i] = ' ';
 		}
+		System.out.println("\033[2J");
+		System.out.println(this);
 	    }
 	    for (int i = pos1; i < pos1+3; i++) {
 		board[i][0] = ' ';
@@ -241,6 +249,8 @@ public class Pong {
 	    if (System.in.available() != 0) { //if a button is pressed:
 		int key = System.in.read();
 		move(key);
+		System.out.println("\033[2J");
+		System.out.println(this);
 	    }
 	} catch (IOException e) {
 	    System.out.println("IOException");
