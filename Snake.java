@@ -129,7 +129,7 @@ public class Snake{
 	snake.addFirst(y*cols+x);
 	check();
 	board[y][x] = 'S';
-	//debug(""+yy+" "+xx);
+	debug(""+yy+" "+xx);
 	board[yy][xx] = ' ';
         return true;
     }
