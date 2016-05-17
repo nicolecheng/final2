@@ -17,6 +17,8 @@ public class Pong {
     private int ballX;
     private int ballY;
     private int lastDir;
+    private int score1;
+    private int score2;
     private boolean DEBUG;
     
     public Pong(int difficulty) {
@@ -42,6 +44,8 @@ public class Pong {
         for (int i = pos2; i < pos2+3; i++) {
             board[i][board[0].length-1] = '#';
         }
+	score1 = 0;
+	score1 = 0;
 	//show the ball
         board[board.length/2][board[0].length/2] = '*';
 	ballX = board[0].length/2;
@@ -51,6 +55,53 @@ public class Pong {
         this.difficulty = difficulty; //set difficulty
     }
     
+    public void reset() {
+	if (ballX == 0 || ballX == board[0].length-1) {
+	    if (ballX == 0) {
+		score2++;
+		board[3][board[0].length-7] = 'G';
+		board[3][board[0].length-6] = 'O';
+		board[3][board[0].length-5] = 'A';
+		board[3][board[0].length-4] = 'L';
+		board[3][board[0].length-3] = '!';
+		wait(300);
+		for (int i = board.length-7; i < board.length-2; i++) {
+		    board[3][i] = ' ';
+		}
+	    }
+	    if (ballX == board[0].length-1) {
+		score1++;
+		board[3][2] = 'G';
+		board[3][3] = 'O';
+		board[3][4] = 'A';
+		board[3][5] = 'L';
+		board[3][6] = '!';
+		wait(300);
+		for (int i = 2; i < 7; i++) {
+		    board[3][i] = ' ';
+		}
+	    }
+	    for (int i = pos1; i < pos1+3; i++) {
+		board[i][0] = ' ';
+	    }
+	    for (int i = pos2; i < pos2+3; i++) {
+		board[i][0] = ' ';
+	    }
+	    pos1 = 6;
+	    pos2 = 6;
+	    for (int i = pos1; i < pos1+3; i++) {
+		board[i][0] = '#';
+	    }
+	    for (int i = pos2; i < pos2+3; i++) {
+		board[i][board[0].length-1] = '#';
+	    }
+	    board[board.length/2][board[0].length/2] = '*';
+	    ballX = board[0].length/2;
+	    ballY = board.length/2;
+	    lastDir = 4;
+	}
+    }
+
     public void move(int key) {
         if (key == 0x77 && pos1 > 0) {
             board[pos1][0] = '#';
@@ -194,6 +245,7 @@ public class Pong {
 	} catch (IOException e) {
 	    System.out.println("IOException");
 	}
+	reset();
     }
 
     public void wait(int millis){
