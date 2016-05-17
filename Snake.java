@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Snake{
 
-    private boolean DEBUG = true;
+    private boolean DEBUG = false;
     private int x,y;
     private int ox,oy; // xcor, ycor of obstacle
     private int length;
@@ -133,7 +133,8 @@ public class Snake{
 	//debug(""+yy+" "+xx);
 	board[yy][xx] = ' ';
 	moves++;
-	if(moves==3){
+	if(moves==2){
+            wait(10);
 	    board[1][2]=' ';
 	    board[2][1]=' ';
 	}
@@ -259,7 +260,7 @@ public class Snake{
 		    m.move(key);
 		}
 		i++;
-		m.wait(100);        
+		m.wait(400);        
 		m.run();
 	    }
 	} catch (IOException e) {
