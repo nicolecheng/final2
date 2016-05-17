@@ -101,7 +101,7 @@ public class Snake{
 	int xx = 1;
 	int yy = 1;
 	if(snake.getLast()!=null){
-	    debug("AQUI");
+	    //debug("AQUI");
 	    xx = snake.getLast()%cols;
 	    yy = snake.getLast()/cols;
 	}
@@ -109,13 +109,13 @@ public class Snake{
 	if(c=='u' && ok(x,y-1)){
 		y--;
 		dir = 0;
-	}else if(c=='d' && ok(x,y+1)){
+	}else if(c=='d'){// && ok(x,y+1)){
 		y++;
 		dir = 1;
-	}else if(c=='l' && ok(x-1,y)){
+	}else if(c=='l'){// && ok(x-1,y)){
 		x--;
 		dir = 2;
-	}else if(c=='r' && ok(x+1,y)){
+	}else if(c=='r'){// && ok(x+1,y)){
 		x++;
 		dir = 3;
 	}else{
@@ -252,7 +252,7 @@ public class Snake{
 		    m.move(key);
 		}
 		i++;
-		m.wait(1000);        
+		m.wait(500);        
 		m.run();
 	    }
 	} catch (IOException e) {
