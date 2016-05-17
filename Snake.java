@@ -109,17 +109,17 @@ public class Snake{
 	if(c=='u' && ok(x,y-1)){
 		y--;
 		dir = 0;
-	}else if(c=='d'){// && ok(x,y+1)){
+	}else if(c=='d' && ok(x,y+1)){
 		y++;
 		dir = 1;
-	}else if(c=='l'){// && ok(x-1,y)){
+	}else if(c=='l' && ok(x-1,y)){
 		x--;
 		dir = 2;
-	}else if(c=='r'){// && ok(x+1,y)){
+	}else if(c=='r' && ok(x+1,y)){
 		x++;
 		dir = 3;
 	}else{
-	    //gameOver();
+	    gameOver();
 	    return false;
 	}
 	if(snake.getLast()!=null){
