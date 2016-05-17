@@ -135,7 +135,7 @@ public class Snake{
     }
 
     private void check(){ // checks for hitting the wall / obstacles
-	if(board[y][x]=='#'){
+	if(board[y][x]=='#' || board[y][x]=='S'){
 	    gameOver();
 	}else if(board[y][x]=='!'){
 	    // found obstacle thing
