@@ -186,6 +186,14 @@ public class Pong {
 	    System.out.println(this);
 	    lastDir = ballMove(getDir(lastDir));
 	}
+	try {
+	    if (System.in.available() != 0) { //if a button is pressed:
+		int key = System.in.read();
+		move(key);
+	    }
+	} catch (IOException e) {
+	    System.out.println("IOException");
+	}
     }
 
     public void wait(int millis){
@@ -209,14 +217,12 @@ public class Pong {
 	    setTerminalToCBreak();
 	    while (true) {
 		p.wait(50);
-		if (System.in.available() != 0) { //if a button is pressed:
-		      int key = System.in.read();
-		      if (key == 0x1B) {
-			  break;
-		      }
-		      p.move(key);
-		  }
-		  p.play();
+		if (System.in.available() != 0) {
+		    if (System.in.read() == 0x1B) {
+			break;
+		    }
+		}
+		p.play();
 	    }
 	} catch (IOException e) {
 	    System.out.println("IOException");
