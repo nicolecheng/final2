@@ -101,6 +101,7 @@ public class Snake{
 	int xx = 1;
 	int yy = 1;
 	if(snake.getLast()!=null){
+	    debug("AQUI");
 	    xx = snake.getLast()%cols;
 	    yy = snake.getLast()/cols;
 	}
@@ -121,8 +122,10 @@ public class Snake{
 	    //gameOver();
 	    return false;
 	}
-	snake.removeLast();
-	System.out.println(snake);
+	if(snake.getLast()!=null){
+	    snake.removeLast();
+	}
+	//System.out.println(snake);
 	snake.addFirst(y*cols+x);
 	check();
 	board[y][x] = 'S';
