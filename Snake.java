@@ -161,9 +161,9 @@ public class Snake{
 	}else if(dir==1){
 	    move('d');
 	}else if(dir==2){
-	    move('r');
-	}else if(dir==3){
 	    move('l');
+	}else if(dir==3){
+	    move('r');
 	}
 	System.out.println("\033[2J");
 	System.out.println(this);
