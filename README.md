@@ -34,6 +34,12 @@ Development Log <br><ul>
     <li>
       05/16/16: We came up with a rad team name.
     </li>
+    <li>
+      05/16/16: Noah - still need to work on synchronizing visual with internal
+    </li>
+    <li>
+      05/17/16: Noah - fixed wait function to not actually stop the game, need to place it correctly to sync visual and internal
+    </li>
 </ul><br><br>
 
 Project plan/outline including your goals prioritized by importance and chronology <br>
