@@ -22,7 +22,7 @@ public class Pong {
     private boolean DEBUG;
     
     public Pong(int difficulty) {
-	DEBUG = true;
+	DEBUG = false;
         //initialize the board to by an empty 9 by 25 board
         board = new char[15][75];
         for (int r = 0; r < board.length; r++) {
@@ -66,7 +66,8 @@ public class Pong {
 		board[3][board[0].length-3] = '!';
 		System.out.println("\033[2J");
 		System.out.println(this);
-		wait(1000);
+		long x = System.currentTimeMillis();
+		while (!wait(1000,x)) {}
 		for (int i = board.length-7; i < board.length-2; i++) {
 		    board[3][i] = ' ';
 		}
@@ -82,7 +83,8 @@ public class Pong {
 		board[3][6] = '!';
 		System.out.println("\033[2J");
 		System.out.println(this);
-		wait(1000);
+		long x = System.currentTimeMillis();
+		while (!wait(1000,x)) {};
 		for (int i = 2; i < 7; i++) {
 		    board[3][i] = ' ';
 		}
@@ -234,7 +236,7 @@ public class Pong {
     }
     
     public void play() {
-	if (!DEBUG) {
+	if (DEBUG) {
 	    System.out.println("lastDir: "+lastDir);
 	    System.out.println("ballX: "+ballX);
 	    System.out.println("ballY: "+ballY);
@@ -243,8 +245,8 @@ public class Pong {
 	} else {
 	    System.out.println("\033[2J");
 	    System.out.println(this);
-	    lastDir = ballMove(getDir(lastDir));
 	}
+	lastDir = ballMove(getDir(lastDir));
 	try {
 	    if (System.in.available() != 0) { //if a button is pressed:
 		int key = System.in.read();
@@ -258,12 +260,27 @@ public class Pong {
 	reset();
     }
 
-    public void wait(int millis){
-	try {
-	    Thread.sleep(millis);
+    public void fixPos() {
+	int r = 0;
+	boolean changed = false;
+	while (!changed) {
+	    if (board[0][r] == '#') {
+		pos1 = r;
+		changed = true;
+	    }
 	}
-	catch (InterruptedException e) {
+	r = 0;
+	changed = false;
+	while (!changed) {
+	    if (board[board[0].length-1][r] == '#') {
+		pos2 = r;
+		changed = true;
+	    }
 	}
+    }
+
+    public static boolean wait(int millis, long currentTime) {
+	return System.currentTimeMillis()-currentTime > millis;
     }
 
     public static boolean inBounds(int pos, char[][] board) {
@@ -278,10 +295,16 @@ public class Pong {
 	try {
 	    setTerminalToCBreak();
 	    while (true) {
-		p.wait(50);
+		long x = System.currentTimeMillis();
+		while (!p.wait(50,x)) {}
 		if (System.in.available() != 0) {
-		    if (System.in.read() == 0x1B) {
+		    int key = System.in.read();
+		    if (key == 0x1B) {
 			break;
+		    } else {
+			p.move(key);
+			System.out.println(p);
+			p.fixPos();
 		    }
 		}
 		p.play();
