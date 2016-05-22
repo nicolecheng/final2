@@ -50,8 +50,8 @@ public class Platformer {
     public void checkTime() {
 	if (timeSinceLastObs >= timeToReach) {
 	    if (obsCreated != 5) {
-		obsCreated++;
 		obs[obsCreated] = new Obstacle((int)(Math.random()*2)+1,(int)(Math.random()*2)+1);
+		obsCreated++;
 	    }
 	    else {
 		remakeFirstObs();
