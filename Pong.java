@@ -246,13 +246,23 @@ public class Pong {
 	    System.out.println("\033[2J");
 	    System.out.println(this);
 	}
+	long x = System.currentTimeMillis();
+	while (!p.wait(50,x)) {}
+	if (System.in.available() != 0) {
+	    int key = System.in.read();
+	    if (key == 0x1B) {
+		break;
+	    } else {
+		p.move(key);
+		System.out.println(p);
+		p.fixPos();
+	    }
+	}
 	lastDir = ballMove(getDir(lastDir));
 	try {
 	    if (System.in.available() != 0) { //if a button is pressed:
 		int key = System.in.read();
 		move(key);
-		System.out.println("\033[2J");
-		System.out.println(this);
 	    }
 	} catch (IOException e) {
 	    System.out.println("IOException");
@@ -295,18 +305,6 @@ public class Pong {
 	try {
 	    setTerminalToCBreak();
 	    while (true) {
-		long x = System.currentTimeMillis();
-		while (!p.wait(50,x)) {}
-		if (System.in.available() != 0) {
-		    int key = System.in.read();
-		    if (key == 0x1B) {
-			break;
-		    } else {
-			p.move(key);
-			System.out.println(p);
-			p.fixPos();
-		    }
-		}
 		p.play();
 	    }
 	} catch (IOException e) {
