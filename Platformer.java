@@ -67,7 +67,7 @@ public class Platformer {
 	for (Obstacle obsX : obs) {
 	    obsX.moveLeft();
 	}
-	if (!System.in.available()) {
+	if (System.in.available() != 0) {
 	    int key = System.in.read();
 	    move(key);
 	}
@@ -95,7 +95,6 @@ public class Platformer {
     }
 
     public void move(int key) {
-	int time = System.currentTimeMillis();
 	if (key == 0x77 && (jump == 0 || jump == 1 || jump == 2 || jump == 3)) {
 	    board[board.length-1][jump+2] = ' ';
 	    board[board.length-1][jump+4] = ' ';
@@ -161,14 +160,15 @@ public class Platformer {
 	    setTerminalToCBreak();
 	    Platformer p = new Platformer();
 	    while (true) {
-	        if (System.in.available() != 0) {
+		long x = System.currentTimeMillis();
+		if (System.in.available() != 0) {
 		    int key = System.in.read();
 		    if (key == 0x1B) {
 			break;
-		    } else {
-			p.play();
 		    }
 		}
+		while (wait(50,x)) {}
+	        p.play()
 	    }
 	} catch (IOException e) {
 	    System.out.println("IOException");
