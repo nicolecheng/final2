@@ -148,8 +148,8 @@ public class Platformer {
 	private void moveLeft() {
 	    for (int h = 0; h < height; h++) {
 		for (int w = 0; w < width; w++) {
-		    board[board.length-1+h][botLeftPos+w] = ' ';
-		    board[board.length-1+h][botLeftPos+w-1] = '=';
+		    board[board.length-1-h][botLeftPos+w] = ' ';
+		    board[board.length-1-h][botLeftPos+w-1] = '=';
 		}
 	    }
 	    botLeftPos--;
