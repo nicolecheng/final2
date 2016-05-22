@@ -6,6 +6,8 @@ import java.io.*;
 
 public class Tutorial{
 
+    private static boolean testMode = true; // debug mode?
+
     static String name;
   
     public static void main(String [] args){
@@ -85,6 +87,7 @@ public class Tutorial{
 		System.out.println();
 	    }
 	    // activate snake
+	    Snake.snakeGame();
 	}else if(s.toLowerCase().contains("fountain")){ //questionable water fountain
 	    if(!places[2]){
 		places[2]=true; // Tutorial.places[2] = true;
@@ -112,11 +115,13 @@ public class Tutorial{
     }
 
     private static void wait(int millis){
-        try {
-            Thread.sleep(millis);
-        }
-        catch (InterruptedException e) {
-        }
+	if(!testMode){ // only wait if not on testMode
+	    try {
+		Thread.sleep(millis);
+	    }
+	    catch (InterruptedException e) {
+	    }
+	}
     }
 
 }

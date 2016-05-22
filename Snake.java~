@@ -1,13 +1,12 @@
 import java.io.IOException;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-<<<<<<< HEAD
 import java.util.*;
 import java.io.*;
 
 public class Snake{
 
-    private boolean DEBUG = true;
+    private boolean DEBUG = false;
     private int x,y;
     private int ox,oy; // xcor, ycor of obstacle
     private int length;
@@ -15,7 +14,7 @@ public class Snake{
     private char[][]board;
     private MyDeque<Integer>snake;
     private int dir; // direction: 0 = up, 1 = down, 2 = left, 3 = right
-    private int score;
+    private int score,moves;
     private boolean done;
 
     private void debug(String s){
@@ -36,6 +35,7 @@ public class Snake{
 	addObstacle();
 	dir = -1;
 	score = 0;
+	moves=0;
     }
 
     private void board(){ 
@@ -102,6 +102,7 @@ public class Snake{
 	int xx = 1;
 	int yy = 1;
 	if(snake.getLast()!=null){
+	    //debug("AQUI");
 	    xx = snake.getLast()%cols;
 	    yy = snake.getLast()/cols;
 	}
@@ -119,15 +120,24 @@ public class Snake{
 		x++;
 		dir = 3;
 	}else{
-	    //gameOver();
+	    gameOver();
 	    return false;
 	}
-	snake.removeLast();
+	if(snake.getLast()!=null){
+	    snake.removeLast();
+	}
+	//System.out.println(snake);
 	snake.addFirst(y*cols+x);
 	check();
 	board[y][x] = 'S';
 	//debug(""+yy+" "+xx);
 	board[yy][xx] = ' ';
+	moves++;
+	if(moves==2){
+            wait(10);
+	    board[1][2]=' ';
+	    board[2][1]=' ';
+	}
         return true;
     }
 
@@ -136,7 +146,7 @@ public class Snake{
     }
 
     private void check(){ // checks for hitting the wall / obstacles
-	if(board[y][x]=='#'){
+	if(board[y][x]=='#' || board[y][x]=='S'){
 	    gameOver();
 	}else if(board[y][x]=='!'){
 	    // found obstacle thing
@@ -158,10 +168,11 @@ public class Snake{
 	}else if(dir==1){
 	    move('d');
 	}else if(dir==2){
-	    move('r');
-	}else if(dir==3){
 	    move('l');
+	}else if(dir==3){
+	    move('r');
 	}
+	check();
 	System.out.println("\033[2J");
 	System.out.println(this);
     }
@@ -231,30 +242,16 @@ public class Snake{
     */
 
     
-=======
-
-//Resources
-//https://msdn.microsoft.com/en-us/library/windows/desktop/dd375731(v=vs.85).aspx
-//http://www.darkcoding.net/software/non-blocking-console-io-is-not-possible/
-//http://stackoverflow.com/questions/9545388/how-can-i-detect-arrow-keys-in-java-console-not-in-gui
-//https://docs.oracle.com/javase/tutorial/essential/exceptions/finally.html
-
-public class Snake {
->>>>>>> refs/remotes/origin/master
     //Thanks to Graham King from darkcoding.net for the lesson on making the terminal interactive
     private static String ttyConfig;
 
     public static void main(String[] args) {
-<<<<<<< HEAD
 	Snake m = new Snake();
-=======
->>>>>>> refs/remotes/origin/master
 	try {
 	    setTerminalToCBreak();
 	    int i = 0;
 	    while (true) {
 		if (System.in.available() != 0) { //if a button is pressed:
-<<<<<<< HEAD
 		    int key = System.in.read();
 		    //System.out.println(key);
 		    if (key == 0x1B) { //if the button pressed is the esc key:
@@ -263,17 +260,8 @@ public class Snake {
 		    m.move(key);
 		}
 		i++;
-		m.wait(1000);        
+		m.wait(400);        
 		m.run();
-=======
-		    int exitKey = System.in.read();
-		    System.out.println(exitKey);
-		    if (exitKey == 0x48 || exitKey == 0x61) { //if the button pressed is the up key:
-			break; //stop the loop
-		    }
-		}
-		i++;
->>>>>>> refs/remotes/origin/master
 	    }
 	} catch (IOException e) {
 	    System.out.println("IOException");
@@ -327,7 +315,6 @@ public class Snake {
         String result = new String(bout.toByteArray());
         return result;
     }
-<<<<<<< HEAD
     
 
 }
@@ -337,6 +324,3 @@ public class Snake {
 //http://www.darkcoding.net/software/non-blocking-console-io-is-not-possible/
 //http://stackoverflow.com/questions/9545388/how-can-i-detect-arrow-keys-in-java-console-not-in-gui
 //https://docs.oracle.com/javase/tutorial/essential/exceptions/finally.html
-=======
-}
->>>>>>> refs/remotes/origin/master
