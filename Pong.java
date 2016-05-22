@@ -247,7 +247,7 @@ public class Pong {
 	    System.out.println(this);
 	}
 	long x = System.currentTimeMillis();
-	while (!p.wait(50,x)) {}
+	while (p.wait(50,x)) {}
 	if (System.in.available() != 0) {
 	    int key = System.in.read();
 	    if (key == 0x1B) {
@@ -258,6 +258,7 @@ public class Pong {
 		p.fixPos();
 	    }
 	}
+	reset();
 	lastDir = ballMove(getDir(lastDir));
 	try {
 	    if (System.in.available() != 0) { //if a button is pressed:
@@ -267,7 +268,6 @@ public class Pong {
 	} catch (IOException e) {
 	    System.out.println("IOException");
 	}
-	reset();
     }
 
     public void fixPos() {
