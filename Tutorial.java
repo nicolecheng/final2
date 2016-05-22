@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Tutorial{
 
-    private static boolean testMode;// = true; // debug mode?
+    private static boolean testMode = true; // debug mode?
 
     static String name;
   
