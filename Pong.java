@@ -269,14 +269,6 @@ public class Pong {
 	}
 	reset();
 	lastDir = ballMove(getDir(lastDir));
-	try {
-	    if (System.in.available() != 0) { //if a button is pressed:
-		int key = System.in.read();
-		move(key);
-	    }
-	} catch (IOException e) {
-	    System.out.println("IOException");
-	}
     }
 
     public void fixPos() {
