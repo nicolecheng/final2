@@ -16,13 +16,13 @@ public class Snake{
     private int dir; // direction: 0 = up, 1 = down, 2 = left, 3 = right
     private int score,moves;
     private boolean done;
+    private boolean started;
 
     private void debug(String s){
 	if(DEBUG){
 	    System.out.println(s);
 	}
     }
-    
 
     public Snake(){
 	x = 1;
@@ -80,19 +80,19 @@ public class Snake{
     public void move(int i){
 	//debug("HERE");
 	if(i==0x77){
-	    debug("MOVING UP");
+	    //debug("MOVING UP");
 	    move('u');
 	    dir = 0;
 	}else if(i==0x73){
-	    debug("MOVING DOWN");
+	    //debug("MOVING DOWN");
 	    move('d');
 	    dir = 1;
 	}else if(i==0x61){
-	    debug("MOVING LEFT");
+	    //debug("MOVING LEFT");
 	    move('l');
 	    dir = 2;
 	}else if(i==0x64){
-	    debug("MOVING RIGHT");
+	    //debug("MOVING RIGHT");
 	    move('r');
 	    dir = 3;
 	}
@@ -147,7 +147,7 @@ public class Snake{
     }
 
     private void check(){ // checks for hitting the wall / obstacles
-	if(board[y][x]=='#' || board[y][x]=='S'){
+	if((board[y][x]=='#' || board[y][x]=='S') && started){
 	    gameOver();
 	}else if(board[y][x]=='!'){
 	    // found obstacle thing
@@ -367,9 +367,7 @@ public class Snake{
 
 	Snake m = new Snake();
 	try {
-	    System.out.println("try statement started");
 	    setTerminalToCBreak();
-	    System.out.println("setTerminalToCBreak worked");
 	    int i = 0;
 	    while (true) {
 		if (System.in.available() != 0) { //if a button is pressed:
