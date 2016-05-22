@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.*;
 
 public class Platformer {
