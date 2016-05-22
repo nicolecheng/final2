@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Tutorial{
 
-    private static boolean testMode = true; // debug mode?
+    private static boolean testMode = false; // with waits or nah?
 
     static String name, snakeName;
     static int snakeScore;
@@ -88,12 +88,11 @@ public class Tutorial{
 		System.out.println();
 	    }
 	    // activate snake
-	    snakeScore = Snake.snakeGame();
-	    scene2();
+	    playSnake();
 	}else if(s.toLowerCase().contains("fountain")){ //questionable water fountain
 	    if(!places[2]){
 		places[2]=true; // Tutorial.places[2] = true;
-		System.out.println("You walk over to the water fountain, and see that years of neglect has left it covered in an inch of grime.");
+		System.out.println("You walk over to the water fountain, and see that years of neglect have left it covered in an inch of grime.");
 		wait(2000);
 		System.out.println("You slowly back away and decide to get water somewhere else.");
 	    }else{
@@ -116,6 +115,18 @@ public class Tutorial{
 	}
     }
 
+    private static void playSnake(){
+	snakeScore = Snake.snakeGame();
+	if(snakeScore > 20){
+	    scene2();
+	}else{
+	    System.out.println("Oof, sorry, you didn't beat the high score. Please try again.");
+	    System.out.println();
+	    wait(2700);
+	    playSnake();
+	}
+    }
+
     private static void snakeName(){
 	System.out.println("Please enter a nickname to record this high score.");
 	Scanner in = new Scanner(System.in);
@@ -124,15 +135,21 @@ public class Tutorial{
 	System.out.println();
 	System.out.println();
 	String spacing = "";
-	if(snakeName.length()<=25){
+	if(snakeName.length()>25){
+	    System.out.println("That nickname has too many characters.");
+	    wait(1700);
 	    snakeName();
 	}else{
-	    for(int i = 0; i < 25-snakeName(); i++){
+	    for(int i = 0; i < 25-snakeName.length(); i++){
 		spacing+=" ";
 	    }
+	    spacing+=" ";
 	    System.out.println("1. "+snakeName+spacing+"HI: "+snakeScore);
-	    System.out.println("2. Noah Constricter         HI: 20");
-	    System.out.println("3. MyAnacondaDo             HI: 17");
+	    wait(2000);
+	    System.out.println("2. Noah Constricter          HI: 20");
+	    wait(2000);
+	    System.out.println("3. MyAnacondaDo              HI: 17");
+	    wait(2000);
 	}
     }
 
@@ -150,6 +167,7 @@ public class Tutorial{
 	System.out.println(".");
 	wait(1000);
 	System.out.println(".");
+	wait(1200);
 	System.out.println("RRRRIIIIIINNNNGGGGGGGGGGG");
 	wait(2000);
 	System.out.println("RRRRIIIIIINNNNGGGGGGGGGGG");
@@ -170,9 +188,9 @@ public class Tutorial{
 	    System.out.println();
 	    wait(2000);
 	    System.out.println("Hello there, "+name+". My name is Mr. Igayim, and I want to help you on your journey.");
-	    wait(3500);
+	    wait(3800);
 	    System.out.println("I want to offer you some advice. Talk less -- smile more. Don't let them know what you're against or what you're for.");
-	    wait(3500);
+	    wait(4000);
 	    System.out.println("OK, but seriously. Go down to the old arcade down by the pier. There are tons of games for you there.");
 	    wait(3500);
 	    System.out.println("Good luck, young grasshopper.");
@@ -202,29 +220,160 @@ public class Tutorial{
 	System.out.println();
 	System.out.println();
 	wait(3000);
-	System.out.println("Oh gosh. What do you do? What is there to do?");
-	System.out.println();
-	wait(2000);
+	System.out.println("Oh gosh. This is weird... and kind of freaky, too.");
+	wait(2500);
 	System.out.println("Soooooo... It's time to make a decision. Do you go down to the pier? (y/n)");
 	n = in.nextLine();
 	pier(n);
     }
 
     private static void pier(String s){
+	System.out.println();
 	if(s.toLowerCase().contains("y")){
 	    System.out.println("You walk down to the pier, and you see a figure in a trench coat.");
-	    wait(2000);
+	    wait(2700);
 	    System.out.println("You approach this strange person and he flashes you a smile.");
 	    System.out.println();
-	    wait(2000);
-	    System.out.println("");
+	    wait(2600);
+	    System.out.println("Why, hello, little "+name+". My name is Pierre.");
+	    wait(2500);
+	    System.out.println("Pierre on a pier. Pretty clever, aren't I?");
+	    wait(2500);
+	    System.out.println("OK sorry that was uncalled for.");
+	    wait(2500);
+	    System.out.println("Anyway, I'm glad you decided to join me. I have the oasis you need to become to very best, like no one ever was.");
+	    wait(3500);
+	    System.out.println("To get you here was my real test, but to train you is my cause.");
+	    wait(3300);
+	    System.out.println("Here's the key to my arcade. It's been closed off to the general public for years. Only people I deem worthy are allowed to access this paradise of games.");
 	    System.out.println();
-	}else if(s.toLowerCase().contains("n")){
+	    wait(4300);
+	    System.out.println("He tosses you the key for the arcade and walks away. You dare not speak to or approach him.");
 	    System.out.println();
+	    wait(3600);
+	    System.out.println("You go to the arcade, because you are such a brave soul. You unlock it and walk in. The place is lined with tacky neon lights and reeks of pizza and BO. Gross.");
+	    wait(4500);
+	    System.out.println("Nonetheless, Pierre and Mr. Igayim were right: it had every game imaginable. SCORE.");
+	    wait(3200);
+	    //}else if(s.toLowerCase().contains("n")){
 	}else{
-	    System.out.println();
+	    System.out.println("You don't go to the pier, but this mention of the arcade has reminded you of your immense love of those bulky machines and their monotonous beeps and tones.");
+	    wait(4900);
+	    System.out.println("You decide to go down the block to go to your favorite arcade: Flynn's");
+	    wait(3200);
+	    System.out.println("You walk in, and it's just how you remembered -- perfect.");
+	    wait(2700);
 	}
 	System.out.println();
+	System.out.println("You immediately see that ____, your favorite game, is not occupied. You rush over to get your hands on that beauty.");
+	wait(3900);
+	System.out.println();
+	System.out.println("PLEASE ENTER 2 TOKENS TO BEGIN.");
+	System.out.println();
+	wait(3500);
+	System.out.println("Drat. You don't have any tokens, and you really don't feel like getting any.");
+	troll();
+    }
+
+    private static void troll(){
+	System.out.println();
+	wait(3900);
+	System.out.println("PSSSSSSST. Over here.");
+	System.out.println();
+	wait(2200);
+	System.out.println("You see what appears to be an arcade troll crouching under a gross table.");
+	wait(2900);
+	System.out.println("You reluctantly approach it.");
+	System.out.println();
+	wait(2200);
+	System.out.println("Hello. I see that you are fresh out of tokens. Luckily for you, I have a proposition you...");
+	wait(3900);
+	System.out.println("Answer 2 of these 4 questions correctly, and I will give you 10 beautiful tokens.");
+	wait(3000);
+	System.out.println();
+	questions();
+    }
+
+    private static void questions(){
+	int qScore = 0;
+	//questions
+	String[] door0 = {"If I drink, I die. If I eat, I'm fine. What am I?","What gets more wet the more it dries?","What's brown and sticky?","What has a face and two hands but no arms or legs?"};
+	String[] door1 = {"Poor people have it, rich people need it, if you eat it you die. What is it?","What goes up and does not come back down?","Brothers and sisters I have none, but this man's father is my father's son. Who is this man?","A man walks into the bar, goes up to the bartender, the bartender scares him, the man says thank you and walks out. What happened?" };
+	String[] door2 = {"Where is most of the world's fresh water located?","What is the capital of Canada?","What's the capital of California?","What is the capital of Australia?"};
+	String[] door3 = {"What is converted into alcohol during brewing?","In which city was Martin Luther King assasinated?","What day of the week are you most likely to have a heart attack?","What do you call an infant whale?"};
+	//answers
+	String[] door0ans = {"fire","towel","stick","clock"};
+	String[] door1ans = {"nothing","age","my son","hiccup"};
+	String[] door2ans = {"antarctica","ottowa","sacramento","canberra"};
+	String[] door3ans = {"sugar","memphis","monday","calf"};
+	//randomly choose which riddle
+	int num0 = (int) (Math.random()*4);
+	System.out.println(door0[num0]);
+	System.out.println();
+	Scanner in = new Scanner(System.in);
+	String d0 = in.nextLine();
+	System.out.println();
+	wait(2000);
+	if (d0.toLowerCase().contains(door0ans[num0])){
+	    System.out.println("Correct!");
+	    qScore++;
+	}else{
+	    System.out.println("Incorrect! The correct answer was a" + door0ans[num0]);
+	}
+	System.out.println();
+	wait(2000);
+	int num1 = (int) (Math.random()*4);
+	System.out.println(door1[num1]);
+	System.out.println();
+	in = new Scanner(System.in);
+	String d1 = in.nextLine();
+	System.out.println();
+	wait(2000);
+	if (d1.toLowerCase().contains(door1ans[num1])){
+	    System.out.println("Correct!");
+	    qScore++;
+	}else{
+	    System.out.println("Incorrect!  The correct answer was " + door1ans[num1]);
+	}
+	System.out.println();
+	wait(2000);
+	int num2 = (int) (Math.random() * 4);
+	System.out.println(door2[num2]);
+	System.out.println();
+	in = new Scanner(System.in);
+	String d2 = in.nextLine();
+	System.out.println();
+	wait(2000);
+	if (d2.toLowerCase().contains(door2ans[num2])){
+	    System.out.println("Correct!");
+	    qScore++;
+	}else{
+	    System.out.println("Incorrect!  The correct answer was " + door2ans[num2]);
+	}
+	System.out.println();
+	wait(2000);
+	int num3 = (int) (Math.random() * 4);
+	System.out.println(door3[num3]);
+	System.out.println();
+	String d3 = in.nextLine();
+	System.out.println();
+	wait(2000);
+	if (d3.toLowerCase().contains(door3ans[num3])){
+	    System.out.println("Correct!");
+	    qScore++;
+	}else{
+	    System.out.println("Incorrect!  The correct answer was " + door3ans[num3]);
+	}
+	System.out.println();
+	wait(2600);
+	if (qScore >= 2){
+	    System.out.println("Congratulations! You won! You got " + qScore + "out of the 4 correct!");
+	}else{
+	    System.out.println("You lost! Try again.");
+	    wait(2500);
+	    System.out.println();
+	    questions();
+	}
     }
 
     private static void wait(int millis){
