@@ -62,36 +62,40 @@ public class Platformer {
     }
 
     public void play() {
-	System.out.println("\033[2J");
-	System.out.println(this);
-	for (Obstacle obsX : obs) {
-	    obsX.moveLeft();
-	}
-	if (System.in.available() != 0) {
-	    int key = System.in.read();
-	    move(key);
-	}
-	else {
-	    if (jump != 0) {
-		board[board.length-1][jump+2] = ' ';
-		board[board.length-1][jump+4] = ' ';
-		board[board.length-2][jump+3] = ' ';
-		board[board.length-3][jump+3] = ' ';
-		board[board.length-4][jump+3] = ' ';
-		board[board.length-4][jump+2] = ' ';
-		board[board.length-4][jump+4] = ' ';
-		jump--;
-		board[board.length-1][jump+2] = '|';
-		board[board.length-1][jump+4] = '|';
-		board[board.length-2][jump+3] = '-';
-		board[board.length-3][jump+3] = '|';
-		board[board.length-4][jump+3] = 'v';
-		board[board.length-4][jump+2] = '.';
-		board[board.length-4][jump+4] = '.';
+	try {
+	    System.out.println("\033[2J");
+	    System.out.println(this);
+	    for (Obstacle obsX : obs) {
+		obsX.moveLeft();
 	    }
+	    if (System.in.available() != 0) {
+		int key = System.in.read();
+		move(key);
+	    }
+	    else {
+		if (jump != 0) {
+		    board[board.length-1][jump+2] = ' ';
+		    board[board.length-1][jump+4] = ' ';
+		    board[board.length-2][jump+3] = ' ';
+		    board[board.length-3][jump+3] = ' ';
+		    board[board.length-4][jump+3] = ' ';
+		    board[board.length-4][jump+2] = ' ';
+		    board[board.length-4][jump+4] = ' ';
+		    jump--;
+		    board[board.length-1][jump+2] = '|';
+		    board[board.length-1][jump+4] = '|';
+		    board[board.length-2][jump+3] = '-';
+		    board[board.length-3][jump+3] = '|';
+		    board[board.length-4][jump+3] = 'v';
+		    board[board.length-4][jump+2] = '.';
+		    board[board.length-4][jump+4] = '.';
+		}
+	    }
+	    timeSinceLastObs++;
+	    checkTime();
+	} catch (IOException e) {
+	    System.out.println("IOException");
 	}
-	timeSinceLastObs++;
-	checkTime();
     }
 
     public void move(int key) {
