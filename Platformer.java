@@ -6,11 +6,15 @@ public class Platformer {
     private int obsCreated;
     private int level;
     private int jump;
+    private int timeSinceLastObs;
+    private int timeToReach;
     private boolean DEBUG;
     
     public Platformer() {
 	DEBUG = false;
 	jump = 0;
+	timeSinceLastObs = 0;
+	timeToReach = (int)(Math.random()*20)+5;
 	//init board
 	board = new char[15][75];
         for (int r = 0; r < board.length; r++) {
@@ -32,12 +36,26 @@ public class Platformer {
     }
 
     public void remakeFirstObs() {
-	Obstacle[] new = new Obstacle[5];
+	Obstacle[] newObs = new Obstacle[5];
 	for (int i = 1; i < obs.length; i++) {
-	    new[i-1] = obs[i];
-	    new[5] = new Obstacle((int)(Math.random()*2)+1,(int)(Math.random()*2)+1);
+	    newObs[i-1] = obs[i];
+	    newObs[5] = new Obstacle((int)(Math.random()*2)+1,(int)(Math.random()*2)+1);
 	}
-	obs = new;
+	obs = newObs;
+    }
+
+    public void checkTime() {
+	if (timeSinceLastObs >= timeToReach) {
+	    if (obsCreated != 5) {
+		obsCreated++;
+		obs[obsCreated] = new Obstacle((int)(Math.random()*2)+1,(int)(Math.random()*2)+1);
+	    }
+	    else {
+		remakeFirstObs();
+	    }
+	    timeSinceLastObs = 0;
+	    timeToReach = (int)(Math.random()*20)+5;
+	}
     }
 
     public void play() {
@@ -69,13 +87,8 @@ public class Platformer {
 		board[board.length-4][jump+4] = '.';
 	    }
 	}
-	if (obsCreated != 5) {
-	    obsCreated++;
-	    obs[obsCreated] = new Obstacle((int)(Math.random()*2)+1,(int)(Math.random()*2)+1);
-	}
-	else {
-	    remakeFirstObs();
-	}
+	timeSinceLastObs++;
+	checkTime();
     }
 
     public void move(int key) {
@@ -143,13 +156,14 @@ public class Platformer {
     public static void main(String[] args) {
 	try {
 	    setTerminalToCBreak();
+	    Platformer p = new Platformer();
 	    while (true) {
 	        if (System.in.available() != 0) {
 		    int key = System.in.read();
 		    if (key == 0x1B) {
 			break;
 		    } else {
-			move(key);
+			p.play();
 		    }
 		}
 	    }
