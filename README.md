@@ -40,6 +40,12 @@ Development Log <br><ul>
     <li>
       05/17/16: Noah - fixed wait function to not actually stop the game, need to place it correctly to sync visual and internal
     </li>
+    <li>
+      05/20/16: Nicole - started tutorial program's structure and storyline of the game
+    </li>
+    <li>
+      05/21/16: Nicole - wrote beginning segment of the tutorial (up until the character reaches the snake game)
+    </li>
 </ul><br><br>
 
 Project plan/outline including your goals prioritized by importance and chronology <br>
@@ -61,6 +67,9 @@ Things to do: <br><ul><li>
 Things already done:<br><ul>
 	<li>
 	Snake basics down (interaction, running snake, obstacles, etc.) 
+	</li>
+	<li>
+	Tutorial outline
 	</li>
 </ul><br><br>
 
