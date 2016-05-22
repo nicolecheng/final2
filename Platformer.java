@@ -42,7 +42,7 @@ public class Platformer {
 	Obstacle[] newObs = new Obstacle[5];
 	for (int i = 1; i < obs.length; i++) {
 	    newObs[i-1] = obs[i];
-	    newObs[5] = new Obstacle((int)(Math.random()*2)+1,(int)(Math.random()*2)+1);
+	    newObs[4] = new Obstacle((int)(Math.random()*2)+1,(int)(Math.random()*2)+1);
 	}
 	obs = newObs;
     }
@@ -173,7 +173,7 @@ public class Platformer {
 			break;
 		    }
 		}
-		while (wait(50,x)) {}
+		while (wait(1000,x)) {}
 	        p.play();
 	    }
 	} catch (IOException e) {
