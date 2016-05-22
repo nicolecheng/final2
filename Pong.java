@@ -138,18 +138,18 @@ public class Pong {
 	if (dir == 1) {
 	    board[ballY][ballX] = ' ';
 	    ballX++;
-	    ballY++;
+	    ballY--;
 	    board[ballY][ballX] = '*';
 	}
 	if (dir == 2) {
 	    board[ballY][ballX] = ' ';
-	    ballY++;
+	    ballY--;
 	    board[ballY][ballX] = '*';
 	}
 	if (dir == 3) {
 	    board[ballY][ballX] = ' ';
 	    ballX--;
-	    ballY++;
+	    ballY--;
 	    board[ballY][ballX] = '*';
 	}
 	if (dir == 4) {
@@ -160,18 +160,18 @@ public class Pong {
 	if (dir == 5) {
 	    board[ballY][ballX] = ' ';
 	    ballX--;
-	    ballY--;
+	    ballY++;
 	    board[ballY][ballX] = '*';
 	}
 	if (dir == 6) {
 	    board[ballY][ballX] = ' ';
-	    ballY--;
+	    ballY++;
 	    board[ballY][ballX] = '*';
 	}
 	if (dir == 7) {
 	    board[ballY][ballX] = ' ';
 	    ballX++;
-	    ballY--;
+	    ballY++;
 	    board[ballY][ballX] = '*';
 	}
 	return dir;
