@@ -127,6 +127,7 @@ public class Pong {
             board[pos1+3][0] = '#';
             pos1++;
         }
+	System.out.println(this);
     }
 
     public int ballMove(int dir) {
