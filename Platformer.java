@@ -168,7 +168,7 @@ public class Platformer {
 		    }
 		}
 		while (wait(50,x)) {}
-	        p.play()
+	        p.play();
 	    }
 	} catch (IOException e) {
 	    System.out.println("IOException");
