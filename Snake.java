@@ -15,7 +15,7 @@ public class Snake{
     private static MyDeque<Integer>snake;
     private static int dir; // direction: 0 = up, 1 = down, 2 = left, 3 = right
     private static int score,moves;
-    private static boolean done,started;
+    static boolean done,started;
 
     private static void debug(String s){
 	if(DEBUG){
