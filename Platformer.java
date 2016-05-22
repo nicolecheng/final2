@@ -95,6 +95,7 @@ public class Platformer {
 	    }
 	    timeSinceLastObs++;
 	    checkTime();
+	    while (wait(1000,x)) {}
 	} catch (IOException e) {
 	    System.out.println("IOException");
 	}
