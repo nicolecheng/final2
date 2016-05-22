@@ -395,8 +395,9 @@ public class Snake{
 		System.out.println("Exception restoring tty config");
 	    }
 	}
-    }
     return score;
+    }
+    
 }
 
 //Resources
