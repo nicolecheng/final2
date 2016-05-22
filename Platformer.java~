@@ -1,0 +1,64 @@
+public class Platformer {
+    //Thanks to Graham King from darkcoding.net for the lesson on making the terminal interactive
+    private static String ttyConfig;
+
+    public static void main(String[] args) {
+    Pong p = new Pong(0);
+	try {
+	    setTerminalToCBreak();
+	    while (true) {
+		p.play();
+	    }
+	} catch (IOException e) {
+	    System.out.println("IOException");
+	} catch (InterruptedException e) {
+	    System.out.println("InterruptedException");
+    }
+	finally {
+	    try {
+		stty(ttyConfig.trim());
+	    } catch (Exception e) {
+		System.out.println("Exception restoring tty config");
+	    }
+	}
+    }
+
+    private static void setTerminalToCBreak() throws IOException, InterruptedException { //used in main()
+	ttyConfig = stty("-g");
+	stty("-icanon min 1"); //makes the console go character by character rather than line by line
+	stty("-echo"); //disables the terminal displaying the character pressed
+    }
+
+    private static String stty(final String args) throws IOException, InterruptedException { //used in setTerminalToCBreak()
+	String cmd = "stty " + args + " < /dev/tty";
+	
+	return exec(new String[] {
+		"sh",
+		"-c",
+		cmd
+	    });
+    }
+
+    private static String exec(final String[] cmd) throws IOException, InterruptedException { //used in stty()
+	ByteArrayOutputStream bout = new ByteArrayOutputStream();
+
+	Process p = Runtime.getRuntime().exec(cmd);
+        int c;
+        InputStream in = p.getInputStream();
+
+	while ((c = in.read()) != -1) {
+            bout.write(c);
+        }
+
+        in = p.getErrorStream();
+
+        while ((c = in.read()) != -1) {
+            bout.write(c);
+        }
+	
+        p.waitFor();
+
+        String result = new String(bout.toByteArray());
+        return result;
+    }
+}
