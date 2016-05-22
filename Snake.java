@@ -96,6 +96,7 @@ public class Snake{
 
     public static void move(int i){
 	//debug("HERE");
+	started = true;
 	if(i==0x77){
 	    //debug("MOVING UP");
 	    move('u');

@@ -115,7 +115,7 @@ public class Tutorial{
     }
 
     private static void wait(int millis){
-	if(!testMode){ // only wait if not on testMode
+	if(!testMode && !Snake.started){ // only wait if not on testMode
 	    try {
 		Thread.sleep(millis);
 	    }
