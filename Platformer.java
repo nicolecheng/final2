@@ -66,7 +66,9 @@ public class Platformer {
 	    System.out.println("\033[2J");
 	    System.out.println(this);
 	    for (Obstacle obsX : obs) {
-		obsX.moveLeft();
+		if (obsX != null) {
+		    obsX.moveLeft();
+		}
 	    }
 	    if (System.in.available() != 0) {
 		int key = System.in.read();
