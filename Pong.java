@@ -135,45 +135,53 @@ public class Pong {
 	    board[ballY][ballX] = ' ';
 	    ballX++;
 	    board[ballY][ballX] = '*';
+	    return 0;
 	}
 	if (dir == 1) {
 	    board[ballY][ballX] = ' ';
 	    ballX++;
 	    ballY--;
 	    board[ballY][ballX] = '*';
+	    return 1;
 	}
 	if (dir == 2) {
 	    board[ballY][ballX] = ' ';
 	    ballY--;
 	    board[ballY][ballX] = '*';
+	    return 2;
 	}
 	if (dir == 3) {
 	    board[ballY][ballX] = ' ';
 	    ballX--;
 	    ballY--;
 	    board[ballY][ballX] = '*';
+	    return 3;
 	}
 	if (dir == 4) {
 	    board[ballY][ballX] = ' ';
 	    ballX--;
 	    board[ballY][ballX] = '*';
+	    return 4;
 	}
 	if (dir == 5) {
 	    board[ballY][ballX] = ' ';
 	    ballX--;
 	    ballY++;
 	    board[ballY][ballX] = '*';
+	    return 5;
 	}
 	if (dir == 6) {
 	    board[ballY][ballX] = ' ';
 	    ballY++;
 	    board[ballY][ballX] = '*';
+	    return 6;
 	}
 	if (dir == 7) {
 	    board[ballY][ballX] = ' ';
 	    ballX++;
 	    ballY++;
 	    board[ballY][ballX] = '*';
+	    return 7;
 	}
 	return dir;
     }
@@ -248,15 +256,15 @@ public class Pong {
 	    System.out.println(this);
 	}
 	long x = System.currentTimeMillis();
-	while (p.wait(50,x)) {}
+	while (wait(50,x)) {}
 	if (System.in.available() != 0) {
 	    int key = System.in.read();
 	    if (key == 0x1B) {
 		break;
 	    } else {
-		p.move(key);
+		move(key);
 		System.out.println(p);
-		p.fixPos();
+		fixPos();
 	    }
 	}
 	reset();
