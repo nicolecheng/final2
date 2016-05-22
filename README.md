@@ -46,6 +46,9 @@ Development Log <br><ul>
     <li>
       05/21/16: Nicole - wrote beginning segment of the tutorial (up until the character reaches the snake game)
     </li>
+    <li>
+      05/22/16: Nicole - added a lot more to the tutorial to include 2 games, and I added a trivia segment.
+    </li>
 </ul><br><br>
 
 Project plan/outline including your goals prioritized by importance and chronology <br>
