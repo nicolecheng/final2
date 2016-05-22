@@ -362,7 +362,7 @@ public class Snake{
 
     private static String ttyConfig;
     
-    public static void snakeGame(){
+    public static int snakeGame(){
 	//Thanks to Graham King from darkcoding.net for the lesson on making the terminal interactive
         //String ttyConfig;
 
@@ -396,7 +396,7 @@ public class Snake{
 	    }
 	}
     }
-    
+    return score;
 }
 
 //Resources

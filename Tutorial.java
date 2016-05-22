@@ -8,7 +8,8 @@ public class Tutorial{
 
     private static boolean testMode = true; // debug mode?
 
-    static String name;
+    static String name, snakeName;
+    static int snakeScore;
   
     public static void main(String [] args){
 	//intro
@@ -87,7 +88,8 @@ public class Tutorial{
 		System.out.println();
 	    }
 	    // activate snake
-	    Snake.snakeGame();
+	    snakeScore = Snake.snakeGame();
+	    scene2();
 	}else if(s.toLowerCase().contains("fountain")){ //questionable water fountain
 	    if(!places[2]){
 		places[2]=true; // Tutorial.places[2] = true;
@@ -112,6 +114,117 @@ public class Tutorial{
 	    String n = in.nextLine();
 	    getWater(n);
 	}
+    }
+
+    private static void snakeName(){
+	System.out.println("Please enter a nickname to record this high score.");
+	Scanner in = new Scanner(System.in);
+	snakeName = in.nextLine();
+	// output data
+	System.out.println();
+	System.out.println();
+	String spacing = "";
+	if(snakeName.length()<=25){
+	    snakeName();
+	}else{
+	    for(int i = 0; i < 25-snakeName(); i++){
+		spacing+=" ";
+	    }
+	    System.out.println("1. "+snakeName+spacing+"HI: "+snakeScore);
+	    System.out.println("2. Noah Constricter         HI: 20");
+	    System.out.println("3. MyAnacondaDo             HI: 17");
+	}
+    }
+
+    private static void scene2(){
+	wait(2000);
+	System.out.println();
+	System.out.println("Congratulations, you have defeated the Noah Constricter.");
+	System.out.println();
+	wait(2200);
+	snakeName();
+	System.out.println("One game down...");
+	wait(1000);
+	System.out.println(".");
+	wait(1000);
+	System.out.println(".");
+	wait(1000);
+	System.out.println(".");
+	System.out.println("RRRRIIIIIINNNNGGGGGGGGGGG");
+	wait(2000);
+	System.out.println("RRRRIIIIIINNNNGGGGGGGGGGG");
+	wait(2000);
+	System.out.println();
+	System.out.println("It looks like someone's calling you.");
+	wait(1800);
+	System.out.println("The number is private...");
+	wait(1800);
+	System.out.println("Do you pick up? (y/n)");
+	Scanner in = new Scanner(System.in);
+	String n = in.nextLine();
+	if(n.toLowerCase().contains("y")){
+	    System.out.println("You pick up the phone and slowly bring the phone to your ear.");
+	    wait(2000);
+	    System.out.println();
+	    System.out.println("A deep scratchy voice begins speaking.");
+	    System.out.println();
+	    wait(2000);
+	    System.out.println("Hello there, "+name+". My name is Mr. Igayim, and I want to help you on your journey.");
+	    wait(3500);
+	    System.out.println("I want to offer you some advice. Talk less -- smile more. Don't let them know what you're against or what you're for.");
+	    wait(3500);
+	    System.out.println("OK, but seriously. Go down to the old arcade down by the pier. There are tons of games for you there.");
+	    wait(3500);
+	    System.out.println("Good luck, young grasshopper.");
+	    System.out.println();
+	    wait(2000);
+	    System.out.println("BEEEEEEEEP");
+	    System.out.println();
+	    wait(2000);
+	    System.out.println("Mr. Igayim hung up on you before you got to respond. Hmph. Rude.");
+	}else if(n.toLowerCase().contains("n")){
+	    System.out.println("You press the reject button.");
+	    wait(2000);
+	    System.out.println("The phone immediately short-circuits and you drop it on the floor.");
+	    wait(2200);
+	    System.out.println("It would've shattered, but luckily, you have been equipped with a Nokia brick.");
+	    wait(3000);
+	    System.out.println("Instead, a slip of paper falls out with the following words:");
+	    System.out.println();
+	    wait(2200);
+	    System.out.println("Go down to the old arcade by the pier. This is crucial.");
+	}else{
+	    System.out.println("You hear a large boom, the lights go off, and the ringing stops.");
+	    System.out.println();
+	    wait(2200);
+	    System.out.println("Go down to the pier and enter the old arcade. NOW.");
+	}
+	System.out.println();
+	System.out.println();
+	wait(3000);
+	System.out.println("Oh gosh. What do you do? What is there to do?");
+	System.out.println();
+	wait(2000);
+	System.out.println("Soooooo... It's time to make a decision. Do you go down to the pier? (y/n)");
+	n = in.nextLine();
+	pier(n);
+    }
+
+    private static void pier(String s){
+	if(s.toLowerCase().contains("y")){
+	    System.out.println("You walk down to the pier, and you see a figure in a trench coat.");
+	    wait(2000);
+	    System.out.println("You approach this strange person and he flashes you a smile.");
+	    System.out.println();
+	    wait(2000);
+	    System.out.println("");
+	    System.out.println();
+	}else if(s.toLowerCase().contains("n")){
+	    System.out.println();
+	}else{
+	    System.out.println();
+	}
+	System.out.println();
     }
 
     private static void wait(int millis){
