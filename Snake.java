@@ -24,6 +24,8 @@ public class Snake{
     }
 
     public Snake(){
+	done = false;
+	//started = false;
 	x = 1;
 	y = 1;
 	length = 1;
@@ -65,7 +67,7 @@ public class Snake{
 
     public static String toString(boolean a){
 	// animations
-	debug(""+rows+" "+cols);
+	//debug(""+rows+" "+cols);
 	String s = "Score: "+score+"\n";
 	for(int row = 0; row < rows; row++){
 	    for(int col = 0; col < cols; col++){
@@ -78,7 +80,7 @@ public class Snake{
 
     
     public static void run(){
-	while(!done){
+	if(!done){
 	    if(dir==0){
 		move('u');
 	    }else if(dir==1){
@@ -89,6 +91,7 @@ public class Snake{
 		move('r');
 	    }
 	    check();
+	    wait(100);
 	    System.out.println("\033[2J");
 	    System.out.println(toString(true));
 	}
@@ -129,15 +132,19 @@ public class Snake{
 	if(c=='u' && ok(x,y-1)){
 	    y--;
 	    dir = 0;
+	    moves++;
 	}else if(c=='d' && ok(x,y+1)){
 	    y++;
 	    dir = 1;
+	    moves++;
 	}else if(c=='l' && ok(x-1,y)){
 	    x--;
 	    dir = 2;
+	    moves++;
 	}else if(c=='r' && ok(x+1,y)){
 	    x++;
 	    dir = 3;
+	    moves++;
 	}else{
 	    gameOver();
 	    return false;
@@ -151,7 +158,6 @@ public class Snake{
 	board[y][x] = 'S';
 	//debug(""+yy+" "+xx);
 	board[yy][xx] = ' ';
-	moves++;
 	if(moves==2){
             wait(10);
 	    board[1][2]=' ';
@@ -161,11 +167,13 @@ public class Snake{
     }
 
     private static boolean ok(int y, int x){
+	//debug(""+board[y][x]);
+	//debug(""+moves);
 	return (board[y][x]!='#' && board[y][x]!='S');
     }
 
     private static void check(){ // checks for hitting the wall / obstacles
-	if((board[y][x]=='#' || board[y][x]=='S') && started){
+	if((board[y][x]=='#')){// || board[y][x]=='S') && moves>0){
 	    gameOver();
 	}else if(board[y][x]=='!'){	    // found obstacle thing
 	    score++;
@@ -178,6 +186,7 @@ public class Snake{
 	//board = null;
 	System.out.println("GAME OVER. YOU LOST.");
 	done=true;
+	System.out.println("Click any key to continue");
     }
 
 
@@ -190,136 +199,6 @@ public class Snake{
         }
     }
 
-
-    /*
-    //FREE STUFF!!! (creds to mr k)
-
-    public void clearTerminal(){
-    System.out.println(CLEAR_SCREEN);
-    }
-
-    public String toString(){
-    int maxx = maze.length;
-    int maxy = maze[0].length;
-    String ans = "";
-    if(animate){
-    ans = "Solving a maze that is " + maxx + " by " + maxy + "\n";
-    }
-    for(int i = 0; i < maxx * maxy; i++){
-    if(i % maxx == 0 && i != 0){
-    ans += "\n";
-    }
-    char c =  maze[i % maxx][i / maxx];
-    if(c == '#'){
-    ans += color(38,47)+c;
-    }else{
-    ans += color(33,40)+c;
-    }
-    }
-    return HIDE_CURSOR + go(0,0) + ans + "\n" + SHOW_CURSOR + color(37,40);
-    }
-
-    //MORE FREE STUFF!!! *you can ignore all of this*
-    //Terminal keycodes to clear the terminal, or hide/show the cursor
-    private static final String CLEAR_SCREEN =  "\033[2J";
-    private static final String HIDE_CURSOR =  "\033[?25l";
-    private static final String SHOW_CURSOR =  "\033[?25h";
-    //terminal specific character to move the cursor
-    private String go(int x,int y){
-    return ("\033[" + x + ";" + y + "H");
-    }
-
-    private String color(int foreground,int background){
-    return ("\033[0;" + foreground + ";" + background + "m");
-    }
-
-    private void wait(int millis){
-    try {
-    Thread.sleep(millis);
-    }
-    catch (InterruptedException e) {
-    }
-    }
-
-    
-    //END FREE STUFF
-    */
-
-    /*
-    //Thanks to Graham King from darkcoding.net for the lesson on making the terminal interactive
-    private static String ttyConfig;
-
-    public static void main(String[] args) {
-    Snake m = new Snake();
-    try {
-    setTerminalToCBreak();
-    int i = 0;
-    while (true) {
-    if (System.in.available() != 0) { //if a button is pressed:
-    int key = System.in.read();
-    //System.out.println(key);
-    if (key == 0x1B) { //if the button pressed is the esc key:
-    break; //stop the loop
-    }
-    m.move(key);
-    }
-    i++;
-    m.wait(400);        
-    m.run();
-    }
-    } catch (IOException e) {
-    System.out.println("IOException");
-    } catch (InterruptedException e) {
-    System.out.println("InterruptedException");
-    }
-    finally {
-    try {
-    stty(ttyConfig.trim());
-    } catch (Exception e) {
-    System.out.println("Exception restoring tty config");
-    }
-    }
-    }
-
-    private static void setTerminalToCBreak() throws IOException, InterruptedException { //used in main()
-    ttyConfig = stty("-g");
-    stty("-icanon min 1"); //makes the console go character by character rather than line by line
-    stty("-echo"); //disables the terminal displaying the character pressed
-    }
-
-    private static String stty(final String args) throws IOException, InterruptedException { //used in setTerminalToCBreak()
-    String cmd = "stty " + args + " < /dev/tty";
-	
-    return exec(new String[] {
-    "sh",
-    "-c",
-    cmd
-    });
-    }
-
-    private static String exec(final String[] cmd) throws IOException, InterruptedException { //used in stty()
-    ByteArrayOutputStream bout = new ByteArrayOutputStream();
-
-    Process p = Runtime.getRuntime().exec(cmd);
-    int c;
-    InputStream in = p.getInputStream();
-
-    while ((c = in.read()) != -1) {
-    bout.write(c);
-    }
-
-    in = p.getErrorStream();
-
-    while ((c = in.read()) != -1) {
-    bout.write(c);
-    }
-	
-    p.waitFor();
-
-    String result = new String(bout.toByteArray());
-    return result;
-    }
-    */
 
     private static void setTerminalToCBreak() throws IOException, InterruptedException { //used in main()
 	ttyConfig = stty("-g");
@@ -380,7 +259,7 @@ public class Snake{
 		    m.move(key);
 		}
 		i++;
-		m.wait(400);        
+		m.wait(500);        
 		m.run();
 	    }
 	} catch (IOException e) {
