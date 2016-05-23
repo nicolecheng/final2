@@ -69,7 +69,7 @@ public class Platformer {
 	    System.out.println(this);
 	    for (Obstacle obsX : obs) {
 		if (obsX != null) {
-		    if (obsX.getBotLeft() != 0) {
+		    if (obsX.getBotLeft() > 0) {
 			obsX.moveLeft();
 		    } else {
 			remakeFirstObs();
@@ -77,10 +77,14 @@ public class Platformer {
 		}
 	    }
 	    if (System.in.available() != 0) {
+		int key = System.in.read();
 		if (keyReady) {
-		    int key = System.in.read();
 		    move(key);
 		    keyReady = false;
+		} else {
+		    for (int i = 0; i < 1000; i++) {
+			key = System.in.read();
+		    }
 		}
 	    }
 	    else {
@@ -214,6 +218,7 @@ public class Platformer {
 	        if (p.play()) {
 		    System.out.println("\033[2J");
 		    System.out.println("GAME OVER");
+		    break;
 		}
 	    }
 	} catch (IOException e) {
