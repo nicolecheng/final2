@@ -11,11 +11,13 @@ public class Platformer {
     private int jump;
     private int timeSinceLastObs;
     private int timeToReach;
+    private boolean keyReady;
     private boolean DEBUG;
     
     public Platformer() {
 	DEBUG = false;
 	jump = 0;
+	keyReady = true;
 	timeSinceLastObs = 0;
 	timeToReach = (int)(Math.random()*20)+5;
 	//init board
@@ -26,15 +28,15 @@ public class Platformer {
             }
         }
 	//init player
-	board[board.length-1][jump+2] = '|';
-	board[board.length-1][jump+4] = '|';
-	board[board.length-2][jump+3] = '-';
-	board[board.length-3][jump+3] = '|';
-	board[board.length-4][jump+3] = 'v';
-	board[board.length-4][jump+2] = '.';
-	board[board.length-4][jump+4] = '.';
+	board[board.length-1-jump][2] = '|';
+	board[board.length-1-jump][4] = '|';
+	board[board.length-2-jump][3] = '-';
+	board[board.length-3-jump][3] = '|';
+	board[board.length-4-jump][3] = 'v';
+	board[board.length-4-jump][2] = '.';
+	board[board.length-4-jump][4] = '.';
 	obs = new Obstacle[5];
-	obs[1] = new Obstacle((int)(Math.random()*2)+1,(int)(Math.random()*2)+1);
+	obs[1] = new Obstacle((int)(Math.random()*4)+1,(int)(Math.random()*4)+1);
 	obsCreated = 1;
     }
 
@@ -42,7 +44,7 @@ public class Platformer {
 	Obstacle[] newObs = new Obstacle[5];
 	for (int i = 1; i < obs.length; i++) {
 	    newObs[i-1] = obs[i];
-	    newObs[4] = new Obstacle((int)(Math.random()*2)+1,(int)(Math.random()*2)+1);
+	    newObs[4] = new Obstacle((int)(Math.random()*4)+1,(int)(Math.random()*4)+1);
 	}
 	obs = newObs;
     }
@@ -50,7 +52,7 @@ public class Platformer {
     public void checkTime() {
 	if (timeSinceLastObs >= timeToReach) {
 	    if (obsCreated != 5) {
-		obs[obsCreated] = new Obstacle((int)(Math.random()*2)+1,(int)(Math.random()*2)+1);
+		obs[obsCreated] = new Obstacle((int)(Math.random()*4)+1,(int)(Math.random()*4)+1);
 		obsCreated++;
 	    }
 	    else {
@@ -61,63 +63,71 @@ public class Platformer {
 	}
     }
 
-    public void play() {
+    public boolean play() {
 	try {
 	    System.out.println("\033[2J");
 	    System.out.println(this);
 	    for (Obstacle obsX : obs) {
 		if (obsX != null) {
-		    obsX.moveLeft();
+		    if (obsX.getBotLeft() != 0) {
+			obsX.moveLeft();
+		    } else {
+			remakeFirstObs();
+		    }
 		}
 	    }
 	    if (System.in.available() != 0) {
-		int key = System.in.read();
-		move(key);
+		if (keyReady) {
+		    int key = System.in.read();
+		    move(key);
+		    keyReady = false;
+		}
 	    }
 	    else {
 		if (jump != 0) {
-		    board[board.length-1][jump+2] = ' ';
-		    board[board.length-1][jump+4] = ' ';
-		    board[board.length-2][jump+3] = ' ';
-		    board[board.length-3][jump+3] = ' ';
-		    board[board.length-4][jump+3] = ' ';
-		    board[board.length-4][jump+2] = ' ';
-		    board[board.length-4][jump+4] = ' ';
+		    board[board.length-1-jump][2] = ' ';
+		    board[board.length-1-jump][4] = ' ';
+		    board[board.length-2-jump][3] = ' ';
+		    board[board.length-3-jump][3] = ' ';
+		    board[board.length-4-jump][3] = ' ';
+		    board[board.length-4-jump][2] = ' ';
+		    board[board.length-4-jump][4] = ' ';
 		    jump--;
-		    board[board.length-1][jump+2] = '|';
-		    board[board.length-1][jump+4] = '|';
-		    board[board.length-2][jump+3] = '-';
-		    board[board.length-3][jump+3] = '|';
-		    board[board.length-4][jump+3] = 'v';
-		    board[board.length-4][jump+2] = '.';
-		    board[board.length-4][jump+4] = '.';
+		    board[board.length-1-jump][2] = '|';
+		    board[board.length-1-jump][4] = '|';
+		    board[board.length-2-jump][3] = '-';
+		    board[board.length-3-jump][3] = '|';
+		    board[board.length-4-jump][3] = 'v';
+		    board[board.length-4-jump][2] = '.';
+		    board[board.length-4-jump][4] = '.';
 		}
 	    }
 	    timeSinceLastObs++;
 	    checkTime();
-	    while (wait(1000,x)) {}
+	    return checkCollision();
 	} catch (IOException e) {
 	    System.out.println("IOException");
 	}
+	return false;
     }
 
     public void move(int key) {
 	if (key == 0x77 && (jump == 0 || jump == 1 || jump == 2 || jump == 3)) {
-	    board[board.length-1][jump+2] = ' ';
-	    board[board.length-1][jump+4] = ' ';
-	    board[board.length-2][jump+3] = ' ';
-	    board[board.length-3][jump+3] = ' ';
-	    board[board.length-4][jump+3] = ' ';
-	    board[board.length-4][jump+2] = ' ';
-	    board[board.length-4][jump+4] = ' ';
+	    board[board.length-1-jump][2] = ' ';
+	    board[board.length-1-jump][4] = ' ';
+	    board[board.length-2-jump][3] = ' ';
+	    board[board.length-3-jump][3] = ' ';
+	    board[board.length-4-jump][3] = ' ';
+	    board[board.length-4-jump][2] = ' ';
+	    board[board.length-4-jump][4] = ' ';
 	    jump++;
-	    board[board.length-1][jump+2] = '|';
-	    board[board.length-1][jump+4] = '|';
-	    board[board.length-2][jump+3] = '-';
-	    board[board.length-3][jump+3] = '|';
-	    board[board.length-4][jump+3] = 'v';
-	    board[board.length-4][jump+2] = '.';
-	    board[board.length-4][jump+4] = '.';
+	    board[board.length-1-jump][2] = '|';
+	    board[board.length-1-jump][4] = '|';
+	    board[board.length-2-jump][3] = '-';
+	    board[board.length-3-jump][3] = '|';
+	    board[board.length-4-jump][3] = 'v';
+	    board[board.length-4-jump][2] = '.';
+	    board[board.length-4-jump][4] = '.';
 	}
     }
 
@@ -134,6 +144,17 @@ public class Platformer {
             ret += "\n";
         }
         return ret;
+    }
+
+    public boolean checkCollision() {
+	for (Obstacle obsX : obs) {
+	    if (obsX != null) {
+		if (board.length-1-jump - board.length-1-obsX.getHeight() < 0 && 4-obsX.getBotLeft() > 0 && 4-obsX.getBotLeft() < obsX.getWidth()) {
+		    return true;
+		}
+	    }
+	}
+	return false;
     }
 
     private class Obstacle {
@@ -157,6 +178,20 @@ public class Platformer {
 	    }
 	    botLeftPos--;
 	}
+
+	public int getBotLeft() {
+	    return botLeftPos;
+	}
+	public int getHeight() {
+	    return height;
+	}
+	public int getWidth() {
+	    return width;
+	}
+    }
+
+    public void setReady() {
+	keyReady = true;
     }
     
     //Thanks to Graham King from darkcoding.net for the lesson on making the terminal interactive
@@ -170,12 +205,16 @@ public class Platformer {
 		long x = System.currentTimeMillis();
 		if (System.in.available() != 0) {
 		    int key = System.in.read();
-		    if (key == 0x1B) {
+		    if (key == 0x73) {
 			break;
 		    }
 		}
-		while (wait(1000,x)) {}
-	        p.play();
+		while (!wait(100,x)) {}
+		p.setReady();
+	        if (p.play()) {
+		    System.out.println("\033[2J");
+		    System.out.println("GAME OVER");
+		}
 	    }
 	} catch (IOException e) {
 	    System.out.println("IOException");
