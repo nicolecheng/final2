@@ -47,33 +47,45 @@ Development Log <br><ul>
       05/21/16: Nicole - wrote beginning segment of the tutorial (up until the character reaches the snake game)
     </li>
     <li>
-      05/22/16: Nicole - added a lot more to the tutorial to include 2 games, and I added a trivia segment.
-    </li>
-</ul><br><br>
+       05/22/16: Nicole - added a lot more to the tutorial to include 2 games, and I added a trivia segment.
+     </li>
+     <li>
+       05/22/16: Noah - began working on platformer, obstacles not working but player jumping works
+     </li>
+     <li>
+       05/23/16: Noah - worked on platformer, obstacles moving but getting sort of confused in terms of their positions (stopping randomly). To do: make it so that it doesn't queue up input commands on terminal (i.e. the w key to jump) so you can only do it once per frame, aka 10 times per second
+     </li>
+ </ul><br><br>
 
-Project plan/outline including your goals prioritized by importance and chronology <br>
-(things to do + things already done)<br>
-Things to do: <br><ul><li>
-	individual games (for demo)<li>
-		which games are we going to recreate?</li><li>
-		tetris: create class of shapes, user terminal input / controls, score keeping </li><li>
-		pacman: series of boards, class of pacman and other little monster thingies</li><li>
-		space invaders: class of alien ships, damage/score records, shooting</li><li>
-		nintendogs: def need to keep track of user's dog and whatnot</li><li>
-		pingpong: AI of some sort?</li><li>
-		pinball: utilize physics! perhaps a simplified board with less controls</li></li><li>
-	a welding factor for the various components</li><li>
-	mechanism to output scores and names into a file</li><li>
-	user accounts</li><li>
-	powerups and cheat codes</li>
-</ul><br>
-Things already done:<br><ul>
-	<li>
-	Snake basics down (interaction, running snake, obstacles, etc.) 
-	</li>
-	<li>
-	Tutorial outline
-	</li>
+ Project plan/outline including your goals prioritized by importance and chronology <br>
+ (things to do + things already done)<br>
+ Things to do: <br><ul><li>
+	 individual games (for demo)<li>
+		 which games are we going to recreate?</li><li>
+		 tetris: create class of shapes, user terminal input / controls, score keeping </li><li>
+		 pacman: series of boards, class of pacman and other little monster thingies</li><li>
+		 space invaders: class of alien ships, damage/score records, shooting</li><li>
+		 nintendogs: def need to keep track of user's dog and whatnot</li><li>
+		 pingpong: AI of some sort?</li><li>
+		 pinball: utilize physics! perhaps a simplified board with less controls</li></li><li>
+	 a welding factor for the various components</li><li>
+	 mechanism to output scores and names into a file</li><li>
+	 user accounts</li><li>
+	 powerups and cheat codes</li>
+ </ul><br>
+ Things already done:<br><ul>
+	 <li>
+	 Snake basics down (interaction, running snake, obstacles, etc.) 
+	 </li>
+	 <li>
+	 Tutorial outline
+	 </li>
+	 <li>
+	   Pong basics
+	 </li>
+	 <li>
+	   Platformer basics
+	 </li>
 </ul><br><br>
 
 Links to the Demo versions, <br> 
