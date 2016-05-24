@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Tutorial{
 
-    private static boolean testMode = true; // with waits or nah?
+    private static boolean testMode = false; // with waits or nah?
 
     static String name, snakeName, dinoName;
     static int snakeScore, dinoScore;

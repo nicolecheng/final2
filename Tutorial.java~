@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Tutorial{
 
-    private static boolean testMode = false; // with waits or nah?
+    private static boolean testMode = true; // with waits or nah?
 
     static String name, snakeName, dinoName;
     static int snakeScore, dinoScore;
@@ -117,12 +117,22 @@ public class Tutorial{
 
     private static void playSnake(){
 	snakeScore = Snake.snakeGame();
-	if(snakeScore > 12){
+	if(snakeScore > 12 || testMode){
 	    scene2();
 	}else{
-	    System.out.println("Oof, sorry, you didn't beat the high score. Please try again.");
+	    System.out.println("You didn't beat the high score. Please try again.");
 	    System.out.println();
-	    wait(3000);
+	    wait(2800);
+	    System.out.println("Ready to go again? (y)");
+	    Scanner in = new Scanner(System.in);
+	    String n = in.nextLine();
+	    if(n.toLowerCase().contains("y")){
+		System.out.println("Rad. Let's begin.");
+		wait(3100);
+	    }else{
+		System.out.println("You have 3200 ms to make yourself ready.");
+		wait(3200);
+	    }
 	    playSnake();
 	}
     }
@@ -143,8 +153,8 @@ public class Tutorial{
 	    for(int i = 0; i < 25-snakeName.length(); i++){
 		spacing+=" ";
 	    }
-	    spacing+=" ";
-	    System.out.println("1. "+snakeName+spacing+"HI: "+snakeScore);
+	    spacing+="   ";
+	    System.out.println("1. "+snakeName.substring(2)+spacing+"HI: "+snakeScore);
 	    wait(2000);
 	    System.out.println("2. Noah Constricter          HI: 12");
 	    wait(2000);
@@ -367,10 +377,12 @@ public class Tutorial{
 	System.out.println();
 	wait(2600);
 	if (qScore >= 2){
-	    System.out.println("Congratulations! You won! You got " + qScore + "out of the 4 correct!");
+	    System.out.println("Congratulations! You won! You got " + qScore + " out of the 4 correct!");
+	    System.out.println();
 	    wait(3300);
 	    System.out.println("You now have tokens to play some arcade games!");
-	    wait(3300);
+	    System.out.println();
+	    wait(3300);	    
 	    System.out.println("Finally, you and Dino Run can have some alone time.");
 	    wait(3300);
 	    System.out.println("Oh, look at that. Tyrannicole has a sorry-looking high score of 17.");
