@@ -8,8 +8,8 @@ public class Tutorial{
 
     private static boolean testMode = false; // with waits or nah?
 
-    static String name, snakeName;
-    static int snakeScore;
+    static String name, snakeName, dinoName;
+    static int snakeScore, dinoScore;
   
     public static void main(String [] args){
 	//intro
@@ -265,7 +265,7 @@ public class Tutorial{
 	    wait(2700);
 	}
 	System.out.println();
-	System.out.println("You immediately see that ____, your favorite game, is not occupied. You rush over to get your hands on that beauty.");
+	System.out.println("You immediately see that DinoRun, your favorite game, is not occupied. You rush over to get your hands on that beauty.");
 	wait(3900);
 	System.out.println();
 	System.out.println("PLEASE ENTER 2 TOKENS TO BEGIN.");
@@ -368,11 +368,84 @@ public class Tutorial{
 	wait(2600);
 	if (qScore >= 2){
 	    System.out.println("Congratulations! You won! You got " + qScore + "out of the 4 correct!");
+	    wait(3300);
+	    System.out.println("You now have tokens to play some arcade games!");
+	    wait(3300);
+	    System.out.println("Finally, you and Dino Run can have some alone time.");
+	    wait(3300);
+	    System.out.println("Oh, look at that. Tyrannicole has a sorry-looking high score of 17.");
+	    wait(3600);
+	    System.out.println("You can do so much better.");
+	    wait(2800);
+	    System.out.println("Ready? (y)");
+	    Scanner in = new Scanner(System.in);
+	    String n = in.nextLine();
+	    if(n.toLowerCase().contains("y")){
+		System.out.println();
+		wait(500);
+		System.out.println("Awesome. Good luck.");
+		wait(1500);
+		System.out.println();
+	    }else{
+		System.out.println();
+		wait(500);
+		System.out.println("Meh. Oh well.");
+		wait(1500);
+		System.out.println();
+	    }
+	    playDino();
 	}else{
 	    System.out.println("You lost! Try again.");
 	    wait(2500);
 	    System.out.println();
 	    questions();
+	}
+    }
+
+    private static void playDino(){
+	dinoScore = Platformer.dino();
+	if(dinoScore > 17){
+	    scene3();
+	}else{
+	    System.out.println("Oof, sorry, you didn't beat the high score. Please try again.");
+	    System.out.println();
+	    wait(2700);
+	    playDino();
+	}
+    }
+
+    private static void scene3(){
+	System.out.println();
+	System.out.println("Nice. You beat Tyrannicole.");
+	System.out.println();
+	System.out.println();
+	System.out.println();
+	System.out.println();
+    }
+
+     private static void dinoName(){
+	System.out.println("Please enter a nickname to record this high score.");
+	Scanner in = new Scanner(System.in);
+	dinoName = in.nextLine();
+	// output data
+	System.out.println();
+	System.out.println();
+	String spacing = "";
+	if(dinoName.length()>25){
+	    System.out.println("That nickname has too many characters.");
+	    wait(1700);
+	    dinoName();
+	}else{
+	    for(int i = 0; i < 25-dinoName.length(); i++){
+		spacing+=" ";
+	    }
+	    spacing+=" ";
+	    System.out.println("1. "+dinoName+spacing+"HI: "+dinoScore);
+	    wait(2000);
+	    System.out.println("2. Tyrannicole               HI: 17");
+	    wait(2000);
+	    System.out.println("3. TexMex                    HI: 16");
+	    wait(2000);
 	}
     }
 
