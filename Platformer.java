@@ -160,6 +160,7 @@ public class Platformer {
             }
             ret += "\n";
         }
+	ret += jump + "\n";
         return ret;
     }
 
