@@ -38,13 +38,13 @@ public class Platformer {
 	board[board.length-4-jump][4] = '.';
 	//init score
 	score = 0;
-	board[20][5] = 'S';
-	board[20][6] = 'C';
-	board[20][7] = 'O';
-	board[20][8] = 'R';
-	board[20][9] = 'E';
-	board[20][10] = ':';
-	board[20][12] = (char)(score);
+	board[2][5] = 'S';
+	board[2][6] = 'C';
+	board[2][7] = 'O';
+	board[2][8] = 'R';
+	board[2][9] = 'E';
+	board[2][10] = ':';
+	board[2][12] = (char)(score);
 	
 	obs = new Obstacle[5];
 	obs[1] = new Obstacle((int)(Math.random()*4)+1,(int)(Math.random()*4)+1);
