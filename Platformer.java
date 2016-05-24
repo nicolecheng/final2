@@ -46,7 +46,7 @@ public class Platformer {
 	board[2][10] = ':';
 	board[2][12] = (char)(score);
 	
-	obs = new Obstacle[5];
+	obs = new Obstacle[10];
 	obs[1] = new Obstacle((int)(Math.random()*4)+1,(int)(Math.random()*4)+1);
 	obsCreated = 1;
     }
@@ -74,7 +74,7 @@ public class Platformer {
 
     public void checkTime() {
 	if (timeSinceLastObs >= timeToReach) {
-	    if (obsCreated != 5) {
+	    if (obsCreated != 10) {
 		obs[obsCreated] = new Obstacle((int)(Math.random()*4)+1,(int)(Math.random()*4)+1);
 		obsCreated++;
 	    }
