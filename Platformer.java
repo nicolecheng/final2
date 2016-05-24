@@ -64,10 +64,10 @@ public class Platformer {
 	board[board.length-4-jump][3] = 'v';
 	board[board.length-4-jump][2] = '.';
 	board[board.length-4-jump][4] = '.';
-	Obstacle[] newObs = new Obstacle[5];
+	Obstacle[] newObs = new Obstacle[10];
 	for (int i = 1; i < obs.length; i++) {
 	    newObs[i-1] = obs[i];
-	    newObs[4] = new Obstacle((int)(Math.random()*4)+1,(int)(Math.random()*4)+1);
+	    newObs[9] = new Obstacle((int)(Math.random()*4)+1,(int)(Math.random()*4)+1);
 	}
 	obs = newObs;
     }
