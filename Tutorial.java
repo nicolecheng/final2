@@ -153,7 +153,7 @@ public class Tutorial{
 	    for(int i = 0; i < 25-snakeName.length(); i++){
 		spacing+=" ";
 	    }
-	    spacing+=" ";
+	    spacing+="   ";
 	    System.out.println("1. "+snakeName.substring(2)+spacing+"HI: "+snakeScore);
 	    wait(2000);
 	    System.out.println("2. Noah Constricter          HI: 12");
@@ -377,10 +377,12 @@ public class Tutorial{
 	System.out.println();
 	wait(2600);
 	if (qScore >= 2){
-	    System.out.println("Congratulations! You won! You got " + qScore + "out of the 4 correct!");
+	    System.out.println("Congratulations! You won! You got " + qScore + " out of the 4 correct!");
+	    System.out.println();
 	    wait(3300);
 	    System.out.println("You now have tokens to play some arcade games!");
-	    wait(3300);
+	    System.out.println();
+	    wait(3300);	    
 	    System.out.println("Finally, you and Dino Run can have some alone time.");
 	    wait(3300);
 	    System.out.println("Oh, look at that. Tyrannicole has a sorry-looking high score of 17.");
