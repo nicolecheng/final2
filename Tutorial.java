@@ -378,8 +378,8 @@ public class Tutorial{
 	    System.out.println("You can do so much better.");
 	    wait(2800);
 	    System.out.println("Ready? (y)");
-	    Scanner in = new Scanner(System.in);
-	    String n = in.nextLine();
+	    Scanner inn = new Scanner(System.in);
+	    String n = inn.nextLine();
 	    if(n.toLowerCase().contains("y")){
 		System.out.println();
 		wait(500);
