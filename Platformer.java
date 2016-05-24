@@ -153,7 +153,7 @@ public class Platformer {
     public boolean checkCollision() {
 	for (Obstacle obsX : obs) {
 	    if (obsX != null) {
-		if (board.length-1-jump - board.length-1-obsX.getHeight() < 0 && 4-obsX.getBotLeft() > 0 && 4-obsX.getBotLeft() < obsX.getWidth()) {
+		if (board.length-1-jump - 75 + obsX.getHeight() > 0 && obsX.getBotLeft() >= 2 && obsX.getBotLeft() <= 4) {
 		    return true;
 		}
 	    }
@@ -167,7 +167,7 @@ public class Platformer {
 	private int botLeftPos;
 
 	private Obstacle(int width, int height) {
-	    this.width = width;
+	    this.width = 1; //changed to 1 because it's easier to deal with
 	    this.height = height;
 	    botLeftPos = board[0].length-width;
 	    moveLeft();
