@@ -9,6 +9,7 @@ public class Platformer {
     private int obsCreated;
     private int level;
     private int jump;
+    private int score;
     private int timeSinceLastObs;
     private int timeToReach;
     private boolean keyReady;
@@ -35,6 +36,16 @@ public class Platformer {
 	board[board.length-4-jump][3] = 'v';
 	board[board.length-4-jump][2] = '.';
 	board[board.length-4-jump][4] = '.';
+	//init score
+	score = 0;
+	board[20][5] = 'S';
+	board[20][6] = 'C';
+	board[20][7] = 'O';
+	board[20][8] = 'R';
+	board[20][9] = 'E';
+	board[20][10] = ':';
+	board[20][12] = (char)(score);
+	
 	obs = new Obstacle[5];
 	obs[1] = new Obstacle((int)(Math.random()*4)+1,(int)(Math.random()*4)+1);
 	obsCreated = 1;
@@ -79,7 +90,6 @@ public class Platformer {
 	try {
 	    System.out.println("\033[2J");
 	    System.out.println(this);
-	    System.out.println(jump);
 	    for (Obstacle obsX : obs) {
 		if (obsX != null) {
 		    if (obsX.getBotLeft() > 0) {
@@ -160,7 +170,6 @@ public class Platformer {
             }
             ret += "\n";
         }
-	ret += jump + "\n";
         return ret;
     }
 
@@ -235,6 +244,7 @@ public class Platformer {
 		    System.out.println("GAME OVER");
 		    break;
 		}
+		score++;
 	    }
 	} catch (IOException e) {
 	    System.out.println("IOException");
