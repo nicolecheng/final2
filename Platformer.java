@@ -235,7 +235,7 @@ public class Platformer {
 		}
 		while (!wait(100,x)) {}
 		p.setReady();
-	        if (p.play()) {
+	        if (!p.play()) {
 		    while (!wait(1000,x)) {}
 		    System.out.println("\033[2J");
 		    System.out.println("GAME OVER");
