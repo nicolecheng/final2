@@ -20,7 +20,7 @@ public class Platformer {
 	jump = 0;
 	keyReady = true;
 	timeSinceLastObs = 0;
-	timeToReach = (int)(Math.random()*40)+20
+	timeToReach = (int)(Math.random()*40)+20;
 	//init board
 	board = new char[15][75];
         for (int r = 0; r < board.length; r++) {
@@ -223,11 +223,15 @@ public class Platformer {
     public void setReady() {
 	keyReady = true;
     }
+
+    public int getScore() {
+	return score;
+    }
     
     //Thanks to Graham King from darkcoding.net for the lesson on making the terminal interactive
     private static String ttyConfig;
 
-    public static void main(String[] args) {
+    public static int dino() {
 	try {
 	    setTerminalToCBreak();
 	    Platformer p = new Platformer();
@@ -245,7 +249,7 @@ public class Platformer {
 		    while (!wait(1000,x)) {}
 		    System.out.println("\033[2J");
 		    System.out.println("GAME OVER");
-		    break;
+		    return p.getScore();
 		}
 	    }
 	} catch (IOException e) {
