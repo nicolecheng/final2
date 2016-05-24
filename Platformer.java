@@ -173,12 +173,12 @@ public class Platformer {
     public boolean checkCollision() {
 	for (Obstacle obsX : obs) {
 	    if (obsX != null) {
-		if (jump < obsX.getHeight() && (obsX.getBotLeft() < 2 || obsX.getBotLeft() > 4)) {
-		    return false;
+		if (jump < obsX.getHeight() && obsX.getBotLeft() >= 2 && obsX.getBotLeft() <= 4) {
+		    return true;
 		}
 	    }
 	}
-	return true;
+	return false;
     }
 
     private class Obstacle {
