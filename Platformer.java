@@ -173,12 +173,12 @@ public class Platformer {
     public boolean checkCollision() {
 	for (Obstacle obsX : obs) {
 	    if (obsX != null) {
-		if (jump >= obsX.getHeight() && obsX.getBotLeft() >= 2 && obsX.getBotLeft() <= 4) {
-		    return true;
+		if (jump < obsX.getHeight() && (obsX.getBotLeft() < 2 || obsX.getBotLeft() > 4)) {
+		    return false;
 		}
 	    }
 	}
-	return false;
+	return true;
     }
 
     private class Obstacle {
@@ -235,7 +235,7 @@ public class Platformer {
 		}
 		while (!wait(100,x)) {}
 		p.setReady();
-	        if (!p.play()) {
+	        if (p.play()) {
 		    while (!wait(1000,x)) {}
 		    System.out.println("\033[2J");
 		    System.out.println("GAME OVER");
