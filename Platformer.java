@@ -68,8 +68,8 @@ public class Platformer {
 	Obstacle[] newObs = new Obstacle[10];
 	for (int i = 1; i < obs.length; i++) {
 	    newObs[i-1] = obs[i];
-	    newObs[9] = new Obstacle((int)(Math.random()*4)+1,(int)(Math.random()*4)+1);
 	}
+	newObs[9] = new Obstacle((int)(Math.random()*4)+1,(int)(Math.random()*4)+1);
 	obs = newObs;
     }
 
