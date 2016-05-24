@@ -29,8 +29,8 @@ public class Snake{
 	x = 1;
 	y = 1;
 	length = 1;
-        rows = 12;
-	cols = 12;
+        rows = 15;
+	cols = 15;
 	snake = new MyDeque<Integer>(); // keeps coords of snake
 	snake.addFirst(cols+1); // start at pt (1,1)
 	board();
@@ -185,8 +185,10 @@ public class Snake{
         System.out.println("\033[2J");
 	//board = null;
 	System.out.println("GAME OVER. YOU LOST.");
+	wait(3000);
 	done=true;
-	System.out.println("Click any key to continue");
+	System.out.println("Click the esc key to try again.");
+	wait(3000);
     }
 
 

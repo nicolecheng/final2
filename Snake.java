@@ -184,11 +184,9 @@ public class Snake{
     private static void gameOver(){
         System.out.println("\033[2J");
 	//board = null;
-	System.out.println("GAME OVER. YOU LOST.");
-	wait(3000);
+	System.out.println("GAME OVER.");
+	wait(2700);
 	done=true;
-	System.out.println("Click the esc key to try again.");
-	wait(3000);
     }
 
 
