@@ -52,9 +52,9 @@ public class Platformer {
     }
 
     public void remakeFirstObs() {
-	for (int h = 0; h < height; h++) {
-	    for (int w = 0; w < width; w++) {
-		board[board.length-1-h][botLeftPos+w] = ' ';
+	for (int h = 0; h < obs[1].getHeight(); h++) {
+	    for (int w = 0; w < obs[1].getWidth(); w++) {
+		board[board.length-1-h][obs[1].getBotLeft()+w] = ' ';
 	    }
 	}
 	board[board.length-1-jump][2] = '|';
@@ -131,6 +131,7 @@ public class Platformer {
 	    }
 	    timeSinceLastObs++;
 	    checkTime();
+	    score++;
 	    return checkCollision();
 	} catch (IOException e) {
 	    System.out.println("IOException");
@@ -244,7 +245,6 @@ public class Platformer {
 		    System.out.println("GAME OVER");
 		    break;
 		}
-		score++;
 	    }
 	} catch (IOException e) {
 	    System.out.println("IOException");
