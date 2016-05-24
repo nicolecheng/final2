@@ -153,7 +153,7 @@ public class Platformer {
     public boolean checkCollision() {
 	for (Obstacle obsX : obs) {
 	    if (obsX != null) {
-		if (board.length-1-jump - 75 + obsX.getHeight() > 0 && obsX.getBotLeft() >= 2 && obsX.getBotLeft() <= 4) {
+		if (board.length-1-jump - 75 + obsX.getHeight() >= 0 && obsX.getBotLeft() >= 2 && obsX.getBotLeft() <= 4) {
 		    return true;
 		}
 	    }
