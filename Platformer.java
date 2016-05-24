@@ -41,6 +41,18 @@ public class Platformer {
     }
 
     public void remakeFirstObs() {
+	for (int h = 0; h < height; h++) {
+	    for (int w = 0; w < width; w++) {
+		board[board.length-1-h][botLeftPos+w] = ' ';
+	    }
+	}
+	board[board.length-1-jump][2] = '|';
+	board[board.length-1-jump][4] = '|';
+	board[board.length-2-jump][3] = '-';
+	board[board.length-3-jump][3] = '|';
+	board[board.length-4-jump][3] = 'v';
+	board[board.length-4-jump][2] = '.';
+	board[board.length-4-jump][4] = '.';
 	Obstacle[] newObs = new Obstacle[5];
 	for (int i = 1; i < obs.length; i++) {
 	    newObs[i-1] = obs[i];
@@ -153,8 +165,8 @@ public class Platformer {
     public boolean checkCollision() {
 	for (Obstacle obsX : obs) {
 	    if (obsX != null) {
-		if (board.length-1-jump - 75 + obsX.getHeight() >= 0 && obsX.getBotLeft() >= 2 && obsX.getBotLeft() <= 4) {
-		    return true;
+		if (jump >= obsX.getHeight() && obsX.getBotLeft() >= 2 && obsX.getBotLeft() <= 4) {
+		    return false;
 		}
 	    }
 	}
