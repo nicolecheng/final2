@@ -48,7 +48,7 @@ public class Platformer {
 	board[2][13] = Character.forDigit(score%10,10);
 	
 	obs = new Obstacle[10];
-	obs[1] = new Obstacle((int)(Math.random()*4)+1,(int)(Math.random()*4)+1);
+	obs[0] = new Obstacle((int)(Math.random()*4)+1,(int)(Math.random()*4)+1);
 	obsCreated = 1;
     }
 
