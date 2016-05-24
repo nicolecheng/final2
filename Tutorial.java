@@ -122,7 +122,17 @@ public class Tutorial{
 	}else{
 	    System.out.println("Oof, sorry, you didn't beat the high score. Please try again.");
 	    System.out.println();
-	    wait(3000);
+	    wait(2800);
+	    System.out.println("Ready to go again? (y)");
+	    Scanner in = new Scanner(System.in);
+	    String n = in.nextLine();
+	    if(n.toLowerCase().contains("y")){
+		System.out.println("Rad. Let's begin.");
+		wait(2800);
+	    }else{
+		System.out.println("You have 3200 ms to make yourself ready.");
+		wait(3200);
+	    }
 	    playSnake();
 	}
     }
