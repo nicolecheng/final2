@@ -267,6 +267,11 @@ public class Platformer {
 	return 0;
     }
 
+    public static void main(String[] args) {
+	System.out.println("\033[2J");
+	System.out.println(dino());
+    }
+
     private static void setTerminalToCBreak() throws IOException, InterruptedException { //used in main()
 	ttyConfig = stty("-g");
 	stty("-icanon min 1"); //makes the console go character by character rather than line by line
