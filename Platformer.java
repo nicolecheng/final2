@@ -174,7 +174,7 @@ public class Platformer {
 	for (Obstacle obsX : obs) {
 	    if (obsX != null) {
 		if (jump >= obsX.getHeight() && obsX.getBotLeft() >= 2 && obsX.getBotLeft() <= 4) {
-		    return false;
+		    return true;
 		}
 	    }
 	}
