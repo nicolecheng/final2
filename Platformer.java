@@ -52,8 +52,8 @@ public class Platformer {
     }
 
     public void remakeFirstObs() {
-	for (int h = 0; h < obs[1].getHeight(); h++) {
-	    for (int w = 0; w < obs[1].getWidth(); w++) {
+	for (int h = 0; h < obs[0].getHeight(); h++) {
+	    for (int w = 0; w < obs[0].getWidth(); w++) {
 		board[board.length-1-h][obs[1].getBotLeft()+w] = ' ';
 	    }
 	}
