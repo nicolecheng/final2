@@ -56,7 +56,13 @@ Development Log <br><ul>
        05/23/16: Noah - worked on platformer, obstacles moving but getting sort of confused in terms of their positions (stopping randomly). To do: make it so that it doesn't queue up input commands on terminal (i.e. the w key to jump) so you can only do it once per frame, aka 10 times per second
      </li>
      <li>
+       05/23/16: Nicole - worked on integrating Snake into the tutorial; fixed issue of the wild running terminal; tweaked text inputs in tutorial to be less crash-prone
+     </li>
+     <li>
        05/23/16: Noah - finished platformer, need to make logistics work (i.e. no more holding jump, obstacles coming at reasonable intervals, etc)
+     </li>
+     <li>
+       05/24/16: Nicole - put everything together to be run from Tutorial.java; couple of bug fixes done; added to tutorial
      </li>
  </ul><br><br>
 
