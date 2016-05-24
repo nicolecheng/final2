@@ -264,6 +264,7 @@ public class Platformer {
 		System.out.println("Exception restoring tty config");
 	    }
 	}
+	return 0;
     }
 
     private static void setTerminalToCBreak() throws IOException, InterruptedException { //used in main()
