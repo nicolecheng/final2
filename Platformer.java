@@ -44,7 +44,8 @@ public class Platformer {
 	board[2][8] = 'R';
 	board[2][9] = 'E';
 	board[2][10] = ':';
-	board[2][12] = (char)(score);
+	board[2][12] = Character.forDigit(score/10,10);
+	board[2][13] = Character.forDigit(score%10,10);
 	
 	obs = new Obstacle[10];
 	obs[1] = new Obstacle((int)(Math.random()*4)+1,(int)(Math.random()*4)+1);
@@ -54,7 +55,7 @@ public class Platformer {
     public void remakeFirstObs() {
 	for (int h = 0; h < obs[0].getHeight(); h++) {
 	    for (int w = 0; w < obs[0].getWidth(); w++) {
-		board[board.length-1-h][obs[1].getBotLeft()+w] = ' ';
+		board[board.length-1-h][obs[0].getBotLeft()+w] = ' ';
 	    }
 	}
 	board[board.length-1-jump][2] = '|';
