@@ -79,6 +79,7 @@ public class Platformer {
 	try {
 	    System.out.println("\033[2J");
 	    System.out.println(this);
+	    System.out.println(jump);
 	    for (Obstacle obsX : obs) {
 		if (obsX != null) {
 		    if (obsX.getBotLeft() > 0) {
