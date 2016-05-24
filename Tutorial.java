@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Tutorial{
 
-    private static boolean testMode = false; // with waits or nah?
+    private static boolean testMode = true; // with waits or nah?
 
     static String name, snakeName, dinoName;
     static int snakeScore, dinoScore;
@@ -117,10 +117,10 @@ public class Tutorial{
 
     private static void playSnake(){
 	snakeScore = Snake.snakeGame();
-	if(snakeScore > 12){
+	if(snakeScore > 12 || testMode){
 	    scene2();
 	}else{
-	    System.out.println("Oof, sorry, you didn't beat the high score. Please try again.");
+	    System.out.println("You didn't beat the high score. Please try again.");
 	    System.out.println();
 	    wait(2800);
 	    System.out.println("Ready to go again? (y)");
@@ -128,7 +128,7 @@ public class Tutorial{
 	    String n = in.nextLine();
 	    if(n.toLowerCase().contains("y")){
 		System.out.println("Rad. Let's begin.");
-		wait(2800);
+		wait(3100);
 	    }else{
 		System.out.println("You have 3200 ms to make yourself ready.");
 		wait(3200);
