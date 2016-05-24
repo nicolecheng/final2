@@ -20,7 +20,7 @@ public class Platformer {
 	jump = 0;
 	keyReady = true;
 	timeSinceLastObs = 0;
-	timeToReach = (int)(Math.random()*20)+5;
+	timeToReach = (int)(Math.random()*40)+20
 	//init board
 	board = new char[15][75];
         for (int r = 0; r < board.length; r++) {
@@ -52,6 +52,11 @@ public class Platformer {
 	obsCreated = 1;
     }
 
+    public void updateScore() {
+	board[2][12] = Character.forDigit(score/10,10);
+	board[2][13] = Character.forDigit(score%10,10);
+    }
+
     public void remakeFirstObs() {
 	board[board.length-1-jump][2] = '|';
 	board[board.length-1-jump][4] = '|';
@@ -78,7 +83,7 @@ public class Platformer {
 		remakeFirstObs();
 	    }
 	    timeSinceLastObs = 0;
-	    timeToReach = (int)(Math.random()*20)+5;
+	    timeToReach = (int)(Math.random()*40)+20;
 	}
     }
 
@@ -128,6 +133,7 @@ public class Platformer {
 	    timeSinceLastObs++;
 	    checkTime();
 	    score++;
+	    updateScore();
 	    return checkCollision();
 	} catch (IOException e) {
 	    System.out.println("IOException");
