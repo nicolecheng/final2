@@ -185,8 +185,9 @@ public class Snake{
         System.out.println("\033[2J");
 	//board = null;
 	System.out.println("GAME OVER.");
-	wait(2700);
+	wait(2300);
 	System.out.println("Press the up arrow key to continue.");
+	wait(2800);
 	done=true;
     }
 

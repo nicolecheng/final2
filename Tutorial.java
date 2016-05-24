@@ -154,7 +154,7 @@ public class Tutorial{
 		spacing+=" ";
 	    }
 	    spacing+=" ";
-	    System.out.println("1. "+snakeName+spacing+"HI: "+snakeScore);
+	    System.out.println("1. "+snakeName.substring(2)+spacing+"HI: "+snakeScore);
 	    wait(2000);
 	    System.out.println("2. Noah Constricter          HI: 12");
 	    wait(2000);
