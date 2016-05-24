@@ -69,7 +69,7 @@ public class Tutorial{
 	    wait(2500);
 	    System.out.println("It's an arcade machine! You walk over and see that it's a Snake game.");
 	    wait(3400);
-	    System.out.println("The high score is only a 20, currently being held by someone by the alias, Noah Constricter.");
+	    System.out.println("The high score is only a 12, currently being held by someone by the alias, Noah Constricter.");
 	    wait(3000);
 	    System.out.println("Easy peasy, right? You're going to take this fella down. Are you ready? (y/n)");
 	    Scanner in = new Scanner(System.in);
@@ -117,12 +117,12 @@ public class Tutorial{
 
     private static void playSnake(){
 	snakeScore = Snake.snakeGame();
-	if(snakeScore > 20){
+	if(snakeScore > 12){
 	    scene2();
 	}else{
 	    System.out.println("Oof, sorry, you didn't beat the high score. Please try again.");
 	    System.out.println();
-	    wait(2700);
+	    wait(3000);
 	    playSnake();
 	}
     }
@@ -146,9 +146,9 @@ public class Tutorial{
 	    spacing+=" ";
 	    System.out.println("1. "+snakeName+spacing+"HI: "+snakeScore);
 	    wait(2000);
-	    System.out.println("2. Noah Constricter          HI: 20");
+	    System.out.println("2. Noah Constricter          HI: 12");
 	    wait(2000);
-	    System.out.println("3. MyAnacondaDo              HI: 17");
+	    System.out.println("3. MyAnacondaDo              HI: 10");
 	    wait(2000);
 	}
     }

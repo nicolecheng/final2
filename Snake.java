@@ -188,6 +188,7 @@ public class Snake{
 	wait(3000);
 	done=true;
 	System.out.println("Click the esc key to try again.");
+	wait(3000);
     }
 
 
