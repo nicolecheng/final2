@@ -178,6 +178,8 @@ public class Snake{
 	}else if(board[y][x]=='!'){	    // found obstacle thing
 	    score++;
 	    addObstacle();
+	    length++;
+	    // add to deque
 	}
     }
 
