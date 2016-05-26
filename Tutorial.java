@@ -20,6 +20,7 @@ public class Tutorial{
 	System.out.println();
 	System.out.println("OK, "+name+", let's get into this.");
 	System.out.println();
+	wait(1500);
 	System.out.println("The rules are simple: you are striving to become to the coolest of the cool.");
 	wait(2300);
 	System.out.println("What better way to do that than to dominate in every retro game?");
