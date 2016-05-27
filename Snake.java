@@ -47,7 +47,7 @@ public class Snake{
     }
 
     private static void board(){ 
-	board = new char[rows][cols]; // default 10x10 board with borders
+	board = new char[rows][cols]; // default board with borders
 	for(int row = 0; row < rows; row++){
 	    for(int col = 0; col < cols; col++){
 		if(row==0 || row==rows-1 || col==0 || col==cols-1){
@@ -142,7 +142,7 @@ public class Snake{
 	}
 	*/
 	int d = dir;
-	/*
+	
 	if(c=='u' && ok(x,y-1)){
 	    y--;
 	    dir = 0;
@@ -159,39 +159,9 @@ public class Snake{
 	    x++;
 	    dir = 3;
 	    moves++;
-	    }*/
-	/*else{
+	}else{
 	    gameOver();
 	    return false;
-	    }*/
-	if(c=='u'){
-	    y--;
-	    dir=0;
-	    moves++;
-	    if(!ok(x,y-1)){
-		gameOver();		    
-	    }
-	}else if(c=='d'){
-	    y++;
-	    dir = 1;
-	    moves++;
-	    if(!ok(x,y+1)){
-		gameOver();
-	    }
-	}else if(c=='l'){
-	    x--;
-	    dir = 2;
-	    moves++;
-	    if(!ok(x-1,y)){
-		gameOver();
-	    }
-	}else if(c=='r'){
-	    x++;
-	    dir = 3;
-	    moves++;
-	    if(!ok(x+1,y)){
-		gameOver();
-	    }
 	}
 	/*
 	String f = ""+(y*cols+x);
@@ -201,6 +171,7 @@ public class Snake{
 	    }*/
 	if(snake.getLast()!=null && !check()){
 	    snake.removeLast();
+	    board[yy][xx] = ' ';
 	}
 	
 	//System.out.println(snake);
@@ -208,7 +179,6 @@ public class Snake{
 	//check();
 	board[y][x] = 'S';
 	//debug(""+yy+" "+xx);
-	board[yy][xx] = ' ';
 	if(moves==2){
             wait(10);
 	    board[1][2]=' ';

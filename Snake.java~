@@ -142,6 +142,7 @@ public class Snake{
 	}
 	*/
 	int d = dir;
+	/*
 	if(c=='u' && ok(x,y-1)){
 	    y--;
 	    dir = 0;
@@ -158,10 +159,46 @@ public class Snake{
 	    x++;
 	    dir = 3;
 	    moves++;
-	}else{
+	    }*/
+	/*else{
 	    gameOver();
 	    return false;
+	    }*/
+	if(c=='u'){
+	    y--;
+	    dir=0;
+	    moves++;
+	    if(!ok(x,y-1)){
+		gameOver();		    
+	    }
+	}else if(c=='d'){
+	    y++;
+	    dir = 1;
+	    moves++;
+	    if(!ok(x,y+1)){
+		gameOver();
+	    }
+	}else if(c=='l'){
+	    x--;
+	    dir = 2;
+	    moves++;
+	    if(!ok(x-1,y)){
+		gameOver();
+	    }
+	}else if(c=='r'){
+	    x++;
+	    dir = 3;
+	    moves++;
+	    if(!ok(x+1,y)){
+		gameOver();
+	    }
 	}
+	/*
+	String f = ""+(y*cols+x);
+	if(snake.toString().contains(f)){
+	    gameOver();
+	    return false;
+	    }*/
 	if(snake.getLast()!=null && !check()){
 	    snake.removeLast();
 	}
