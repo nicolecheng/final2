@@ -57,39 +57,44 @@ public class Pong {
     
     public void reset() {
 	if (ballX == 0 || ballX == board[0].length-1) {
-	    if (ballX == 0) {
-		score2++;
-		board[3][board[0].length-7] = 'G';
-		board[3][board[0].length-6] = 'O';
-		board[3][board[0].length-5] = 'A';
-		board[3][board[0].length-4] = 'L';
-		board[3][board[0].length-3] = '!';
-		System.out.println("\033[2J");
-		System.out.println(this);
-		long x = System.currentTimeMillis();
-		while (!wait(1000,x)) {}
-		for (int i = board.length-7; i < board.length-2; i++) {
-		    board[3][i] = ' ';
+	    try {
+		if (ballX == 0) {
+		    score2++;
+		    board[3][board[0].length-7] = 'G';
+		    board[3][board[0].length-6] = 'O';
+		    board[3][board[0].length-5] = 'A';
+		    board[3][board[0].length-4] = 'L';
+		    board[3][board[0].length-3] = '!';
+		    System.out.println("\033[2J");
+		    System.out.println(this);
+		    long x = System.currentTimeMillis();
+		    Thread.sleep(3000);
+		    for (int i = board.length-7; i < board.length-2; i++) {
+			board[3][i] = ' ';
+		    }
+		    System.out.println("\033[2J");
+		    System.out.println(this);
 		}
-		System.out.println("\033[2J");
-		System.out.println(this);
+		if (ballX == board[0].length-1) {
+		    score1++;
+		    board[3][2] = 'G';
+		    board[3][3] = 'O';
+		    board[3][4] = 'A';
+		    board[3][5] = 'L';
+		    board[3][6] = '!';
+		    System.out.println("\033[2J");
+		    System.out.println(this);
+		    long x = System.currentTimeMillis();
+		    Thread.sleep(3000);
+		    for (int i = 2; i < 7; i++) {
+			board[3][i] = ' ';
+		    }
+		    System.out.println("\033[2J");
+		    System.out.println(this);
+		}
 	    }
-	    if (ballX == board[0].length-1) {
-		score1++;
-		board[3][2] = 'G';
-		board[3][3] = 'O';
-		board[3][4] = 'A';
-		board[3][5] = 'L';
-		board[3][6] = '!';
-		System.out.println("\033[2J");
-		System.out.println(this);
-		long x = System.currentTimeMillis();
-		while (!wait(1000,x)) {};
-		for (int i = 2; i < 7; i++) {
-		    board[3][i] = ' ';
-		}
-		System.out.println("\033[2J");
-		System.out.println(this);
+	    catch (InterruptedException e) {
+		System.out.println("InterruptedException");
 	    }
 	    for (int i = pos1; i < pos1+3; i++) {
 		board[i][0] = ' ';
@@ -127,7 +132,6 @@ public class Pong {
             board[pos1+3][0] = '#';
             pos1++;
         }
-	System.out.println(this);
     }
 
     public int ballMove(int dir) {
@@ -251,15 +255,10 @@ public class Pong {
 	    long x = System.currentTimeMillis();
 	    if (System.in.available() != 0) {
 		int key = System.in.read();
-		if (key == 0x1B) {
-		    return false;
-		} else {
-		    move(key);
-		    System.out.println(this);
-		    //while (wait(50,x)) {}
-		    Thread.sleep(50);
-		    fixPos();
-		}
+		move(key);
+		//while (wait(50,x)) {}
+		Thread.sleep(50);
+		fixPos();
 	    }
 	    reset();
 	    board[3][3] = Character.forDigit(score1,10);
@@ -312,6 +311,12 @@ public class Pong {
 	    while (score1 < 10 && score2 < 10) {
 		if (!play()) {
 		    return score1;
+		}
+		try {
+		    Thread.sleep(100);
+		}
+		catch (InterruptedException e) {
+		    System.out.println("InterruptedException");
 		}
 	    }
 	    return score1;
