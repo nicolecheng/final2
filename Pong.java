@@ -263,7 +263,8 @@ public class Pong {
 	    } else {
 		move(key);
 		System.out.println(p);
-		while (wait(50,x)) {}
+		//while (wait(50,x)) {}
+		Thread.sleep(50);
 		fixPos();
 	    }
 	}
