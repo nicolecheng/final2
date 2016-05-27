@@ -261,6 +261,8 @@ public class Pong {
 	    }
 	}
 	reset();
+	board[3][3] = Character.forDigit(score1);
+	board[3][board[0].length-4] = Character.forDigit(score2);
 	lastDir = ballMove(getDir(lastDir));
     }
 
@@ -298,9 +300,10 @@ public class Pong {
     Pong p = new Pong(0);
 	try {
 	    setTerminalToCBreak();
-	    while (true) {
+	    while (score1 < 10 && score2 < 10) {
 		p.play();
 	    }
+	    return score1;
 	} catch (IOException e) {
 	    System.out.println("IOException");
 	} catch (InterruptedException e) {
