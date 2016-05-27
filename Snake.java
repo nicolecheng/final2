@@ -167,7 +167,7 @@ public class Snake{
 	    snake.removeLast();
 	    board[yy][xx] = ' ';
 	}
-	if(!ok(y,x)){
+	if(!ok(y,x)&&dir>0){
 	    System.out.println("NOT OK");
 	    gameOver();
 	}else{
