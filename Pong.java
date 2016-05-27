@@ -207,14 +207,14 @@ public class Pong {
 	    }
 	}
 	//if it hits the ceiling, reflect it in the opposite direction
-	else if (ballY == 1) {
+	else if (ballY <= 1) {
 	    if (lastDir == 1) {
 		return 7;
 	    }
 	    if (lastDir == 3) {
 		return 5;
 	    }
-	} else if (ballY == board.length-2) {
+	} else if (ballY >= board.length-2) {
 	    if (lastDir == 7) {
 		return 1;
 	    }
