@@ -23,6 +23,12 @@ public class Snake{
 	}
     }
 
+    private static void debug(int i){
+	if(DEBUG){
+	    System.out.println(i);
+	}
+    }
+
     public Snake(){
 	done = false;
 	//started = false;
@@ -207,6 +213,9 @@ public class Snake{
     }
 
     private static void gameOver(){
+	System.out.println("x,y"+x+"   "+y);
+	System.out.println("coord val"+board[y][x]);
+	System.out.println("dir= "+dir);
         System.out.println("\033[2J");
 	//board = null;
 	System.out.println("GAME OVER.");
