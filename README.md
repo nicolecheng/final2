@@ -64,6 +64,9 @@ Development Log <br><ul>
      <li>
        05/24/16: Nicole - put everything together to be run from Tutorial.java; couple of bug fixes done; added to tutorial
      </li>
+     <li>
+     	05/26/16: Noah - fixed infinite jumping, changed score to be every obstacle rather than time, everything working without BUGS but could be optimized
+     </li>
  </ul><br><br>
 
  Project plan/outline including your goals prioritized by importance and chronology <br>
