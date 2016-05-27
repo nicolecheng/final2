@@ -236,34 +236,44 @@ public class Pong {
         return ret;
     }
     
-    public void play() {
-	if (DEBUG) {
-	    System.out.println("lastDir: "+lastDir);
-	    System.out.println("ballX: "+ballX);
-	    System.out.println("ballY: "+ballY);
-	    System.out.println("pos1: "+pos1);
-	    System.out.println();
-	} else {
-	    System.out.println("\033[2J");
-	    System.out.println(this);
-	}
-	long x = System.currentTimeMillis();
-	if (System.in.available() != 0) {
-	    int key = System.in.read();
-	    if (key == 0x1B) {
-		break;
+    public boolean play() {
+	try {
+	    if (DEBUG) {
+		System.out.println("lastDir: "+lastDir);
+		System.out.println("ballX: "+ballX);
+		System.out.println("ballY: "+ballY);
+		System.out.println("pos1: "+pos1);
+		System.out.println();
 	    } else {
-		move(key);
-		System.out.println(p);
-		//while (wait(50,x)) {}
-		Thread.sleep(50);
-		fixPos();
+		System.out.println("\033[2J");
+		System.out.println(this);
 	    }
+	    long x = System.currentTimeMillis();
+	    if (System.in.available() != 0) {
+		int key = System.in.read();
+		if (key == 0x1B) {
+		    return false;
+		} else {
+		    move(key);
+		    System.out.println(this);
+		    //while (wait(50,x)) {}
+		    Thread.sleep(50);
+		    fixPos();
+		}
+	    }
+	    reset();
+	    board[3][3] = Character.forDigit(score1,10);
+	    board[3][board[0].length-4] = Character.forDigit(score2,10);
+	    lastDir = ballMove(getDir(lastDir));
+	    return true;
 	}
-	reset();
-	board[3][3] = Character.forDigit(score1);
-	board[3][board[0].length-4] = Character.forDigit(score2);
-	lastDir = ballMove(getDir(lastDir));
+	catch (InterruptedException e) {
+	    System.out.println("Interrupted exception");
+	}
+	catch (IOException e) {
+	    System.out.println("IOException");
+	}
+	return false;
     }
 
     public void fixPos() {
@@ -296,19 +306,20 @@ public class Pong {
     //Thanks to Graham King from darkcoding.net for the lesson on making the terminal interactive
     private static String ttyConfig;
 
-    public static void main(String[] args) {
-    Pong p = new Pong(0);
+    public int pong() {
 	try {
 	    setTerminalToCBreak();
 	    while (score1 < 10 && score2 < 10) {
-		p.play();
+		if (!play()) {
+		    return score1;
+		}
 	    }
 	    return score1;
 	} catch (IOException e) {
 	    System.out.println("IOException");
 	} catch (InterruptedException e) {
 	    System.out.println("InterruptedException");
-    }
+	}
 	finally {
 	    try {
 		stty(ttyConfig.trim());
@@ -316,6 +327,12 @@ public class Pong {
 		System.out.println("Exception restoring tty config");
 	    }
 	}
+	return 0;
+    }
+    
+    public static void main(String[] args) {
+	Pong p = new Pong(0);
+        System.out.println(p.pong());
     }
 
     private static void setTerminalToCBreak() throws IOException, InterruptedException { //used in main()
