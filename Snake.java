@@ -23,6 +23,12 @@ public class Snake{
 	}
     }
 
+    private static void debug(int i){
+	if(DEBUG){
+	    System.out.println(i);
+	}
+    }
+
     public Snake(){
 	done = false;
 	//started = false;
