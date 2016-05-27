@@ -22,7 +22,7 @@ public class Pong {
     private boolean DEBUG;
     
     public Pong(int difficulty) {
-	DEBUG = false;
+	DEBUG = true;
         //initialize the board to by an empty 9 by 25 board
         board = new char[15][75];
         for (int r = 0; r < board.length; r++) {
@@ -247,6 +247,7 @@ public class Pong {
 		System.out.println("ballX: "+ballX);
 		System.out.println("ballY: "+ballY);
 		System.out.println("pos1: "+pos1);
+		System.out.println("pos2: "+pos2);
 		System.out.println();
 	    } else {
 		System.out.println("\033[2J");
@@ -256,8 +257,6 @@ public class Pong {
 	    if (System.in.available() != 0) {
 		int key = System.in.read();
 		move(key);
-		//while (wait(50,x)) {}
-		Thread.sleep(50);
 		fixPos();
 	    }
 	    reset();
@@ -265,9 +264,6 @@ public class Pong {
 	    board[3][board[0].length-4] = Character.forDigit(score2,10);
 	    lastDir = ballMove(getDir(lastDir));
 	    return true;
-	}
-	catch (InterruptedException e) {
-	    System.out.println("Interrupted exception");
 	}
 	catch (IOException e) {
 	    System.out.println("IOException");
@@ -278,20 +274,26 @@ public class Pong {
     public void fixPos() {
 	int r = 0;
 	boolean changed = false;
+	//the error is between here
 	while (!changed) {
 	    if (board[0][r] == '#') {
 		pos1 = r;
 		changed = true;
+		r++;
+		System.out.println("test");
 	    }
 	}
+	//and here
 	r = 0;
 	changed = false;
 	while (!changed) {
 	    if (board[board[0].length-1][r] == '#') {
 		pos2 = r;
 		changed = true;
+		r++;
 	    }
 	}
+	System.out.println("test5");
     }
 
     public static boolean wait(int millis, long currentTime) {
@@ -316,7 +318,6 @@ public class Pong {
 		    Thread.sleep(100);
 		}
 		catch (InterruptedException e) {
-		    System.out.println("InterruptedException");
 		}
 	    }
 	    return score1;
