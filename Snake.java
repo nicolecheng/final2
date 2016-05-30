@@ -143,7 +143,7 @@ public class Snake{
 	    dir = 3;
 	    moves++;
 	}
-	if(snake.getLast()!=null && check()==0 && ok(y,x)){
+	if(snake.getLast()!=null && check()==0){/// && ok(y,x)){
 	    snake.removeLast();
 	    board[yy][xx] = ' ';
 	}
