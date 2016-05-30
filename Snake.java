@@ -96,7 +96,7 @@ public class Snake{
 	    }else if(dir==3){
 		move('r');
 	    }
-	    check();
+	    //ok(y,x);
 	    wait(100);
 	    System.out.println("\033[2J");
 	    System.out.println(toString(true));
@@ -127,13 +127,6 @@ public class Snake{
 	    xx = snake.getLast()%cols;
 	    yy = snake.getLast()/cols;
 	}
-	/*	
-		if(snake.getLast()!=null && board[x][y]!='!'){
-		snake.removeLast();
-		}else{
-		length++;
-		}
-	*/
 	int d = dir;
 	
 	if(c=='u'){// && ok(x,y-1)){
@@ -163,11 +156,11 @@ public class Snake{
 	  gameOver();
 	  return false;
 	  }*/
-	if(snake.getLast()!=null && check()==3 && ok(y,x)){
+	if(snake.getLast()!=null && check()==0 && ok(y,x)){
 	    snake.removeLast();
 	    board[yy][xx] = ' ';
 	}
-	if(!ok(y,x)&&dir>0){
+	if(!ok(y,x)&&dir>=0){
 	    System.out.println("NOT OK");
 	    gameOver();
 	}else{
@@ -207,7 +200,7 @@ public class Snake{
 	    score++;
 	    addObstacle();
 	    return 1;
-	}else if(board[y][x]=='S'){
+	}else if(board[y][x]=='S' && dir >= 0){
 	    gameOver();
 	    return 3;
 	}else if(board[y][x]==' '){
@@ -225,7 +218,7 @@ public class Snake{
 	    score++;
 	    addObstacle();
 	    return 1;
-	}else if(board[y][x]=='S'){
+	}else if(board[y][x]=='S' && dir >= 0){
 	    gameOver();
 	    return 3;
 	}else if(board[y][x]==' '){
