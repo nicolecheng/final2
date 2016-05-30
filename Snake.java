@@ -128,11 +128,11 @@ public class Snake{
 	    yy = snake.getLast()/cols;
 	}
 	/*	
-	if(snake.getLast()!=null && board[x][y]!='!'){
-	    snake.removeLast();
-	}else{
-	    length++;
-	}
+		if(snake.getLast()!=null && board[x][y]!='!'){
+		snake.removeLast();
+		}else{
+		length++;
+		}
 	*/
 	int d = dir;
 	
@@ -153,16 +153,16 @@ public class Snake{
 	    dir = 3;
 	    moves++;
 	}/*else{
-	    gameOver();
-	    return false;
-	}
+	   gameOver();
+	   return false;
+	   }
 	 */
 	/*
-	String f = ""+(y*cols+x);
-	if(snake.toString().contains(f)){
-	    gameOver();
-	    return false;
-	    }*/
+	  String f = ""+(y*cols+x);
+	  if(snake.toString().contains(f)){
+	  gameOver();
+	  return false;
+	  }*/
 	if(snake.getLast()!=null && check()==3 && ok(y,x)){
 	    snake.removeLast();
 	    board[yy][xx] = ' ';
@@ -190,7 +190,7 @@ public class Snake{
 	//debug(""+moves);
 	if(board[y][x]=='#'){
 	    return false;
-	}else if(board[y][x]=='S'){
+	}else if(board[y][x]=='S' && dir >= 0){
 	    return false;
 	}else{
 	    return true;
@@ -333,7 +333,7 @@ public class Snake{
 		System.out.println("Exception restoring tty config");
 	    }
 	}
-    return score;
+	return score;
     }
     
 }
