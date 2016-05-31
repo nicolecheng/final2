@@ -134,6 +134,11 @@ public class Pacman {
 	    }
 	}
     }
+
+    public void play() {
+	System.out.println("\033[2J");
+	System.out.println(this);
+    }
     
     public int pacman() {
 	try {
