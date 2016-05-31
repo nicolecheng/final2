@@ -22,7 +22,7 @@ public class Pong {
     private boolean DEBUG;
     
     public Pong(int difficulty) {
-	DEBUG = true;
+	DEBUG = false;
         //initialize the board to by an empty 9 by 25 board
         board = new char[15][75];
         for (int r = 0; r < board.length; r++) {
@@ -274,7 +274,6 @@ public class Pong {
     public void fixPos() {
 	int r = 0;
 	boolean changed = false;
-	//the error is between here
 	while (!changed) {
 	    if (board[r][0] == '#') {
 		pos1 = r;
@@ -283,7 +282,6 @@ public class Pong {
 	    }
 	    r++;
 	}
-	//and here
 	r = 0;
 	changed = false;
 	while (!changed) {
