@@ -83,6 +83,17 @@ public class Pacman {
 	//implement
     }
 
+    public String toString() {
+        String ret = "";
+        for (int r = 0; r < board.length; r++) {
+            for (int c = 0; c < board[0].length; c++) {
+                ret += String.valueOf(board[r][c]);
+            }
+            ret += "\n";
+        }
+        return ret;
+    }
+
     private class Ghost {
 	private int ghostX;
 	private int ghostY;
@@ -152,8 +163,8 @@ public class Pacman {
     }
     
     public static void main(String[] args) {
-	Pong p = new Pong(0);
-	System.out.println(p.pong());
+	Pacman p = new Pacman(0);
+	System.out.println(p.pacman());
     }
 
     private static void setTerminalToCBreak() throws IOException, InterruptedException { //used in main()
