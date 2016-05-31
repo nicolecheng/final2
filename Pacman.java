@@ -211,4 +211,3 @@ public class Pacman {
         return result;
     }
 }
-}
