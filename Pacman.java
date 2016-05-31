@@ -27,6 +27,46 @@ public class Pacman {
 	pink = new Ghost(14,17);
 	orange = new Ghost(16,17);
 	superPac = false;
+	//board setup
+	board = new char[36][28];
+	for (int r = 0; r < 36; r++) {
+	    for (int c = 0; c < 28; c++) {
+		board[r][c] = ' ';
+	    }
+	}
+	board[0][13] = 'S';
+	board[0][14] = 'C';
+	board[0][15] = 'O';
+	board[0][16] = 'R';
+	board[0][17] = 'E';
+	board[1][15] = Character.forDigit(score,10)/10;
+	board[1][16] = Character.forDigit(score,10)%10;
+	//outsides
+	for (int c = 0; c < 28; c++) {
+	    board[3][c] = '=';
+	}
+	for (int r = 4; r < 13; r++) {
+	    board[r][0] = '=';
+	    board[r][27] = '=';
+	}
+	for (int c = 0; c < 6; c++) {
+	    board[12][c] = '=';
+	    board[12][27-c] = '=';
+	    board[17][c] = '=';
+	    board[17][27-c] = '=';
+	    board[19][c] = '=';
+	    board[19][27-c] = '=';
+	    board[23][c] = '=';
+	    board[23][27-c] = '=';
+	}
+	for (int r = 13; r < 17; r++) {
+	    board[r][5] = '=';
+	    board[r][22] = '=';
+	}
+	for (int r = 19; r < 24; r++) {
+	    board[r][5] = '=';
+	    board[r][22] = '=';
+	}
     }
 
     private class Ghost {
