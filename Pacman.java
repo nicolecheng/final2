@@ -63,10 +63,24 @@ public class Pacman {
 	    board[r][5] = '=';
 	    board[r][22] = '=';
 	}
-	for (int r = 19; r < 24; r++) {
+	for (int r = 19; r < 23; r++) {
 	    board[r][5] = '=';
 	    board[r][22] = '=';
 	}
+	for (int r = 24; r < 34; r++) {
+	    board[r][0] = '=';
+	    board[r][27] = '=';
+	}
+	for (int c = 0; c < 28; c++) {
+	    board[33][c] = '=';
+	}
+    }
+
+    public void updateScore() {
+	//implement
+    }
+    public void updateLives() {
+	//implement
     }
 
     private class Ghost {
