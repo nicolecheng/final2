@@ -34,13 +34,13 @@ public class Pacman {
 		board[r][c] = ' ';
 	    }
 	}
-	board[0][13] = 'S';
-	board[0][14] = 'C';
-	board[0][15] = 'O';
-	board[0][16] = 'R';
-	board[0][17] = 'E';
-	board[1][15] = Character.forDigit(score/10,10);
-	board[1][16] = Character.forDigit(score%10,10);
+	board[0][11] = 'S';
+	board[0][12] = 'C';
+	board[0][13] = 'O';
+	board[0][14] = 'R';
+	board[0][15] = 'E';
+	board[2][14] = Character.forDigit(score/10,10);
+	board[2][15] = Character.forDigit(score%10,10);
 	//outsides
 	for (int c = 0; c < 28; c++) {
 	    board[3][c] = '=';
@@ -52,27 +52,104 @@ public class Pacman {
 	for (int c = 0; c < 6; c++) {
 	    board[12][c] = '=';
 	    board[12][27-c] = '=';
-	    board[17][c] = '=';
-	    board[17][27-c] = '=';
-	    board[19][c] = '=';
-	    board[19][27-c] = '=';
-	    board[23][c] = '=';
-	    board[23][27-c] = '=';
+	    board[16][c] = '=';
+	    board[16][27-c] = '=';
+	    board[18][c] = '=';
+	    board[18][27-c] = '=';
+	    board[22][c] = '=';
+	    board[22][27-c] = '=';
 	}
-	for (int r = 13; r < 17; r++) {
+	for (int r = 12; r < 17; r++) {
 	    board[r][5] = '=';
 	    board[r][22] = '=';
 	}
-	for (int r = 19; r < 23; r++) {
+	for (int r = 18; r < 23; r++) {
 	    board[r][5] = '=';
 	    board[r][22] = '=';
 	}
-	for (int r = 24; r < 34; r++) {
+	for (int r = 23; r < 34; r++) {
 	    board[r][0] = '=';
 	    board[r][27] = '=';
 	}
 	for (int c = 0; c < 28; c++) {
 	    board[33][c] = '=';
+	}
+	//insides
+	for (int r = 3; r < 8; r++) {
+	    board[r][13] = '=';
+	    board[r][14] = '=';
+	}
+	for (int r = 5; r < 8; r++) {
+	    for (int c = 2; c < 26; c++) {
+		if (c != 6 && c != 12 && c != 15 && c != 21) {
+		    board[r][c] = '=';
+		}
+	    }
+	}
+	for (int r = 9; r < 11; r++) {
+	    for (int c = 2; c < 26; c++) {
+		if (c != 6 && c != 9 && c != 18 && c != 21) {
+		    board[r][c] = '=';
+		}
+	    }
+	}
+	for (int r = 11; r < 17; r++) {
+	    board[r][7] = '=';
+	    board[r][8] = '=';
+	    if (r < 14) {
+		board[r][13] = '=';
+		board[r][14] = '=';
+	    }
+	    board[r][19] = '=';
+	    board[r][20] = '=';
+	}
+	for (int c = 9; c < 12; c++) {
+	    board[12][c] = '=';
+	    board[13][c] = '=';
+	}
+	for (int c = 16; c < 19; c++) {
+	    board[12][c] = '=';
+	    board[13][c] = '=';
+	}
+	for (int r = 15; r < 20; r++) {
+	    board[r][10] = '=';
+	    board[r][17] = '=';
+	}
+	for (int c = 10; c < 18; c++) {
+	    board[15][c] = '=';
+	    board[19][c] = '=';
+	}
+	board[15][13] = '-';
+	board[15][14] = '-';
+	for (int r = 18; r < 23; r++) {
+	    board[r][7] = '=';
+	    board[r][8] = '=';
+	    board[r][19] = '=';
+	    board[r][20] = '=';
+	}
+	for (int c = 10; c < 18; c++) {
+	    board[21][c] = '=';
+	    board[22][c] = '=';
+	}
+	board[23][13] = '=';
+	board[23][14] = '=';
+	for (int c = 2; c < 26; c++) {
+	    if (c != 6 && c != 12 && c != 15 && c != 21) {
+		board[24][c] = '=';
+		board[25][c] = '=';
+	    }
+	}
+	for (int r = 26; r < 29; r++) {
+	    board[r][4] = '=';
+	    board[r][5] = '=';
+	    board[r][22] = '=';
+	    board[r][23] = '=';
+	}
+	for (int c = 1; c < 27; c++) {
+	    if (c != 3 && c != 6 && c != 9 && c != 18 && c != 21 && c != 24) {
+		board[27][c] = '=';
+		board[28][c] = '=';
+	    }
 	}
     }
 
@@ -87,7 +164,7 @@ public class Pacman {
         String ret = "";
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c++) {
-                ret += String.valueOf(board[r][c]);
+                ret += String.valueOf(board[r][c]) + " ";
             }
             ret += "\n";
         }
@@ -142,8 +219,9 @@ public class Pacman {
     
     public int pacman() {
 	try {
+	    long time = System.currentTimeMillis();
 	    setTerminalToCBreak();
-	    while (lives > 0) {
+	    while (System.currentTimeMillis() - time < 5000) {
 		play();
 		try {
 		    Thread.sleep(100);
