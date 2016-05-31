@@ -69,6 +69,11 @@ public class Pong {
 		    System.out.println(this);
 		    long x = System.currentTimeMillis();
 		    Thread.sleep(3000);
+		    board[3][board[0].length-7] = ' ';
+		    board[3][board[0].length-6] = ' ';
+		    board[3][board[0].length-5] = ' ';
+		    board[3][board[0].length-4] = ' ';
+		    board[3][board[0].length-3] = ' ';
 		    for (int i = board.length-7; i < board.length-2; i++) {
 			board[3][i] = ' ';
 		    }
@@ -86,6 +91,11 @@ public class Pong {
 		    System.out.println(this);
 		    long x = System.currentTimeMillis();
 		    Thread.sleep(3000);
+		    board[3][2] = ' ';
+		    board[3][3] = ' ';
+		    board[3][4] = ' ';
+		    board[3][5] = ' ';
+		    board[3][6] = ' ';
 		    for (int i = 2; i < 7; i++) {
 			board[3][i] = ' ';
 		    }
@@ -290,7 +300,6 @@ public class Pong {
 	    }
 	    r++;
 	}
-	System.out.println("test5");
     }
 
     public static boolean wait(int millis, long currentTime) {
