@@ -70,6 +70,12 @@ Development Log <br><ul>
      <li>
      	05/26/16: Nicole - added length to snake, but it's triggering gameOver() at wrong times
      </li>
+     <li>
+     	05/29/16: Noah - finished up lasting errors in Pong (still need to fix certain key errors e.g. w key not registering) no official bugs as of now
+     </li>
+     <li>
+     	05/30/16: Noah - began Pacman! setting up board, Ghosts, player
+     </li>
  </ul><br><br>
 
  Project plan/outline including your goals prioritized by importance and chronology <br>
@@ -100,6 +106,9 @@ Development Log <br><ul>
 	 </li>
 	 <li>
 	   Platformer basics
+	 </li>
+	 <li>
+	   Pacman outer board
 	 </li>
 </ul><br><br>
 
