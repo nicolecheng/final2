@@ -278,7 +278,6 @@ public class Pong {
 	    if (board[r][0] == '#') {
 		pos1 = r;
 		changed = true;
-		System.out.println("test");
 	    }
 	    r++;
 	}
@@ -291,7 +290,6 @@ public class Pong {
 	    }
 	    r++;
 	}
-	System.out.println("test5");
     }
 
     public static boolean wait(int millis, long currentTime) {
