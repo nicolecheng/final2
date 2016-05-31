@@ -74,6 +74,9 @@ Development Log <br><ul>
      	05/29/16: Noah - finished up lasting errors in Pong (still need to fix certain key errors e.g. w key not registering) no official bugs as of now
      </li>
      <li>
+       05/29/16: Nicole - fixed the bug in Snake that didn't let anyone win; found a new bug, which triggers the gameOver() at wrong times.
+     </li>
+     <li>
      	05/30/16: Noah - began Pacman! setting up board, Ghosts, player
      </li>
  </ul><br><br>
