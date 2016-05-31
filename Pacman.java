@@ -39,8 +39,8 @@ public class Pacman {
 	board[0][15] = 'O';
 	board[0][16] = 'R';
 	board[0][17] = 'E';
-	board[1][15] = Character.forDigit(score,10)/10;
-	board[1][16] = Character.forDigit(score,10)%10;
+	board[1][15] = Character.forDigit(score/10,10);
+	board[1][16] = Character.forDigit(score%10,10);
 	//outsides
 	for (int c = 0; c < 28; c++) {
 	    board[3][c] = '=';
@@ -168,10 +168,12 @@ public class Pacman {
     }
     
     public static void main(String[] args) {
-	Pacman p = new Pacman(0);
+	Pacman p = new Pacman();
 	System.out.println(p.pacman());
     }
 
+    private static String ttyConfig;
+    
     private static void setTerminalToCBreak() throws IOException, InterruptedException { //used in main()
 	ttyConfig = stty("-g");
 	stty("-icanon min 1"); //makes the console go character by character rather than line by line
