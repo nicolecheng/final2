@@ -279,9 +279,9 @@ public class Pong {
 	    if (board[0][r] == '#') {
 		pos1 = r;
 		changed = true;
-		r++;
 		System.out.println("test");
 	    }
+	    r++;
 	}
 	//and here
 	r = 0;
@@ -290,8 +290,8 @@ public class Pong {
 	    if (board[board[0].length-1][r] == '#') {
 		pos2 = r;
 		changed = true;
-		r++;
 	    }
+	    r++;
 	}
 	System.out.println("test5");
     }

@@ -276,7 +276,7 @@ public class Pong {
 	boolean changed = false;
 	//the error is between here
 	while (!changed) {
-	    if (board[0][r] == '#') {
+	    if (board[r][0] == '#') {
 		pos1 = r;
 		changed = true;
 		System.out.println("test");
@@ -287,7 +287,7 @@ public class Pong {
 	r = 0;
 	changed = false;
 	while (!changed) {
-	    if (board[board[0].length-1][r] == '#') {
+	    if (board[r][board[0].length-1] == '#') {
 		pos2 = r;
 		changed = true;
 	    }
