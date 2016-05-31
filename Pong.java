@@ -37,7 +37,7 @@ public class Pong {
 	}
         //create the paddles at each end of the board
         pos1 = 6;
-        pos2 = 6;
+        pos2 = 7;
         for (int i = pos1; i < pos1+3; i++) {
             board[i][0] = '#';
         }
@@ -290,6 +290,7 @@ public class Pong {
 	    }
 	    r++;
 	}
+	System.out.println("test5");
     }
 
     public static boolean wait(int millis, long currentTime) {
