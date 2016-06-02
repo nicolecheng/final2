@@ -222,6 +222,13 @@ public class Pacman {
 	}
     }
 
+    public void play() {
+	System.out.println("\033[2J");
+	System.out.println(this);
+	updateScore();
+	updateLives();
+    }
+
     public void updateScore() {
 	//implement
     }
@@ -245,7 +252,7 @@ public class Pacman {
 		} else if (board[r][c] == '<') {
 		    ret += color(33,40)+String.valueOf(board[r][c]) + " ";
 		} else {
-		    ret += color(37,40)+String.valueOf(board[r][c]) + " ";
+		    ret += color(37,44)+String.valueOf(board[r][c]) + " ";
 		}
             }
             ret += "\n";
@@ -292,11 +299,6 @@ public class Pacman {
 		ghostX--;
 	    }
 	}
-    }
-
-    public void play() {
-	System.out.println("\033[2J");
-	System.out.println(this);
     }
     
     public int pacman() {
