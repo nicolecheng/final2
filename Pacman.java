@@ -190,11 +190,19 @@ public class Pacman {
 	//implement
     }
 
+    private String color(int foreground,int background){
+	return ("\033[0;" + foreground + ";" + background + "m");
+    }
+
     public String toString() {
         String ret = "";
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c++) {
-                ret += String.valueOf(board[r][c]) + " ";
+                if (String.valueOf(board[r][c]) == '=') {
+		    ret += color(37,30)+String.valueOf(board[r][c]) + " ";
+		} else {
+		    ret += String.valueOf(board[r][c]) + " ";
+		}
             }
             ret += "\n";
         }
