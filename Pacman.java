@@ -31,9 +31,27 @@ public class Pacman {
 	board = new char[36][28];
 	for (int r = 0; r < 36; r++) {
 	    for (int c = 0; c < 28; c++) {
+		board[r][c] = '*';
+	    }
+	}
+	//clear areas that shouldn't have *s
+	for (int r = 0; r < 3; r++) {
+	    for (int c = 0; c < 28; c++) {
 		board[r][c] = ' ';
 	    }
 	}
+	for (int r = 13; r < 16; r++) {
+	    for (int c = 0; c < 5; c++) {
+		board[r][c] = ' ';
+		board[r][27-c] = ' ';
+	    }
+	}
+	for (int r = 34; r < 36; r++) {
+	    for (int c = 0; c < 28; c++) {
+		board[r][c] = ' ';
+	    }
+	}
+	//score
 	board[0][11] = 'S';
 	board[0][12] = 'C';
 	board[0][13] = 'O';
