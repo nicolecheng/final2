@@ -240,7 +240,7 @@ public class Pacman {
 		    if (c == 27) {
 			ret += color(37,40);
 		    }
-		} else if (board[r][c] = '<') {
+		} else if (board[r][c] == '<') {
 		    ret += color(33,40)+"<";
 		} else {
 		    ret += color(37,40)+String.valueOf(board[r][c]) + " ";
