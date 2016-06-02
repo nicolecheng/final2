@@ -83,7 +83,7 @@ public class Pacman {
 	    }
 	}
 	//pacman
-	board[pacX][pacY] = '<';
+	board[pacY][pacX] = '<';
 	//score
 	board[0][11] = 'S';
 	board[0][12] = 'C';
