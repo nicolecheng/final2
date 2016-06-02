@@ -46,6 +46,12 @@ public class Pacman {
 		board[r][27-c] = ' ';
 	    }
 	}
+	for (int r = 19; r < 22; r++) {
+	    for (int c = 0; c < 5; c++) {
+		board[r][c] = ' ';
+		board[r][27-c] = ' ';
+	    }
+	}
 	for (int r = 34; r < 36; r++) {
 	    for (int c = 0; c < 28; c++) {
 		board[r][c] = ' ';
