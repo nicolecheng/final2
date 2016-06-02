@@ -151,6 +151,18 @@ public class Pacman {
 		board[28][c] = '=';
 	    }
 	}
+	board[29][7] = '=';
+	board[29][8] = '=';
+	board[29][13] = '=';
+	board[29][14] = '=';
+	board[29][19] = '=';
+	board[29][20] = '=';
+	for (int c = 2; c < 26; c++) {
+	    if (c != 12 && c != 15) {
+		board[30][c] = '=';
+		board[31][c] = '=';
+	    }
+	}
     }
 
     public void updateScore() {
