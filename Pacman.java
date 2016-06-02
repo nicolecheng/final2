@@ -82,6 +82,8 @@ public class Pacman {
 		board[r][c] = ' ';
 	    }
 	}
+	//pacman
+	board[pacX][pacY] = '<';
 	//score
 	board[0][11] = 'S';
 	board[0][12] = 'C';
@@ -236,12 +238,12 @@ public class Pacman {
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c++) {
                 if (board[r][c] == '=') {
-		    ret += color(30,47)+"=";
+		    ret += color(30,47)+String.valueOf(board[r][c]) + " ";
 		    if (c == 27) {
 			ret += color(37,40);
 		    }
 		} else if (board[r][c] == '<') {
-		    ret += color(33,40)+"<";
+		    ret += color(33,40)+String.valueOf(board[r][c]) + " ";
 		} else {
 		    ret += color(37,40)+String.valueOf(board[r][c]) + " ";
 		}
