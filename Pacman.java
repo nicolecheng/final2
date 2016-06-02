@@ -3,6 +3,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.*;
 
+//color references
+//http://stackoverflow.com/questions/1448858/how-to-color-system-out-println-output
+
 public class Pacman {
     private int score;
     private int lives;
@@ -19,7 +22,7 @@ public class Pacman {
     public Pacman() {
 	score = 0;
 	lives = 3;
-	pacX = 14;
+	pacX = 13;
 	pacY = 26;
 	timer = 0;
 	red = new Ghost(14,14);
@@ -233,10 +236,12 @@ public class Pacman {
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c++) {
                 if (board[r][c] == '=') {
-		    ret += color(30,47)+String.valueOf(board[r][c]) + " ";
+		    ret += color(30,47)+"=";
 		    if (c == 27) {
 			ret += color(37,40);
 		    }
+		} else if (board[r][c] = '<') {
+		    ret += color(33,40)+"<";
 		} else {
 		    ret += color(37,40)+String.valueOf(board[r][c]) + " ";
 		}
