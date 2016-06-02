@@ -15,7 +15,7 @@ public class Snake{
     private static MyDeque<Integer>snake;
     private static int dir; // direction: 0 = up, 1 = down, 2 = left, 3 = right
     private static int score,moves;
-    static boolean done,started;
+    static boolean done;
 
     private static void debug(String s){
 	if(DEBUG){
@@ -31,7 +31,6 @@ public class Snake{
 
     public Snake(){
 	done = false;
-	//started = false;
 	x = 1;
 	y = 1;
 	length = 1;
@@ -103,7 +102,7 @@ public class Snake{
     }
 
     public static void move(int i){
-	started = true;
+	//started = true;
 	if(i==0x77){
 	    move('u');
 	    dir = 0;
@@ -126,7 +125,7 @@ public class Snake{
 	    xx = snake.getLast()%cols;
 	    yy = snake.getLast()/cols;
 	}
-	int d = dir;
+	//int d = dir;
 	
 	if(c=='u'){
 	    y--;
@@ -145,7 +144,7 @@ public class Snake{
 	    dir = 3;
 	    moves++;
 	}
-	if(snake.getLast()!=null && check()==0){/// && ok(y,x)){
+	if(snake.getLast()!=null && check()==0){// 0 = ' ', 1 = '!', 2 = '#', 3 = 'S'
 	    snake.removeLast();
 	    board[yy][xx] = ' ';
 	}
@@ -194,7 +193,7 @@ public class Snake{
 	// 0 = ' ', 1 = '!', 2 = '#', 3 = 'S'
     }
 
-    private static int check(int x, int y){ // checks for hitting the wall / obstacles
+    private static int check(int y, int x){ // checks for hitting the wall / obstacles
 	if((board[y][x]=='#')){
 	    debug("POUND TWO");
 	    gameOver();
