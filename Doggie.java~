@@ -1,0 +1,39 @@
+public class Doggie{
+
+    private static int years;
+    private static boolean hungry,thirsty;
+    private static boolean bored,tired;
+    private static String dog;
+    
+    public Doggie(){
+	years=0;
+	hungry=true;
+	thirsty=true;
+	bored=true;
+	tired=false;
+	dog="   
+                                 ,:'/   _..._  \n
+                                // ( `''-.._.' \n
+                                \| /    6\___  \n
+                                |     6      0 \n
+                                |            / \n
+                                \_       .--'  \n
+                                (_'---'`)      \n
+                                / `'---`()     \n
+                              ,'        |      \n
+              ,            .'`          |      \n
+              )\       _.-'             ;      \n
+             / |    .'`   _            /       \n
+           /` /   .'       '.        , |       \n
+          /  /   /           \   ;   | |       \n
+          |  \  |            |  .|   | |       \n
+           \  `'|           /.-' |   | |       \n
+            '-..-\       _.;.._  |   |.;-.     \n
+                  \    <`.._  )) |  .;-. ))    \n
+                  (__.  `  ))-'  \_    ))'     \n
+                      `'--'`       `'''`       \n
+";
+	
+    }
+    
+}
