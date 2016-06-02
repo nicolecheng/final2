@@ -206,6 +206,9 @@ public class Pacman {
             for (int c = 0; c < board[0].length; c++) {
                 if (board[r][c] == '=') {
 		    ret += color(30,47)+String.valueOf(board[r][c]) + " ";
+		    if (c == 27) {
+			ret += color(37,40);
+		    }
 		} else {
 		    ret += color(37,40)+String.valueOf(board[r][c]) + " ";
 		}
