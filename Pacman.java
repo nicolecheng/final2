@@ -224,11 +224,13 @@ public class Pacman {
 	}
     }
 
-    public void play() {
+    public void play(long time) {
 	System.out.println("\033[2J");
 	System.out.println(this);
 	updateScore();
 	updateLives();
+	checkTeleport();
+	checkTime(time);
 	try {
 	    Thread.sleep(1000);
 	} catch (InterruptedException e) {
@@ -248,35 +250,101 @@ public class Pacman {
     }
 
     public void updateScore() {
-	//implement
+        board[2][14] = Character.forDigit(score/10,10);
+	board[2][15] = Character.forDigit(score%10,10);
     }
     public void updateLives() {
 	//implement
+    }
+    public void checkTeleport() {
+	if (pacX == 0 && pacY == 17 && direction == 2) {
+	    board[pacY][pacX] = ' ';
+	    pacX = 27;
+	    board[pacY][pacX] = '<';
+	}
+	if (pacX == 27 && pacY == 17 && direction == 0) {
+	    board[pacY][pacX] = ' ';
+	    pacX = 0;
+	    board[pacY][pacX] = '<';
+	}
+    }
+    public void checkTime() {
+	
     }
     public int move(int dir) {
 	if (dir == 0 && pacX < 27 && board[pacY][pacX+1] != '=') {
 	    board[pacY][pacX] = ' ';
 	    pacX++;
+	    if (board[pacY][pacX] == '*') {
+		score++;
+	    }
 	    board[pacY][pacX] = '<';
 	    return 0;
 	}
-	if (dir == 1 && pacY > 0 && board[pacY-1][pacX] != '=') {
+	else if (dir == 1 && pacY > 0 && board[pacY-1][pacX] != '=') {
 	    board[pacY][pacX] = ' ';
 	    pacY--;
+	    if (board[pacY][pacX] == '*') {
+		score++;
+	    }
 	    board[pacY][pacX] = 'v';
 	    return 1;
 	}
-	if (dir == 2 && pacX > 0 && board[pacY][pacX-1] != '=') {
+	else if (dir == 2 && pacX > 0 && board[pacY][pacX-1] != '=') {
 	    board[pacY][pacX] = ' ';
-	    pacY--;
+	    pacX--;
+	    if (board[pacY][pacX] == '*') {
+		score++;
+	    }
 	    board[pacY][pacX] = '>';
 	    return 2;
 	}
-	if (dir == 3 && pacY < 35 && board[pacY+1][pacX] != '=') {
+	else if (dir == 3 && pacY < 35 && board[pacY+1][pacX] != '=') {
 	    board[pacY][pacX] = ' ';
-	    pacY--;
+	    pacY++;
+	    if (board[pacY][pacX] == '*') {
+		score++;
+	    }
 	    board[pacY][pacX] = '^';
 	    return 3;
+	}
+	else {
+	    if (direction == 0 && pacX < 27 && board[pacY][pacX+1] != '=') {
+		board[pacY][pacX] = ' ';
+		pacX++;
+		if (board[pacY][pacX] == '*') {
+		    score++;
+		}
+		board[pacY][pacX] = '<';
+		return 0;
+	    }
+	    else if (direction == 1 && pacY > 0 && board[pacY-1][pacX] != '=') {
+		board[pacY][pacX] = ' ';
+		pacY--;
+		if (board[pacY][pacX] == '*') {
+		    score++;
+		}
+		board[pacY][pacX] = 'v';
+		return 1;
+	    }
+	    else if (direction == 2 && pacX > 0 && board[pacY][pacX-1] != '=') {
+		board[pacY][pacX] = ' ';
+		pacX--;
+		if (board[pacY][pacX] == '*') {
+		    score++;
+		}
+		board[pacY][pacX] = '>';
+		return 2;
+	    }
+	    else if (direction == 3 && pacY < 35 && board[pacY+1][pacX] != '=') {
+		board[pacY][pacX] = ' ';
+		pacY++;
+		if (board[pacY][pacX] == '*') {
+		    score++;
+		}
+		board[pacY][pacX] = '^';
+		return 3;
+	    }
 	}
 	return direction;
     }
@@ -306,7 +374,7 @@ public class Pacman {
             for (int c = 0; c < board[0].length; c++) {
                 if (board[r][c] == '=') {
 		    ret += color(30,47)+String.valueOf(board[r][c]) + " " +color(30,47);
-		} else if (board[r][c] == '<' || board[r][c] == '^' || board[r][c] == '>' || board[r][c] == '^') {
+		} else if (board[r][c] == '<' || board[r][c] == 'v' || board[r][c] == '>' || board[r][c] == '^') {
 		    ret += color(33,40)+String.valueOf(board[r][c]) + " "+color(30,47);
 		} else {
 		    ret += color(37,44)+String.valueOf(board[r][c]) + " "+color(30,47);
@@ -362,15 +430,19 @@ public class Pacman {
 	try {
 	    long time = System.currentTimeMillis();
 	    setTerminalToCBreak();
-	    while (System.currentTimeMillis() - time < 20000) {
-		play();
+	    while (System.currentTimeMillis() - time < 40000) {
+		play(time);
 		try {
 		    Thread.sleep(100);
 		}
 		catch (InterruptedException e) {
 		}
 	    }
-	    return score;
+	    if (score > 2) {
+		return score-2;
+	    } else {
+		return score;
+	    }
 	} catch (IOException e) {
 	    System.out.println("IOException");
 	} catch (InterruptedException e) {
