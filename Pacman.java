@@ -12,6 +12,7 @@ public class Pacman {
     private int pacX;
     private int pacY;
     private int timer;
+    private int direction;
     private char[][] board;
     private Ghost red;
     private Ghost blue;
@@ -25,6 +26,7 @@ public class Pacman {
 	pacX = 13;
 	pacY = 26;
 	timer = 0;
+	direction = 0;
 	red = new Ghost(14,14);
 	blue = new Ghost(12,17);
 	pink = new Ghost(14,17);
@@ -227,6 +229,22 @@ public class Pacman {
 	System.out.println(this);
 	updateScore();
 	updateLives();
+	try {
+	    Thread.sleep(1000);
+	} catch (InterruptedException e) {
+	    System.out.println("InterruptedException");
+	}
+	try {
+	    if (System.in.available() != 0) {
+		int key = System.in.read();
+		direction = move(getDir(key));
+	    }
+	    else {
+		move(direction);
+	    }
+	} catch (IOException e) {
+	    System.out.println("IOException");
+	}
     }
 
     public void updateScore() {
@@ -234,6 +252,48 @@ public class Pacman {
     }
     public void updateLives() {
 	//implement
+    }
+    public int move(int dir) {
+	if (dir == 0 && pacX < 27 && board[pacY][pacX+1] != '=') {
+	    board[pacY][pacX] = ' ';
+	    pacX++;
+	    board[pacY][pacX] = '<';
+	    return 0;
+	}
+	if (dir == 1 && pacY > 0 && board[pacY-1][pacX] != '=') {
+	    board[pacY][pacX] = ' ';
+	    pacY--;
+	    board[pacY][pacX] = 'v';
+	    return 1;
+	}
+	if (dir == 2 && pacX > 0 && board[pacY][pacX-1] != '=') {
+	    board[pacY][pacX] = ' ';
+	    pacY--;
+	    board[pacY][pacX] = '>';
+	    return 2;
+	}
+	if (dir == 3 && pacY < 35 && board[pacY+1][pacX] != '=') {
+	    board[pacY][pacX] = ' ';
+	    pacY--;
+	    board[pacY][pacX] = '^';
+	    return 3;
+	}
+	return direction;
+    }
+    public int getDir(int key) {
+	if (key == 0x64) { //d
+	    return 0;
+	}
+	if (key == 0x77) { //w
+	    return 1;
+	}
+	if (key == 0x61) { //a
+	    return 2;
+	}
+	if (key == 0x73) { //s
+	    return 3;
+	}
+	return 0;
     }
 
     private String color(int foreground,int background){
@@ -245,14 +305,11 @@ public class Pacman {
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c++) {
                 if (board[r][c] == '=') {
-		    ret += color(30,47)+String.valueOf(board[r][c]) + " ";
-		    if (c == 27) {
-			ret += color(37,40);
-		    }
-		} else if (board[r][c] == '<') {
-		    ret += color(33,40)+String.valueOf(board[r][c]) + " ";
+		    ret += color(30,47)+String.valueOf(board[r][c]) + " " +color(30,47);
+		} else if (board[r][c] == '<' || board[r][c] == '^' || board[r][c] == '>' || board[r][c] == '^') {
+		    ret += color(33,40)+String.valueOf(board[r][c]) + " "+color(30,47);
 		} else {
-		    ret += color(37,44)+String.valueOf(board[r][c]) + " ";
+		    ret += color(37,44)+String.valueOf(board[r][c]) + " "+color(30,47);
 		}
             }
             ret += "\n";
@@ -305,7 +362,7 @@ public class Pacman {
 	try {
 	    long time = System.currentTimeMillis();
 	    setTerminalToCBreak();
-	    while (System.currentTimeMillis() - time < 5000) {
+	    while (System.currentTimeMillis() - time < 20000) {
 		play();
 		try {
 		    Thread.sleep(100);
