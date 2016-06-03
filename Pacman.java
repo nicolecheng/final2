@@ -268,8 +268,15 @@ public class Pacman {
 	    board[pacY][pacX] = '<';
 	}
     }
-    public void checkTime() {
-	
+    public void checkTime(long time) {
+	if (System.currentTimeMillis()-time > 5000) {
+	    board[20][11] = ' ';
+	    board[20][12] = ' ';
+	    board[20][13] = ' ';
+	    board[20][14] = ' ';
+	    board[20][15] = ' ';
+	    board[20][16] = ' ';
+	}
     }
     public int move(int dir) {
 	if (dir == 0 && pacX < 27 && board[pacY][pacX+1] != '=') {
