@@ -519,11 +519,7 @@ public class Pacman {
 		catch (InterruptedException e) {
 		}
 	    }
-	    if (score > 2) {
-		return score-2;
-	    } else {
-		return score;
-	    }
+	    return score;
 	} catch (IOException e) {
 	    System.out.println("IOException");
 	} catch (InterruptedException e) {
