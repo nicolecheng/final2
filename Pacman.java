@@ -391,7 +391,7 @@ public class Pacman {
 	    board[pacY][pacX] = '>';
 	    return 2;
 	}
-	else if (dir == 3 && pacY < 35 && board[pacY+1][pacX] != '=') {
+	else if (dir == 3 && pacY < 35 && board[pacY+1][pacX] != '=' && board[pacY+1][pacX] != '-') {
 	    board[pacY][pacX] = ' ';
 	    pacY++;
 	    if (board[pacY][pacX] == '*') {
@@ -510,7 +510,7 @@ public class Pacman {
 	    return ghostY;
 	}
 	
-	public void move(int dir) {
+	public int move(int dir) {
 	    if (onEdible) {
 		board[ghostX][ghostY] = '*';
 	    }
@@ -526,6 +526,7 @@ public class Pacman {
 			onEdible = false;
 		    }
 		    ghostY--;
+		    return 0;
 		}
 		if (dir == 1 && ghostY > 0 && board[ghostY-1][ghostX] != '=') {
 		    if (board[ghostY-1][ghostX] == '*') {
@@ -535,6 +536,7 @@ public class Pacman {
 			onEdible = false;
 		    }
 		    ghostX++;
+		    return 1;
 		}
 		if (dir == 2 && ghostX > 0 && board[ghostY][ghostX-1] != '=') {
 		    if (board[ghostY][ghostX-1] == '*') {
@@ -544,6 +546,7 @@ public class Pacman {
 			onEdible = false;
 		    }
 		    ghostY++;
+		    return 2;
 		}
 		if (dir == 3 && ghostY < 35 && board[ghostY+1][ghostX] != '=') {
 		    if (board[ghostY+1][ghostX] == '*') {
@@ -553,6 +556,7 @@ public class Pacman {
 			onEdible = false;
 		    }
 		    ghostX--;
+		    return 3;
 		}
 	    }
 	}
