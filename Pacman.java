@@ -371,7 +371,7 @@ public class Pacman {
 	}
 	if (timer > 20) {
 	    ghosts[2].setFreedom(true);
-	    ghosts[3].setYX(14,14);
+	    ghosts[2].setYX(14,14);
 	}
 	if (timer > 30) {
 	    ghosts[3].setFreedom(true);
@@ -518,11 +518,18 @@ public class Pacman {
 	public void setDirection(int direction) {
 	    this.direction = direction;
 	}
+	
 	public int getX() {
 	    return ghostX;
 	}
+	
 	public int getY() {
 	    return ghostY;
+	}
+
+	public void setYX(int y, int x) {
+	    ghostY = y;
+	    ghostX = x;
 	}
 	
 	public int move(int dir) {
@@ -576,6 +583,7 @@ public class Pacman {
 	    }
 	    return dir;
 	}
+	
 	public void go() {
 	    if (!atIntersection()) {
 		direction = move(direction);
@@ -618,6 +626,7 @@ public class Pacman {
 	    }
 	    board[ghostY][ghostX] = 'G';
 	}
+	
 	public boolean atIntersection() {
 	    int moves = 0;
 	    if (board[ghostY][ghostX+1] != '=') {
