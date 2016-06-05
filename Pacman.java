@@ -48,6 +48,9 @@ public class Pacman {
 	System.out.println(this);
 	updateScore();
 	updateLives();
+	for (Ghost g : ghosts) {
+	    g.go();
+	}
 	checkTeleport();
 	checkTime(time);
 	try {
@@ -465,6 +468,7 @@ public class Pacman {
 	private int ghostY;
 	private int direction; //house: 0, up: 1, right: 2, down: 3, left: 4
 	private boolean freedom;
+	private boolean onEdible;
 	private int movementMode; //scatter: 0, chase: 1, frightened: 2
 
 	public Ghost(int ghostX, int ghostY) {
@@ -472,6 +476,7 @@ public class Pacman {
 	    this.ghostY = ghostY;
 	    direction = (int)(Math.random()*4);
 	    freedom = false;
+	    onEdible = false;
 	    movementMode = 0;
 	}
 
@@ -491,18 +496,47 @@ public class Pacman {
 	    return ghostY;
 	}
 	
-	public int move(int dir) {
-	    if (dir == 0 && ghostX < 27 && board[ghostY][ghostX+1] != '=') {
-		ghostY--;
+	public void move(int dir) {
+	    if (onEdible) {
+		board[ghostX][ghostY] = '*';
 	    }
-	    if (dir == 1 && ghostY > 0 && board[ghostY-1][ghostX] != '=') {
-		ghostX++;
-	    }
-	    if (dir == 2 && ghostX > 0 && board[ghostY][ghostX-1] != '=') {
-		ghostY++;
-	    }
-	    if (dir == 3 && ghostY < 35 && board[ghostY+1][ghostX] != '=') {
-		ghostX--;
+	    if (freedom) {
+		if (dir == 0 && ghostX < 27 && board[ghostY][ghostX+1] != '=') {
+		    if (board[ghostY][ghostX+1] == '*') {
+			onEdible = true;
+		    }
+		    else {
+			onEdible = false;
+		    }
+		    ghostY--;
+		}
+		if (dir == 1 && ghostY > 0 && board[ghostY-1][ghostX] != '=') {
+		    if (board[ghostY-1][ghostX] == '*') {
+			onEdible = true;
+		    }
+		    else {
+			onEdible = false;
+		    }
+		    ghostX++;
+		}
+		if (dir == 2 && ghostX > 0 && board[ghostY][ghostX-1] != '=') {
+		    if (board[ghostY][ghostX-1] == '*') {
+			onEdible = true;
+		    }
+		    else {
+			onEdible = false;
+		    }
+		    ghostY++;
+		}
+		if (dir == 3 && ghostY < 35 && board[ghostY+1][ghostX] != '=') {
+		    if (board[ghostY+1][ghostX] == '*') {
+			onEdible = true;
+		    }
+		    else {
+			onEdible = false;
+		    }
+		    ghostX--;
+		}
 	    }
 	}
 	public void go() {
@@ -511,6 +545,7 @@ public class Pacman {
 	    }
 	    else {
 		direction = (int)(Math.random()*4);
+		move(direction);
 	    }
 	}
 	public boolean atIntersection() {
@@ -529,6 +564,9 @@ public class Pacman {
 	    }
 	    if (moves >= 3) {
 		return true;
+	    }
+	    else {
+		return false;
 	    }
 	}
     }
