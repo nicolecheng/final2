@@ -43,16 +43,16 @@ public class Pacman {
 	setup();
     }
 
-    public void play(long time) {
+    public boolean play() {
 	System.out.println("\033[2J");
 	System.out.println(this);
 	updateScore();
-	updateLives();
+        updateLives();
 	for (Ghost g : ghosts) {
 	    g.go();
 	}
 	checkTeleport();
-	checkTime(time);
+	checkTime();
 	try {
 	    Thread.sleep(1000);
 	} catch (InterruptedException e) {
@@ -69,6 +69,8 @@ public class Pacman {
 	} catch (IOException e) {
 	    System.out.println("IOException");
 	}
+	timer++;
+        return checkGameOver();
     }
 
     public void updateScore() {
@@ -311,10 +313,12 @@ public class Pacman {
 	    }
 	}
     }
-    public void checkGameOver() {
+    public boolean checkGameOver() { //true if player can continue playing, false otherwise
 	if (lives == 0) {
 	    gameOver();
+	    return false;
 	}
+	return true;
     }
     public void gameOver() {
         System.out.println("\033[2J");
@@ -339,14 +343,24 @@ public class Pacman {
 	    board[pacY][pacX] = '<';
 	}
     }
-    public void checkTime(long time) {
-	if (System.currentTimeMillis()-time > 5000) {
+    public void checkTime() {		
+	ghosts[0].setFreedom(true);
+	if (timer > 5) {
 	    board[20][11] = ' ';
 	    board[20][12] = ' ';
 	    board[20][13] = ' ';
 	    board[20][14] = ' ';
 	    board[20][15] = ' ';
 	    board[20][16] = ' ';
+	}
+	if (timer > 10) {
+	    ghosts[1].setFreedom(true);
+	}
+	if (timer > 20) {
+	    ghosts[2].setFreedom(true);
+	}
+	if (timer > 30) {
+	    ghosts[3].setFreedom(true);
 	}
     }
     public int move(int dir) {
@@ -573,17 +587,12 @@ public class Pacman {
     
     public int pacman() {
 	try {
-	    long time = System.currentTimeMillis();
 	    setTerminalToCBreak();
-	    while (System.currentTimeMillis() - time < 40000) {
-		play(time);
-		try {
-		    Thread.sleep(100);
-		}
-		catch (InterruptedException e) {
+	    while (true) {
+		if (play()) {
+		    return score;
 		}
 	    }
-	    return score;
 	} catch (IOException e) {
 	    System.out.println("IOException");
 	} catch (InterruptedException e) {
