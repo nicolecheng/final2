@@ -280,8 +280,8 @@ public class Pacman {
 	    board[15][c] = '=';
 	    board[19][c] = '=';
 	}
-	board[15][13] = '-';
-	board[15][14] = '-';
+	board[15][13] = '=';
+	board[15][14] = '=';
 	for (int r = 18; r < 23; r++) {
 	    board[r][7] = '=';
 	    board[r][8] = '=';
@@ -528,6 +528,7 @@ public class Pacman {
 	}
 
 	public void setYX(int y, int x) {
+	    board[ghostY][ghostX] = ' ';
 	    ghostY = y;
 	    ghostX = x;
 	}
