@@ -24,20 +24,6 @@ public class Pacman {
     public Pacman() {
 	score = 0;
 	lives = 3;
-	pacX = 13;
-	pacY = 26;
-	timer = 0;
-	direction = 0;
-	red = new Ghost(14,14);
-	blue = new Ghost(12,17);
-	pink = new Ghost(14,17);
-	orange = new Ghost(16,17);
-	ghosts = new Ghost[4];
-	ghosts[0] = red;
-	ghosts[1] = blue;
-	ghosts[2] = pink;
-	ghosts[3] = orange;
-	superPac = false;
 	//board setup
 	board = new char[36][28];
 	setup();
@@ -77,6 +63,7 @@ public class Pacman {
         board[2][14] = Character.forDigit(score/10,10);
 	board[2][15] = Character.forDigit(score%10,10);
     }
+    
     public void updateLives() {
         for (Ghost g : ghosts) {
 	    if (g.getX() == pacX && g.getY() == pacY) {
@@ -84,6 +71,7 @@ public class Pacman {
 	    }
 	}
     }
+    
     public void die() {
 	try {
 	    Thread.sleep(3000);
@@ -107,7 +95,22 @@ public class Pacman {
 	}
 	setup();
     }
+    
     public void setup() {
+	pacX = 13;
+	pacY = 26;
+	timer = 0;
+	direction = 0;
+	superPac = false;
+	red = new Ghost(14,14);
+	blue = new Ghost(12,17);
+	pink = new Ghost(14,17);
+	orange = new Ghost(16,17);
+	ghosts = new Ghost[4];
+	ghosts[0] = red;
+	ghosts[1] = blue;
+	ghosts[2] = pink;
+	ghosts[3] = orange;
 	for (int r = 0; r < 36; r++) {
 	    for (int c = 0; c < 28; c++) {
 		board[r][c] = '*';
@@ -186,9 +189,17 @@ public class Pacman {
 	    board[35][10] = '<';
 	    board[35][11] = '3';
 	}
+	else {
+	    board[35][10] = ' ';
+	    board[35][11] = ' ';
+	}
 	if (lives == 3) {
 	    board[35][13] = '<';
 	    board[35][14] = '3';
+	}
+	else {
+	    board[35][13] = ' ';
+	    board[35][14] = ' ';
 	}
 	//outsides
 	for (int c = 0; c < 28; c++) {
