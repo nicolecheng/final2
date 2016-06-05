@@ -32,8 +32,6 @@ public class Pacman {
     public boolean play() {
 	System.out.println("\033[2J");
 	System.out.println(this);
-	updateScore();
-        updateLives();
 	for (Ghost g : ghosts) {
 	    g.go();
 	}
@@ -56,6 +54,8 @@ public class Pacman {
 	    System.out.println("IOException");
 	}
 	timer++;
+	updateScore();
+        updateLives();
         return checkGameOver();
     }
 
