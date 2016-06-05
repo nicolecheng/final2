@@ -32,10 +32,77 @@ public class Pacman {
 	blue = new Ghost(12,17);
 	pink = new Ghost(14,17);
 	orange = new Ghost(16,17);
-	ghosts = {red, blue, pink, orange};
+	ghosts = new Ghost[4];
+	ghosts[0] = red;
+	ghosts[1] = blue;
+	ghosts[2] = pink;
+	ghosts[3] = orange;
 	superPac = false;
 	//board setup
 	board = new char[36][28];
+	setup();
+    }
+
+    public void play(long time) {
+	System.out.println("\033[2J");
+	System.out.println(this);
+	updateScore();
+	updateLives();
+	checkTeleport();
+	checkTime(time);
+	try {
+	    Thread.sleep(1000);
+	} catch (InterruptedException e) {
+	    System.out.println("InterruptedException");
+	}
+	try {
+	    if (System.in.available() != 0) {
+		int key = System.in.read();
+		direction = move(getDir(key));
+	    }
+	    else {
+		move(direction);
+	    }
+	} catch (IOException e) {
+	    System.out.println("IOException");
+	}
+    }
+
+    public void updateScore() {
+        board[2][14] = Character.forDigit(score/10,10);
+	board[2][15] = Character.forDigit(score%10,10);
+    }
+    public void updateLives() {
+        for (Ghost g : ghosts) {
+	    if (g.getX() == pacX && g.getY() == pacY) {
+		die();
+	    }
+	}
+    }
+    public void die() {
+	try {
+	    Thread.sleep(3000);
+	}
+	catch (InterruptedException e) {
+	    System.out.println("InterruptedException");
+	}
+	System.out.println("\033[2J");
+	for (int i = 0; i < 18; i++) {
+	    System.out.println();
+	}
+	System.out.println("YOU DIED");
+	for (int i = 19; i < 36; i++) {
+	    System.out.println();
+	}
+	try {
+	    Thread.sleep(3000);
+	}
+	catch (InterruptedException e) {
+	    System.out.println("InterruptedException");
+	}
+	setup();
+    }
+    public void setup() {
 	for (int r = 0; r < 36; r++) {
 	    for (int c = 0; c < 28; c++) {
 		board[r][c] = '*';
@@ -110,10 +177,14 @@ public class Pacman {
 	board[35][5] = ':';
 	board[35][7] = '<';
 	board[35][8] = '3';
-	board[35][10] = '<';
-	board[35][11] = '3';
-	board[35][13] = '<';
-	board[35][14] = '3';
+	if (lives >= 2) {
+	    board[35][10] = '<';
+	    board[35][11] = '3';
+	}
+	if (lives == 3) {
+	    board[35][13] = '<';
+	    board[35][14] = '3';
+	}
 	//outsides
 	for (int c = 0; c < 28; c++) {
 	    board[3][c] = '=';
@@ -237,73 +308,21 @@ public class Pacman {
 	    }
 	}
     }
-
-    public void play(long time) {
-	System.out.println("\033[2J");
-	System.out.println(this);
-	updateScore();
-	updateLives();
-	checkTeleport();
-	checkTime(time);
-	try {
-	    Thread.sleep(1000);
-	} catch (InterruptedException e) {
-	    System.out.println("InterruptedException");
-	}
-	try {
-	    if (System.in.available() != 0) {
-		int key = System.in.read();
-		direction = move(getDir(key));
-	    }
-	    else {
-		move(direction);
-	    }
-	} catch (IOException e) {
-	    System.out.println("IOException");
-	}
-    }
-
-    public void updateScore() {
-        board[2][14] = Character.forDigit(score/10,10);
-	board[2][15] = Character.forDigit(score%10,10);
-    }
-    public void updateLives() {
-        for (Ghost g : ghosts) {
-	    if (g.getX() == pacX && g.getY() == pacY) {
-		die();
-	    }
-	}
-    }
-    public void die() {
-	try {
-	    Thread.sleep(3000);
-	}
-	catch (InterruptedException e) {
-	    System.out.println("InterruptedException");
-	}
-	System.out.println("\033[2J");
-	for (int i = 0; i < 18; i++) {
-	    System.out.println;
-	}
-	System.out.println("YOU DIED");
-	for (int i = 0; i < 18; i++) {
-	    System.out.println;
-	}
-	try {
-	    Thread.sleep(3000);
-	}
-	catch (InterruptedException e) {
-	    System.out.println("InterruptedException");
-	}
-	
-    }
     public void checkGameOver() {
 	if (lives == 0) {
 	    gameOver();
 	}
     }
     public void gameOver() {
-	//implement
+        System.out.println("\033[2J");
+	for (int i = 0; i < 18; i++) {
+	    System.out.println();
+	}
+	System.out.println("GAME OVER");
+	System.out.println("SCORE: "+score);
+	for (int i = 20; i < 36; i++) {
+	    System.out.println();
+	}
     }
     public void checkTeleport() {
 	if (pacX == 0 && pacY == 17 && direction == 2) {

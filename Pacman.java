@@ -470,7 +470,7 @@ public class Pacman {
 	public Ghost(int ghostX, int ghostY) {
 	    this.ghostX = ghostX;
 	    this.ghostY = ghostY;
-	    direction = 0;
+	    direction = (int)(Math.random()*4);
 	    freedom = false;
 	    movementMode = 0;
 	}
@@ -491,18 +491,44 @@ public class Pacman {
 	    return ghostY;
 	}
 	
-	public void move() {
-	    if (direction == 1) {
+	public int move(int dir) {
+	    if (dir == 0 && ghostX < 27 && board[ghostY][ghostX+1] != '=') {
 		ghostY--;
 	    }
-	    if (direction == 2) {
+	    if (dir == 1 && ghostY > 0 && board[ghostY-1][ghostX] != '=') {
 		ghostX++;
 	    }
-	    if (direction == 3) {
+	    if (dir == 2 && ghostX > 0 && board[ghostY][ghostX-1] != '=') {
 		ghostY++;
 	    }
-	    if (direction == 4) {
+	    if (dir == 3 && ghostY < 35 && board[ghostY+1][ghostX] != '=') {
 		ghostX--;
+	    }
+	}
+	public void go() {
+	    if (!atIntersection()) {
+		move(direction);
+	    }
+	    else {
+		direction = (int)(Math.random()*4);
+	    }
+	}
+	public boolean atIntersection() {
+	    int moves = 0;
+	    if (board[ghostY][ghostX+1] != '=') {
+		moves++;
+	    }
+	    if (board[ghostY][ghostX-1] != '=') {
+		moves++;
+	    }
+	    if (board[ghostY+1][ghostX] != '=') {
+		moves++;
+	    }
+	    if (board[ghostY-1][ghostX] != '=') {
+		moves++;
+	    }
+	    if (moves >= 3) {
+		return true;
 	    }
 	}
     }
@@ -519,11 +545,7 @@ public class Pacman {
 		catch (InterruptedException e) {
 		}
 	    }
-	    if (score > 2) {
-		return score-2;
-	    } else {
-		return score;
-	    }
+	    return score;
 	} catch (IOException e) {
 	    System.out.println("IOException");
 	} catch (InterruptedException e) {
