@@ -548,7 +548,7 @@ public class Pacman {
 		    ghostX--;
 		    return 2;
 		}
-		if (dir == 3 && ghostY < 35 && board[ghostY+1][ghostX] != '=') {
+		if (dir == 3 && ghostY < 35 && board[ghostY+1][ghostX] != '=' && board[ghostY+1][ghostX] != '-') {
 		    if (board[ghostY+1][ghostX] == '*') {
 			onEdible = true;
 		    }
@@ -562,7 +562,6 @@ public class Pacman {
 	    return dir;
 	}
 	public void go() {
-	    board[ghostY][ghostX] = 'G';
 	    if (!atIntersection()) {
 		move(direction);
 	    }
@@ -570,6 +569,7 @@ public class Pacman {
 		direction = (int)(Math.random()*4);
 		move(direction);
 	    }
+	    board[ghostY][ghostX] = 'G';
 	}
 	public boolean atIntersection() {
 	    int moves = 0;
