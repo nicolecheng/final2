@@ -70,6 +70,21 @@ Development Log <br><ul>
      <li>
      	05/26/16: Nicole - added length to snake, but it's triggering gameOver() at wrong times
      </li>
+     <li>
+     	05/29/16: Noah - finished up lasting errors in Pong (still need to fix certain key errors e.g. w key not registering) no official bugs as of now
+     </li>
+     <li>
+       05/29/16: Nicole - fixed the bug in Snake that didn't let anyone win; found a new bug, which triggers the gameOver() at wrong times.
+     </li>
+     <li>
+     	05/30/16: Noah - began Pacman! setting up board, Ghosts, player
+     </li>
+     <li>
+     	06/01/16: Nicole - did some debugging; began Doggie.java, with its basic outlines and scanners.
+     </li>
+     <li>
+     	06/02/16: Nicole - finally got the ascii dog down (without those tedious "illegal characters"; made the toString() to return the doggie and its stats to the user via the terminal.
+     </li>
  </ul><br><br>
 
  Project plan/outline including your goals prioritized by importance and chronology <br>
@@ -90,10 +105,10 @@ Development Log <br><ul>
  </ul><br>
  Things already done:<br><ul>
 	 <li>
-	 Snake basics down (interaction, running snake, obstacles, etc.) 
+	   Snake
 	 </li>
 	 <li>
-	 Tutorial outline
+	   Tutorial outline
 	 </li>
 	 <li>
 	   Pong basics
@@ -101,12 +116,23 @@ Development Log <br><ul>
 	 <li>
 	   Platformer basics
 	 </li>
+	 <li>
+	   Pacman outer board
+	 </li>
+	 <li>
+	   Doggie game basics and outline
+	 </li>
 </ul><br><br>
 
 Links to the Demo versions, <br> 
 what they show about the state of your project, <br> 
 Directions on how to compile/run each version. <br>
 (e.g. what to do to clone the right version) <br> <br>
+<ul>
+	<li>
+	  Compile and run Tutorial.java.
+	</li>
+</ul>
 
 - tetris / snake / nintendogs / pacman / space invaders / pingpong / pinball
 </html>
