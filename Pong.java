@@ -37,7 +37,7 @@ public class Pong {
 	}
         //create the paddles at each end of the board
         pos1 = 6;
-        pos2 = 6;
+        pos2 = 7;
         for (int i = pos1; i < pos1+3; i++) {
             board[i][0] = '#';
         }
@@ -57,39 +57,54 @@ public class Pong {
     
     public void reset() {
 	if (ballX == 0 || ballX == board[0].length-1) {
-	    if (ballX == 0) {
-		score2++;
-		board[3][board[0].length-7] = 'G';
-		board[3][board[0].length-6] = 'O';
-		board[3][board[0].length-5] = 'A';
-		board[3][board[0].length-4] = 'L';
-		board[3][board[0].length-3] = '!';
-		System.out.println("\033[2J");
-		System.out.println(this);
-		long x = System.currentTimeMillis();
-		while (!wait(1000,x)) {}
-		for (int i = board.length-7; i < board.length-2; i++) {
-		    board[3][i] = ' ';
+	    try {
+		if (ballX == 0) {
+		    score2++;
+		    board[3][board[0].length-7] = 'G';
+		    board[3][board[0].length-6] = 'O';
+		    board[3][board[0].length-5] = 'A';
+		    board[3][board[0].length-4] = 'L';
+		    board[3][board[0].length-3] = '!';
+		    System.out.println("\033[2J");
+		    System.out.println(this);
+		    long x = System.currentTimeMillis();
+		    Thread.sleep(3000);
+		    board[3][board[0].length-7] = ' ';
+		    board[3][board[0].length-6] = ' ';
+		    board[3][board[0].length-5] = ' ';
+		    board[3][board[0].length-4] = ' ';
+		    board[3][board[0].length-3] = ' ';
+		    for (int i = board.length-7; i < board.length-2; i++) {
+			board[3][i] = ' ';
+		    }
+		    System.out.println("\033[2J");
+		    System.out.println(this);
 		}
-		System.out.println("\033[2J");
-		System.out.println(this);
+		if (ballX == board[0].length-1) {
+		    score1++;
+		    board[3][2] = 'G';
+		    board[3][3] = 'O';
+		    board[3][4] = 'A';
+		    board[3][5] = 'L';
+		    board[3][6] = '!';
+		    System.out.println("\033[2J");
+		    System.out.println(this);
+		    long x = System.currentTimeMillis();
+		    Thread.sleep(3000);
+		    board[3][2] = ' ';
+		    board[3][3] = ' ';
+		    board[3][4] = ' ';
+		    board[3][5] = ' ';
+		    board[3][6] = ' ';
+		    for (int i = 2; i < 7; i++) {
+			board[3][i] = ' ';
+		    }
+		    System.out.println("\033[2J");
+		    System.out.println(this);
+		}
 	    }
-	    if (ballX == board[0].length-1) {
-		score1++;
-		board[3][2] = 'G';
-		board[3][3] = 'O';
-		board[3][4] = 'A';
-		board[3][5] = 'L';
-		board[3][6] = '!';
-		System.out.println("\033[2J");
-		System.out.println(this);
-		long x = System.currentTimeMillis();
-		while (!wait(1000,x)) {};
-		for (int i = 2; i < 7; i++) {
-		    board[3][i] = ' ';
-		}
-		System.out.println("\033[2J");
-		System.out.println(this);
+	    catch (InterruptedException e) {
+		System.out.println("InterruptedException");
 	    }
 	    for (int i = pos1; i < pos1+3; i++) {
 		board[i][0] = ' ';
@@ -127,7 +142,6 @@ public class Pong {
             board[pos1+3][0] = '#';
             pos1++;
         }
-	System.out.println(this);
     }
 
     public int ballMove(int dir) {
@@ -135,53 +149,45 @@ public class Pong {
 	    board[ballY][ballX] = ' ';
 	    ballX++;
 	    board[ballY][ballX] = '*';
-	    return 0;
 	}
 	if (dir == 1) {
 	    board[ballY][ballX] = ' ';
 	    ballX++;
 	    ballY--;
 	    board[ballY][ballX] = '*';
-	    return 1;
 	}
 	if (dir == 2) {
 	    board[ballY][ballX] = ' ';
 	    ballY--;
 	    board[ballY][ballX] = '*';
-	    return 2;
 	}
 	if (dir == 3) {
 	    board[ballY][ballX] = ' ';
 	    ballX--;
 	    ballY--;
 	    board[ballY][ballX] = '*';
-	    return 3;
 	}
 	if (dir == 4) {
 	    board[ballY][ballX] = ' ';
 	    ballX--;
 	    board[ballY][ballX] = '*';
-	    return 4;
 	}
 	if (dir == 5) {
 	    board[ballY][ballX] = ' ';
 	    ballX--;
 	    ballY++;
 	    board[ballY][ballX] = '*';
-	    return 5;
 	}
 	if (dir == 6) {
 	    board[ballY][ballX] = ' ';
 	    ballY++;
 	    board[ballY][ballX] = '*';
-	    return 6;
 	}
 	if (dir == 7) {
 	    board[ballY][ballX] = ' ';
 	    ballX++;
 	    ballY++;
 	    board[ballY][ballX] = '*';
-	    return 7;
 	}
 	return dir;
     }
@@ -215,14 +221,14 @@ public class Pong {
 	    }
 	}
 	//if it hits the ceiling, reflect it in the opposite direction
-	else if (ballY == 1) {
+	else if (ballY <= 1) {
 	    if (lastDir == 1) {
 		return 7;
 	    }
 	    if (lastDir == 3) {
 		return 5;
 	    }
-	} else if (ballY == board.length-2) {
+	} else if (ballY >= board.length-2) {
 	    if (lastDir == 7) {
 		return 1;
 	    }
@@ -244,49 +250,55 @@ public class Pong {
         return ret;
     }
     
-    public void play() {
-	if (DEBUG) {
-	    System.out.println("lastDir: "+lastDir);
-	    System.out.println("ballX: "+ballX);
-	    System.out.println("ballY: "+ballY);
-	    System.out.println("pos1: "+pos1);
-	    System.out.println();
-	} else {
-	    System.out.println("\033[2J");
-	    System.out.println(this);
-	}
-	long x = System.currentTimeMillis();
-	if (System.in.available() != 0) {
-	    int key = System.in.read();
-	    if (key == 0x1B) {
-		break;
+    public boolean play() {
+	try {
+	    if (DEBUG) {
+		System.out.println("lastDir: "+lastDir);
+		System.out.println("ballX: "+ballX);
+		System.out.println("ballY: "+ballY);
+		System.out.println("pos1: "+pos1);
+		System.out.println("pos2: "+pos2);
+		System.out.println();
 	    } else {
+		System.out.println("\033[2J");
+		System.out.println(this);
+	    }
+	    long x = System.currentTimeMillis();
+	    if (System.in.available() != 0) {
+		int key = System.in.read();
 		move(key);
-		System.out.println(p);
-		while (wait(50,x)) {}
 		fixPos();
 	    }
+	    reset();
+	    board[3][3] = Character.forDigit(score1,10);
+	    board[3][board[0].length-4] = Character.forDigit(score2,10);
+	    lastDir = ballMove(getDir(lastDir));
+	    return true;
 	}
-	reset();
-	lastDir = ballMove(getDir(lastDir));
+	catch (IOException e) {
+	    System.out.println("IOException");
+	}
+	return false;
     }
 
     public void fixPos() {
 	int r = 0;
 	boolean changed = false;
 	while (!changed) {
-	    if (board[0][r] == '#') {
+	    if (board[r][0] == '#') {
 		pos1 = r;
 		changed = true;
 	    }
+	    r++;
 	}
 	r = 0;
 	changed = false;
 	while (!changed) {
-	    if (board[board[0].length-1][r] == '#') {
+	    if (board[r][board[0].length-1] == '#') {
 		pos2 = r;
 		changed = true;
 	    }
+	    r++;
 	}
     }
 
@@ -301,18 +313,25 @@ public class Pong {
     //Thanks to Graham King from darkcoding.net for the lesson on making the terminal interactive
     private static String ttyConfig;
 
-    public static void main(String[] args) {
-    Pong p = new Pong(0);
+    public int pong() {
 	try {
 	    setTerminalToCBreak();
-	    while (true) {
-		p.play();
+	    while (score1 < 10 && score2 < 10) {
+		if (!play()) {
+		    return score1;
+		}
+		try {
+		    Thread.sleep(100);
+		}
+		catch (InterruptedException e) {
+		}
 	    }
+	    return score1;
 	} catch (IOException e) {
 	    System.out.println("IOException");
 	} catch (InterruptedException e) {
 	    System.out.println("InterruptedException");
-    }
+	}
 	finally {
 	    try {
 		stty(ttyConfig.trim());
@@ -320,6 +339,12 @@ public class Pong {
 		System.out.println("Exception restoring tty config");
 	    }
 	}
+	return 0;
+    }
+    
+    public static void main(String[] args) {
+	Pong p = new Pong(0);
+        System.out.println(p.pong());
     }
 
     private static void setTerminalToCBreak() throws IOException, InterruptedException { //used in main()
