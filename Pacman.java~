@@ -14,6 +14,7 @@ public class Pacman {
     private int timer;
     private int direction;
     private char[][] board;
+    private Ghost[] ghosts;
     private Ghost red;
     private Ghost blue;
     private Ghost pink;
@@ -31,6 +32,7 @@ public class Pacman {
 	blue = new Ghost(12,17);
 	pink = new Ghost(14,17);
 	orange = new Ghost(16,17);
+	ghosts = {red, blue, pink, orange};
 	superPac = false;
 	//board setup
 	board = new char[36][28];
@@ -100,6 +102,18 @@ public class Pacman {
 	board[20][14] = 'D';
 	board[20][15] = 'Y';
 	board[20][16] = '!';
+	board[35][0] = 'L';
+	board[35][1] = 'I';
+	board[35][2] = 'V';
+	board[35][3] = 'E';
+	board[35][4] = 'S';
+	board[35][5] = ':';
+	board[35][7] = '<';
+	board[35][8] = '3';
+	board[35][10] = '<';
+	board[35][11] = '3';
+	board[35][13] = '<';
+	board[35][14] = '3';
 	//outsides
 	for (int c = 0; c < 28; c++) {
 	    board[3][c] = '=';
@@ -254,6 +268,41 @@ public class Pacman {
 	board[2][15] = Character.forDigit(score%10,10);
     }
     public void updateLives() {
+        for (Ghost g : ghosts) {
+	    if (g.getX() == pacX && g.getY() == pacY) {
+		die();
+	    }
+	}
+    }
+    public void die() {
+	try {
+	    Thread.sleep(3000);
+	}
+	catch (InterruptedException e) {
+	    System.out.println("InterruptedException");
+	}
+	System.out.println("\033[2J");
+	for (int i = 0; i < 18; i++) {
+	    System.out.println;
+	}
+	System.out.println("YOU DIED");
+	for (int i = 0; i < 18; i++) {
+	    System.out.println;
+	}
+	try {
+	    Thread.sleep(3000);
+	}
+	catch (InterruptedException e) {
+	    System.out.println("InterruptedException");
+	}
+	
+    }
+    public void checkGameOver() {
+	if (lives == 0) {
+	    gameOver();
+	}
+    }
+    public void gameOver() {
 	//implement
     }
     public void checkTeleport() {
@@ -416,7 +465,13 @@ public class Pacman {
 	public void setDirection(int direction) {
 	    this.direction = direction;
 	}
-
+	public int getX() {
+	    return ghostX;
+	}
+	public int getY() {
+	    return ghostY;
+	}
+	
 	public void move() {
 	    if (direction == 1) {
 		ghostY--;
