@@ -355,12 +355,15 @@ public class Pacman {
 	}
 	if (timer > 10) {
 	    ghosts[1].setFreedom(true);
+	    ghosts[1].setYX(14,14);
 	}
 	if (timer > 20) {
 	    ghosts[2].setFreedom(true);
+	    ghosts[3].setYX(14,14);
 	}
 	if (timer > 30) {
 	    ghosts[3].setFreedom(true);
+	    ghosts[3].setYX(14,14);
 	}
     }
     public int move(int dir) {
@@ -563,11 +566,43 @@ public class Pacman {
 	}
 	public void go() {
 	    if (!atIntersection()) {
-		move(direction);
+		direction = move(direction);
+	    }
+	    else if (board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') {
+		if (direction == 0) {
+		    move(1);
+		}
+		if (direction == 1) {
+		    move(0);
+		}
+	    }
+	    else if (board[ghostY-1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') {
+		if (direction == 1) {
+		    move(2);
+		}
+		if (direction == 2) {
+		    move(1);
+		}
+	    }
+	    else if (board[ghostY][ghostX-1] != '=' && board[ghostY+1][ghostX] != '=') {
+		if (direction == 2) {
+		    move(3);
+		}
+		if (direction == 3) {
+		    move(2);
+		}
+	    }
+	    else if (board[ghostY+1][ghostX] != '=' && board[ghostY][ghostX+1] != '=') {
+		if (direction == 3) {
+		    move(0);
+		}
+		if (direction == 0) {
+		    move(3);
+		}
 	    }
 	    else {
 		direction = (int)(Math.random()*4);
-		move(direction);
+		direction = move(direction);
 	    }
 	    board[ghostY][ghostX] = 'G';
 	}
@@ -579,7 +614,7 @@ public class Pacman {
 	    if (board[ghostY][ghostX-1] != '=') {
 		moves++;
 	    }
-	    if (board[ghostY+1][ghostX] != '=') {
+	    if (board[ghostY+1][ghostX] != '=' && board[ghostY+1][ghostX] != '-') {
 		moves++;
 	    }
 	    if (board[ghostY-1][ghostX] != '=') {
@@ -587,9 +622,6 @@ public class Pacman {
 	    }
 	    if (moves >= 3) {
 		return true;
-	    }
-	    else {
-		return false;
 	    }
 	}
     }
