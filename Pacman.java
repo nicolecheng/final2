@@ -644,6 +644,7 @@ public class Pacman {
 	    if (moves >= 3) {
 		return true;
 	    }
+	    return false;
 	}
     }
     
