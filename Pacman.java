@@ -525,7 +525,7 @@ public class Pacman {
 		    else {
 			onEdible = false;
 		    }
-		    ghostY--;
+		    ghostX++;
 		    return 0;
 		}
 		if (dir == 1 && ghostY > 0 && board[ghostY-1][ghostX] != '=') {
@@ -535,7 +535,7 @@ public class Pacman {
 		    else {
 			onEdible = false;
 		    }
-		    ghostX++;
+		    ghostY--;
 		    return 1;
 		}
 		if (dir == 2 && ghostX > 0 && board[ghostY][ghostX-1] != '=') {
@@ -545,7 +545,7 @@ public class Pacman {
 		    else {
 			onEdible = false;
 		    }
-		    ghostY++;
+		    ghostX--;
 		    return 2;
 		}
 		if (dir == 3 && ghostY < 35 && board[ghostY+1][ghostX] != '=') {
@@ -555,7 +555,7 @@ public class Pacman {
 		    else {
 			onEdible = false;
 		    }
-		    ghostX--;
+		    ghostY++;
 		    return 3;
 		}
 	    }
