@@ -554,6 +554,7 @@ public class Pacman {
 	    }
 	}
 	public void go() {
+	    board[ghostY][ghostX] = 'G';
 	    if (!atIntersection()) {
 		move(direction);
 	    }
