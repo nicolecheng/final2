@@ -85,6 +85,15 @@ Development Log <br><ul>
      <li>
      	06/02/16: Nicole - finally got the ascii dog down (without those tedious "illegal characters"; made the toString() to return the doggie and its stats to the user via the terminal.
      </li>
+     <li>
+     	06/02/16: Noah - continued Pacman board
+     </li>
+     <li>
+     	06/03/16: Noah - continued Pacman board, began movement basics
+     </li>
+     <li>
+     	06/04/16: Noah - added lives and death sequence to Pacman
+     </li>
  </ul><br><br>
 
  Project plan/outline including your goals prioritized by importance and chronology <br>
@@ -117,7 +126,7 @@ Development Log <br><ul>
 	   Platformer basics
 	 </li>
 	 <li>
-	   Pacman outer board
+	   Pacman board + movement basics
 	 </li>
 	 <li>
 	   Doggie game basics and outline
