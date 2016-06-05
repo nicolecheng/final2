@@ -93,6 +93,7 @@ public class Pacman {
 	catch (InterruptedException e) {
 	    System.out.println("InterruptedException");
 	}
+	lives--;
 	setup();
     }
     
