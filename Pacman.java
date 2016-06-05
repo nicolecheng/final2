@@ -589,7 +589,7 @@ public class Pacman {
 	try {
 	    setTerminalToCBreak();
 	    while (true) {
-		if (play()) {
+		if (!play()) {
 		    return score;
 		}
 	    }
