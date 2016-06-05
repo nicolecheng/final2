@@ -559,6 +559,7 @@ public class Pacman {
 		    return 3;
 		}
 	    }
+	    return dir;
 	}
 	public void go() {
 	    board[ghostY][ghostX] = 'G';
