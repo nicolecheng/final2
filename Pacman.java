@@ -588,13 +588,12 @@ public class Pacman {
 		}
 		if (dir == 0 && ghostX < 27 && board[ghostY][ghostX+1] != '=') {//either here
 		    if (board[ghostY][ghostX+1] == '*') {
-			System.out.println("here1");
 			onEdible = true;
 		    }
-		    else {
-			System.out.println("here2");
+		    else { //and here
 			onEdible = false;
 		    }
+		    System.out.println("here1");
 		    ghostX++;
 		    return 0;
 		}
@@ -610,13 +609,12 @@ public class Pacman {
 		}
 		if (dir == 2 && ghostX > 0 && board[ghostY][ghostX-1] != '=') {//or here
 		    if (board[ghostY][ghostX-1] == '*') {
-			System.out.println("here3");
 			onEdible = true;
 		    }
-		    else {
-			System.out.println("here4");
+		    else { //and here
 			onEdible = false;
 		    }
+		    System.out.println("here3");
 		    ghostX--;
 		    return 2;
 		}
