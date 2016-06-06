@@ -40,6 +40,7 @@ public class Pacman {
 		}
 	    }
 	}
+	Thread.sleep(5000);
     }
 
     public boolean play() {
@@ -806,6 +807,8 @@ public class Pacman {
     public int pacman() {
 	try {
 	    setTerminalToCBreak();
+	    System.out.println("YOU HAVE 5 SECONDS TO EXPAND YOUR TERMINAL SCREEN SO IT FITS AT LEAST 36 LINES");
+	    System.out.println("                             (ROUGHLY HALF THE SCREEN)");
 	    while (true) {
 		if (!play()) {
 		    return score;
