@@ -26,7 +26,7 @@ public class Pacman {
     public Pacman() {
 	score = 0;
 	lives = 3;
-	speed = 1000;
+	speed = 500;
 	//board setup
 	board = new char[36][28];
 	setup();
@@ -56,6 +56,11 @@ public class Pacman {
 	System.out.println(this);
 	updateScore();
         updateLives();
+	System.out.println("pac " + pacX + " " + pacY);
+	System.out.println("red " + red.getX() + " " + red.getY());
+	System.out.println("blu " + blue.getX() + " " + blue.getY());
+	System.out.println("pnk " + pink.getX() + " " + pink.getY());
+	System.out.println("org " + orange.getX() + " " + orange.getY());
 	try {
 	    Thread.sleep(1000);
 	} catch (InterruptedException e) {
@@ -457,7 +462,7 @@ public class Pacman {
 
     public boolean checkLevelComplete() {
 	if (score % 245 == 0 && timer != 0) {
-	    speed -= 200;
+	    speed -= 100;
 	    if (speed == 0) {
 		gameOver2();
 		return false;
