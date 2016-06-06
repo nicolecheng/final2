@@ -503,7 +503,10 @@ public class Pacman {
 	public Ghost(int ghostX, int ghostY) {
 	    this.ghostX = ghostX;
 	    this.ghostY = ghostY;
-	    direction = (int)(Math.random()*4);
+	    direction = (int)(Math.random()*2);
+	    if (direction == 1) {
+		direction = 2;
+	    }
 	    freedom = false;
 	    onEdible = false;
 	    movementMode = 0;
