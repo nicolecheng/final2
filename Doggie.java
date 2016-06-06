@@ -11,7 +11,8 @@ public class Doggie{
     private static int browniePoints;
     private static String name;
     private static String dog1 = "         ,-~~~~-,\n   .-~~~:        :~~~-.\n  !    !          !    !\n {   .^{  O    O  }^.   }\n  ^~^  { .-~~~~-. }  ^~^\n       :!        !:\n      !^._  ()  _.^!\n     !    ^~~~~^    !\n    :                :\n    {                }\n    {     }    {     }\n    {     }    {     }\n    l     l    l     l\n   { { {   }~~{   } } }\n    ^~~~~~^    ^~~~~~^\n";
-    private static String dog2 = "    ___\n __/o |`.  ..---.   )\n |_,  |_|-'  /   )-^*\n    )        |  ((\n ___Y  ,    .-7 /|\n(_,___/...-- (_/_/\n";
+    private static String dog2 = "    ___\n __/o |`.  ..---.   )\n |_,  |_|-'  /   )-^\n    )        |  ((\n ___Y  ,    .-7 /|\n(_,___/...-- (_/_/\n";
+    private static String[]mysteryBasket;
 
     public Doggie(){
         days=0;
@@ -46,20 +47,59 @@ public class Doggie{
 	wait(3700);
 	System.out.println("The day count can be found in the stats bar below "+name+" on the screen.\n");
 	wait(3100);
-	System.out.println("You will be prompted to perform actions every 3 simulated hours for seven days.\n");
+	System.out.println("You will be prompted to perform actions every three simulated hours for seven simulated days.\n");
 	wait(3300);
-	System.out.println("Be cautious, though. If "+name+"gets too bored, it may run away, which is game over for you.");
+	System.out.println("Be cautious, though. If "+name+" gets too bored, "+name+" may run away, which is game over for you.\n");
 	wait(3500);
 	System.out.println("Similarly, if "+name+" gets too hungry or tired, NAPS (Nikoahla Animal Protective Services) will take "+name+" away, and of course, that too, means game over.");
 	wait(4500);
-	System.out.println();
+	begin();
+        care();
+	
     }
+
+    private static void begin(){
+	System.out.println("\nGot it? (y/n)");
+	Scanner in = new Scanner(System.in);
+	String n = in.nextLine();
+	if(n.contains("y")){
+	    
+	}else{
+	    begin();
+	}
+    }
+	    
 
     private static void care(){
 	while(days<=7){
+	    System.out.println(dog1);
+	    System.out.println("\nName: "+name+"   Days: "+days+" days   Hours: "+hours+" hours   Hunger: "+hunger+"   Bored: "+bored+"   Tired: "+tired);   
+	    System.out.println();
+	    instruct();
+	    System.out.println();
+	    System.out.println();
+	    System.out.println();
+	}
+    }
 
-
-
+    private static void instruct(){
+	System.out.println("What would you like to do?");
+	System.out.println();
+	System.out.println("1) feed "+name+"\n2) play with "+name+"\n3) tuck "+name+" into bed\n4) mystery option (CAREFUL WITH THIS ONE!)\n");
+	Scanner in = new Scanner(System.in);
+	String n = in.nextLine();
+	if(n.contains("1") || n.contains("feed")){
+	    feed();
+	}else if(n.contains("2") || n.contains("play")){
+	    play();
+	}else if(n.contains("3") || n.contains("tuck") || n.contains("sleep")){
+	    tuck();
+	}else if(n.contains("4") || n.contains("mystery")){
+	    mystery();
+	}else{
+	    System.out.println("Sorry, what was that?\n");
+	    wait(1500);
+	    instruct();
 	}
     }
 
