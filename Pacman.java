@@ -27,6 +27,15 @@ public class Pacman {
 	//board setup
 	board = new char[36][28];
 	setup();
+	int count = 0;
+	for (int r = 0; r < board.length; r++) {
+	    for (int c = 0; c < board[0].length; c++) {
+		if (board[r][c] == '*') {
+		    count++;
+		}
+	    }
+	}
+	System.out.println(count);
     }
 
     public boolean play() {
@@ -133,6 +142,24 @@ public class Pacman {
 	    System.out.println("InterruptedException");
 	}
 	lives--;
+	int countStars = 0;
+	for (int r = 0; r < board.length; r++) {
+	    for (int c = 0; c < board[0].length; c++) {
+		if (board[r][c] == '*') {
+		    countStars++;
+		}
+	    }
+	}
+	int[] coords = new int[countStars][2];
+	int pos = 0;
+	for (int r = 0; r < board.length; r++) {
+	    for (int c = 0; c < board[0].length; c++) {
+		if (board[r][c] == '*') {
+		    coords[pos][0] == r;
+		    coords[pos][1] == c;
+		}
+	    }
+	}
 	setup();
     }
     
@@ -774,9 +801,6 @@ public class Pacman {
 	    else {
 		direction = move(direction);
 	    }
-	    System.out.println("dir:"+direction);
-	    System.out.println("x:"+ghostX);
-	    System.out.println("y:"+ghostY);
 	}
 	
 	public int atIntersection() { //0 = complete intersection, 1 = 3 choices, 2 = elbow, 3 = straightaway
