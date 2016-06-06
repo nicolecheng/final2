@@ -534,13 +534,13 @@ public class Pacman {
 	}
 	
 	public int move(int dir) {
-	    if (onEdible) {
-		board[ghostY][ghostX] = '*';
-	    }
-	    else {
-		board[ghostY][ghostX] = ' ';
-	    }
 	    if (freedom) {
+		if (onEdible) {
+		    board[ghostY][ghostX] = '*';
+		}
+		else {
+		    board[ghostY][ghostX] = ' ';
+		}
 		if (dir == 0 && ghostX < 27 && board[ghostY][ghostX+1] != '=') {
 		    if (board[ghostY][ghostX+1] == '*') {
 			onEdible = true;
