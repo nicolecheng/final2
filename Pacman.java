@@ -129,7 +129,7 @@ public class Pacman {
 	int[][] coords = new int[245-countStars][2];
 	int pos = 0;
 	for (int i = 0; i < 245; i++) {
-	    if (board[regCoords[i][0]][regCoords[i][1]) != '*') {
+	    if (board[regCoords[i][0]][regCoords[i][1]] != '*') {
 		coords[pos][0] = regCoords[i][0];
 		coords[pos][1] = regCoords[i][1];
 		pos++;
