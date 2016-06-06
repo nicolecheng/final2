@@ -586,7 +586,7 @@ public class Pacman {
 		    return 0;
 		}
 		if (dir == 1 && ghostY > 0 && board[ghostY-1][ghostX] != '=') {
-		    if (board[ghostY][ghostX] == '*') {
+		    if (board[ghostY-1][ghostX] == '*') {
 			onEdible = true;
 		    }
 		    else {
@@ -597,7 +597,7 @@ public class Pacman {
 		    return 1;
 		}
 		if (dir == 2 && ghostX > 0 && board[ghostY][ghostX-1] != '=') {
-		    if (board[ghostY][ghostX] == '*') {
+		    if (board[ghostY][ghostX-1] == '*') {
 			onEdible = true;
 		    }
 		    else {
@@ -608,7 +608,7 @@ public class Pacman {
 		    return 2;
 		}
 		if (dir == 3 && ghostY < 35 && board[ghostY+1][ghostX] != '=' && board[ghostY+1][ghostX] != '-') {
-		    if (board[ghostY][ghostX] == '*') {
+		    if (board[ghostY+1][ghostX] == '*') {
 			onEdible = true;
 		    }
 		    else {
