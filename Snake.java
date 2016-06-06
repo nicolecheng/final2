@@ -63,7 +63,7 @@ public class Snake{
 	int r,c;
 	r = (int)(Math.random()*(rows-2))+1;
 	c = (int)(Math.random()*(cols-1))+1;
-	if(check(r,c)==0){
+	if(ok(r,c)){//==0){
 	    board[r][c]='!';
 	}else{
 	    addObstacle();
@@ -194,14 +194,14 @@ public class Snake{
     }
 
     private static int check(int y, int x){ // checks for hitting the wall / obstacles
-	if((board[y][x]=='#')){
-	    debug("POUND TWO");
-	    gameOver();
-	    return 2;
-	}else if(board[y][x]=='!'){	   
+	if(board[y][x]=='!'){	   
 	    score++;
 	    addObstacle();
 	    return 1;
+	}else if((board[y][x]=='#')){
+	    debug("POUND TWO");
+	    gameOver();
+	    return 2;
 	}else if(board[y][x]=='S' && dir >= 0){
 	    debug("S CHECK TWO");
 	    gameOver();

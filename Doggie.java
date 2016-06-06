@@ -6,6 +6,9 @@ import java.io.*;
 
 public class Doggie{
 
+    public static boolean real = true; // true = wait, false = don't wait
+
+
     private static int days,hours;
     private static int hunger,tired,bored;
     private static int browniePoints;
@@ -121,13 +124,13 @@ public class Doggie{
 		instruct();
 	    }else{
 		System.out.println();
-		wait(2000);
+		wait(1500);
 		System.out.println(".");
-		wait(2000);
+		wait(1500);
 		System.out.println(".");
-		wait(2000);
+		wait(1500);
 		System.out.println(".");
-		wait(2000);
+		wait(1500);
 		bored+=10;
 		tired+=10;
 		hunger+=10;
@@ -152,36 +155,38 @@ public class Doggie{
     private static void instruct(){
 	System.out.println("What would you like to do?");
 	System.out.println();
-	System.out.println("1) feed "+name+"\n2) play with "+name+"\n3) tuck "+name+" into bed\n4) mystery option (CAREFUL WITH THIS ONE!)\n");
+	System.out.println("1) feed "+name+"\n2) play with "+name+"\n3) tuck "+name+" into bed\n4) mystery option (CAREFUL WITH THIS ONE!)\n5) skip a day (this is for you, mr k)");
 	Scanner in = new Scanner(System.in);
 	String n = in.nextLine();
 	if(n.contains("1") || n.toLowerCase().contains("feed")){
 	    if(feed()){
-		bored+=20;
-		tired+=20;
+		bored+=10;
+		tired+=10;
 		hours+=1;
 	    }
 	}else if(n.contains("2") || n.toLowerCase().contains("play")){
 	    if(play()){
-		hunger+=30;
-		tired+=40;
+		hunger+=10;
+		tired+=10;
 		hours+=1;
 	    }
 	}else if(n.contains("3") || n.toLowerCase().contains("tuck") || n.toLowerCase().contains("sleep")){
 	    if(tuck()){
-		hunger+=30;
+		hunger+=10;
 		hours+=1;
 	    }
 	}else if(n.toLowerCase().contains("4") || n.toLowerCase().contains("mystery")){
 	    if(mystery()){
 		hours+=1;
 	    }
+	}else if(n.toLowerCase().contains("5") || n.toLowerCase().contains("skip")){
+	    hours+=24;
+	    days++;
 	}else{
 	    System.out.println("Sorry, what was that?\n");
 	    wait(1500);
 	    instruct();
-	}
-	
+	}	
 
     }
 
@@ -374,8 +379,7 @@ public class Doggie{
 	return s;
     }
 
-    public static boolean real = true;
-
+    
     private static void wait(int millis){
 	if(real){
 	    try {

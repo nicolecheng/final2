@@ -261,15 +261,15 @@ public class Tutorial{
 	    wait(4400);
 	    System.out.println("He tosses you the key for the arcade and walks away. You dare not speak to or approach him.");
 	    System.out.println();
-	    wait(3700);
+	    wait(3800);
 	    System.out.println("You go to the arcade, because you are such a brave soul. You unlock it and walk in. The place is lined with tacky neon lights and reeks of pizza and BO. Gross.");
-	    wait(4600);
+	    wait(5000);
 	    System.out.println("Nonetheless, Pierre and Mr. Igayim were right: it had every game imaginable. SCORE.");
-	    wait(3200);
+	    wait(3700);
 	    //}else if(s.toLowerCase().contains("n")){
 	}else{
 	    System.out.println("You don't go to the pier, but this mention of the arcade has reminded you of your immense love of those bulky machines and their monotonous beeps and tones.");
-	    wait(5000);
+	    wait(5100);
 	    System.out.println("You decide to go down the block to go to your favorite arcade: Flynn's");
 	    wait(3700);
 	    System.out.println("You walk in, and it's just how you remembered -- perfect.");
@@ -560,11 +560,11 @@ public class Tutorial{
     private static void scene5(){
 	System.out.println();
 	System.out.println("You finallly get home, but you see a box with a letter attached to it.");
-	wait(2700);
-	System.out.println("Being the type of person you are, you open the box before reading the letter.");
 	wait(2800);
-	System.out.println("In it, you find a puppy... Weird. This isn't the box of Insomnia Cookies that you ordered...");
+	System.out.println("Being the type of person you are, you open the box before reading the letter.");
 	wait(3000);
+	System.out.println("In it, you find a puppy... Weird. This isn't the box of Insomnia Cookies that you ordered...");
+	wait(3100);
 	System.out.println();
 	System.out.println("OK, now that you're utterly confused (and quite concerned), you open up the letter and begin reading.\n");
 	wait(3400);
