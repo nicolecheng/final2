@@ -571,7 +571,7 @@ public class Pacman {
 		if (onEdible) {
 		    board[ghostY][ghostX] = '*';
 		}
-		else if (board[ghostY][ghostX] != 'G') {
+		else {
 		    board[ghostY][ghostX] = ' ';
 		}
 		if (dir == 0 && ghostX < 27 && board[ghostY][ghostX+1] != '=') {
@@ -629,7 +629,7 @@ public class Pacman {
 	    }
 	    else if (atIntersection() == 1) {
 		int holddir = direction;
-		while (direction == holddir) {
+		while (direction == holddir || Math.abs(holddir-direction) == 2) {
 		    direction = (int)(Math.random()*4);
 		}
 		direction = move(direction);
