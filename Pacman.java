@@ -155,8 +155,8 @@ public class Pacman {
 	for (int r = 0; r < board.length; r++) {
 	    for (int c = 0; c < board[0].length; c++) {
 		if (board[r][c] == '*') {
-		    coords[pos][0] == r;
-		    coords[pos][1] == c;
+		    coords[pos][0] = r;
+		    coords[pos][1] = c;
 		}
 	    }
 	}
