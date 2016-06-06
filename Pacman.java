@@ -32,8 +32,8 @@ public class Pacman {
     public boolean play() {
 	System.out.println("\033[2J");
 	System.out.println(this);
-	for (Ghost g : ghosts) {
-	    g.go();
+	for (int i = 0; i < 4; i++) {
+	    ghosts[i].go();
 	}
 	checkTeleport();
 	checkTime();
