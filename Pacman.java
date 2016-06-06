@@ -42,7 +42,12 @@ public class Pacman {
 		}
 	    }
 	}
-	Thread.sleep(5000);
+	try {
+	    Thread.sleep(5000);
+	}
+	catch (InterruptedException e) {
+	    System.out.println("InterruptedException");
+	}
     }
 
     public boolean play() {
