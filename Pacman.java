@@ -45,7 +45,9 @@ public class Pacman {
 	try {
 	    if (System.in.available() != 0) {
 		int key = System.in.read();
-		direction = move(getDir(key));
+		if (Math.abs(getDir(key)-direction) != 2) {
+		    direction = move(getDir(key));
+		}
 	    }
 	    else {
 		move(direction);
