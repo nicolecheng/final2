@@ -29,7 +29,7 @@ public class Pacman {
 	board = new char[36][28];
 	setup();
 	//245 to start
-	int[][] regCoords = new int[245][2];
+	regCoords = new int[245][2];
 	int pos = 0;
 	for (int r = 0; r < board.length; r++) {
 	    for (int c = 0; c < board[0].length; c++) {
@@ -45,13 +45,8 @@ public class Pacman {
     public boolean play() {
 	System.out.println("\033[2J");
 	System.out.println(this);
-        red.go();
-	blue.go();
-	pink.go();
-	orange.go();
-	checkTeleport();
-	checkTime();
-	updateGhosts();
+	updateScore();
+        updateLives();
 	try {
 	    Thread.sleep(1000);
 	} catch (InterruptedException e) {
@@ -71,8 +66,13 @@ public class Pacman {
 	    System.out.println("IOException");
 	}
 	timer++;
-	updateScore();
-        updateLives();
+        red.go();
+	blue.go();
+	pink.go();
+	orange.go();
+	checkTeleport();
+	updateGhosts();
+	checkTime();
         return checkGameOver();
     }
 
@@ -401,10 +401,10 @@ public class Pacman {
 	    board[pacY][pacX] = '<';
 	}
 	for (Ghost g : ghosts) {
-	    if (g.getX() == 0 && g.getY() == 17 && g.getDirection() == 2) {
+	    if (g.getX() == 1 && g.getY() == 17 && g.getDirection() == 2) {
 	        g.setDirection(0);
 	    }
-	    if (g.getX() == 27 && g.getY() == 17 && g.getDirection() == 0) {
+	    if (g.getX() == 26 && g.getY() == 17 && g.getDirection() == 0) {
 		g.setDirection(2);
 	    }
 	}
