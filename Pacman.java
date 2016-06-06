@@ -594,6 +594,13 @@ public class Pacman {
 	    if (!atIntersection()) {
 		direction = move(direction);
 	    }
+	    else if (atIntersection()) {
+		int holddir = direction;
+		while (direction == holddir) {
+		    direction = (int)(Math.random()*4);
+		}
+		direction = move(direction);
+	    }
 	    else if (board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') {
 		if (direction == 0) {
 		    move(1);
@@ -625,13 +632,6 @@ public class Pacman {
 		if (direction == 0) {
 		    move(3);
 		}
-	    }
-	    else {
-		int holddir = direction;
-		while (direction == holddir) {
-		    direction = (int)(Math.random()*4);
-		}
-		direction = move(direction);
 	    }
 	    board[ghostY][ghostX] = 'G';
 	    System.out.println("ghostY:"+ghostY);
