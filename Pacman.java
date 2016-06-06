@@ -32,8 +32,29 @@ public class Pacman {
     public boolean play() {
 	System.out.println("\033[2J");
 	System.out.println(this);
-	for (int i = 0; i < 4; i++) {
-	    ghosts[i].go();
+        ghosts[0].go();
+	try {
+	    Thread.sleep(10);
+	} catch (InterruptedException e) {
+	    System.out.println("InterruptedException");
+	}
+	ghosts[1].go();
+	try {
+	    Thread.sleep(10);
+	} catch (InterruptedException e) {
+	    System.out.println("InterruptedException");
+	}
+	ghosts[2].go();
+	try {
+	    Thread.sleep(10);
+	} catch (InterruptedException e) {
+	    System.out.println("InterruptedException");
+	}
+	ghosts[3].go();
+	try {
+	    Thread.sleep(10);
+	} catch (InterruptedException e) {
+	    System.out.println("InterruptedException");
 	}
 	checkTeleport();
 	checkTime();
