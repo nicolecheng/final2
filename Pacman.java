@@ -639,7 +639,7 @@ public class Pacman {
 	    System.out.println("dir:"+direction);
 	}
 	
-	public boolean atIntersection() {
+	public int atIntersection() {
 	    int moves = 0;
 	    if (board[ghostY][ghostX+1] != '=') {
 		moves++;
