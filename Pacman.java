@@ -626,15 +626,14 @@ public class Pacman {
 	public void go() {
 	    if (atIntersection() == 0) {
 		direction = move(direction);
+		System.out.println("1");
 	    }
 	    else if (atIntersection() == 1) {
-		int holddir = direction;
-		while (direction == holddir || Math.abs(holddir-direction) == 2) {
-		    direction = (int)(Math.random()*4);
-		}
-		direction = move(direction);
+		move(direction);
+		System.out.println("2");
 	    }
-	    else if (board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') {
+	    else if (atIntersection() == 2 && board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') {
+		System.out.println("3");
 		if (direction == 0) {
 		    move(1);
 		}
@@ -643,6 +642,7 @@ public class Pacman {
 		}
 	    }
 	    else if (board[ghostY-1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') {
+		System.out.println("4");
 		if (direction == 1) {
 		    move(2);
 		}
@@ -651,6 +651,7 @@ public class Pacman {
 		}
 	    }
 	    else if (board[ghostY][ghostX-1] != '=' && board[ghostY+1][ghostX] != '=') {
+		System.out.println("5");
 		if (direction == 2) {
 		    move(3);
 		}
@@ -659,6 +660,7 @@ public class Pacman {
 		}
 	    }
 	    else if (board[ghostY+1][ghostX] != '=' && board[ghostY][ghostX+1] != '=') {
+		System.out.println("6");
 		if (direction == 3) {
 		    move(0);
 		}
