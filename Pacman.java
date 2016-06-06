@@ -554,6 +554,7 @@ public class Pacman {
 			onEdible = false;
 		    }
 		    ghostX++;
+		    board[ghostY][ghostX] = 'G';
 		    return 0;
 		}
 		if (dir == 1 && ghostY > 0 && board[ghostY-1][ghostX] != '=') {
@@ -564,6 +565,7 @@ public class Pacman {
 			onEdible = false;
 		    }
 		    ghostY--;
+		    board[ghostY][ghostX] = 'G';
 		    return 1;
 		}
 		if (dir == 2 && ghostX > 0 && board[ghostY][ghostX-1] != '=') {
@@ -574,6 +576,7 @@ public class Pacman {
 			onEdible = false;
 		    }
 		    ghostX--;
+		    board[ghostY][ghostX] = 'G';
 		    return 2;
 		}
 		if (dir == 3 && ghostY < 35 && board[ghostY+1][ghostX] != '=' && board[ghostY+1][ghostX] != '-') {
@@ -584,9 +587,11 @@ public class Pacman {
 			onEdible = false;
 		    }
 		    ghostY++;
+		    board[ghostY][ghostX] = 'G';
 		    return 3;
 		}
 	    }
+	    board[ghostY][ghostX] = 'G';
 	    return dir;
 	}
 	
@@ -633,7 +638,6 @@ public class Pacman {
 		    move(3);
 		}
 	    }
-	    board[ghostY][ghostX] = 'G';
 	    System.out.println("ghostY:"+ghostY);
 	    System.out.println("ghostX:"+ghostX);
 	    System.out.println("dir:"+direction);
