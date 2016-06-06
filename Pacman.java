@@ -633,6 +633,18 @@ public class Pacman {
 	    else if (atIntersection() == 1) {
 		if (board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') {
 		    int holddir = direction;
+		    if (holddir == 0) {
+			holddir = 2;
+		    }
+		    else if (holddir == 1) {
+			holddir = 3;
+		    }
+		    else if (holddir == 2) {
+			holddir = 0;
+		    }
+		    else if (holddir == 3) {
+			holddir = 1;
+		    }
 		    while (direction == holddir || direction == 3) {
 			direction = (int)(Math.random()*4);
 		    }
@@ -640,21 +652,57 @@ public class Pacman {
 		}
 		if (board[ghostY][ghostX+1] != '=' && board[ghostY+1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') {
 		    int holddir = direction;
-		    while (direction == holddir || direction == 3) {
+		    if (holddir == 0) {
+			holddir = 2;
+		    }
+		    else if (holddir == 1) {
+			holddir = 3;
+		    }
+		    else if (holddir == 2) {
+			holddir = 0;
+		    }
+		    else if (holddir == 3) {
+			holddir = 1;
+		    }
+		    while (direction == holddir || direction == 1) {
 			direction = (int)(Math.random()*4);
 		    }
 		    direction = move(direction);
 		}
 		if (board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=' && board[ghostY+1][ghostX] != '=') {
 		    int holddir = direction;
-		    while (direction == holddir || direction == 3) {
+		    if (holddir == 0) {
+			holddir = 2;
+		    }
+		    else if (holddir == 1) {
+			holddir = 3;
+		    }
+		    else if (holddir == 2) {
+			holddir = 0;
+		    }
+		    else if (holddir == 3) {
+			holddir = 1;
+		    }
+		    while (direction == holddir || direction == 2) {
 			direction = (int)(Math.random()*4);
 		    }
 		    direction = move(direction);
 		}
 		if (board[ghostY][ghostX-1] != '=' && board[ghostY-1][ghostX] != '=' && board[ghostY+1][ghostX] != '=') {
 		    int holddir = direction;
-		    while (direction == holddir || direction == 3) {
+		    if (holddir == 0) {
+			holddir = 2;
+		    }
+		    else if (holddir == 1) {
+			holddir = 3;
+		    }
+		    else if (holddir == 2) {
+			holddir = 0;
+		    }
+		    else if (holddir == 3) {
+			holddir = 1;
+		    }
+		    while (direction == holddir || direction == 0) {
 			direction = (int)(Math.random()*4);
 		    }
 		    direction = move(direction);
