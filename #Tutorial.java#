@@ -20,7 +20,6 @@ public class Tutorial{
 	System.out.println();
 	System.out.println("OK, "+name+", let's get into this.");
 	System.out.println();
-	wait(1500);
 	System.out.println("The rules are simple: you are striving to become to the coolest of the cool.");
 	wait(2300);
 	System.out.println("What better way to do that than to dominate in every retro game?");
@@ -242,38 +241,38 @@ public class Tutorial{
 	System.out.println();
 	if(s.toLowerCase().contains("y")){
 	    System.out.println("You walk down to the pier, and you see a figure in a trench coat.");
-	    wait(3200);
+	    wait(2700);
 	    System.out.println("You approach this strange person and he flashes you a smile.");
 	    System.out.println();
-	    wait(2900);
-	    System.out.println("Why, hello, little "+name+". My name is Pierre.");
-	    wait(2800);
-	    System.out.println("Pierre on a pier. Pretty clever, aren't I?");
-	    wait(2700);
-	    System.out.println("OK sorry that was uncalled for.");
 	    wait(2600);
+	    System.out.println("Why, hello, little "+name+". My name is Pierre.");
+	    wait(2500);
+	    System.out.println("Pierre on a pier. Pretty clever, aren't I?");
+	    wait(2500);
+	    System.out.println("OK sorry that was uncalled for.");
+	    wait(2500);
 	    System.out.println("Anyway, I'm glad you decided to join me. I have the oasis you need to become to very best, like no one ever was.");
-	    wait(3700);
-	    System.out.println("To get you here was my real test, but to train you is my cause.");
 	    wait(3500);
+	    System.out.println("To get you here was my real test, but to train you is my cause.");
+	    wait(3300);
 	    System.out.println("Here's the key to my arcade. It's been closed off to the general public for years. Only people I deem worthy are allowed to access this paradise of games.");
 	    System.out.println();
-	    wait(4400);
+	    wait(4300);
 	    System.out.println("He tosses you the key for the arcade and walks away. You dare not speak to or approach him.");
 	    System.out.println();
-	    wait(3700);
+	    wait(3600);
 	    System.out.println("You go to the arcade, because you are such a brave soul. You unlock it and walk in. The place is lined with tacky neon lights and reeks of pizza and BO. Gross.");
-	    wait(4600);
+	    wait(4500);
 	    System.out.println("Nonetheless, Pierre and Mr. Igayim were right: it had every game imaginable. SCORE.");
 	    wait(3200);
 	    //}else if(s.toLowerCase().contains("n")){
 	}else{
 	    System.out.println("You don't go to the pier, but this mention of the arcade has reminded you of your immense love of those bulky machines and their monotonous beeps and tones.");
-	    wait(5000);
+	    wait(4900);
 	    System.out.println("You decide to go down the block to go to your favorite arcade: Flynn's");
-	    wait(3700);
-	    System.out.println("You walk in, and it's just how you remembered -- perfect.");
 	    wait(3200);
+	    System.out.println("You walk in, and it's just how you remembered -- perfect.");
+	    wait(2700);
 	}
 	System.out.println();
 	System.out.println("You immediately see that DinoRun, your favorite game, is not occupied. You rush over to get your hands on that beauty.");
@@ -431,11 +430,7 @@ public class Tutorial{
 	System.out.println();
 	System.out.println("Nice. You beat Tyrannicole.");
 	System.out.println();
-	wait(3000);
-	dinoName();
 	System.out.println();
-	wait(1500);
-	// cont with scene
 	System.out.println();
 	System.out.println();
     }

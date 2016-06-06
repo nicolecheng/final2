@@ -15,7 +15,7 @@ public class Snake{
     private static MyDeque<Integer>snake;
     private static int dir; // direction: 0 = up, 1 = down, 2 = left, 3 = right
     private static int score,moves;
-    static boolean done,started;
+    static boolean done;
 
     private static void debug(String s){
 	if(DEBUG){
@@ -23,9 +23,14 @@ public class Snake{
 	}
     }
 
+    private static void debug(int i){
+	if(DEBUG){
+	    System.out.println(i);
+	}
+    }
+
     public Snake(){
 	done = false;
-	//started = false;
 	x = 1;
 	y = 1;
 	length = 1;
@@ -37,11 +42,11 @@ public class Snake{
 	addObstacle();
 	dir = -1;
 	score = 0;
-	moves=0;
+	moves = 0;
     }
 
     private static void board(){ 
-	board = new char[rows][cols]; // default 10x10 board with borders
+	board = new char[rows][cols]; // default board with borders
 	for(int row = 0; row < rows; row++){
 	    for(int col = 0; col < cols; col++){
 		if(row==0 || row==rows-1 || col==0 || col==cols-1){
@@ -58,7 +63,7 @@ public class Snake{
 	int r,c;
 	r = (int)(Math.random()*(rows-2))+1;
 	c = (int)(Math.random()*(cols-1))+1;
-	if(ok(r,c)){
+	if(check(r,c)==0){
 	    board[r][c]='!';
 	}else{
 	    addObstacle();
@@ -66,8 +71,6 @@ public class Snake{
     }
 
     public static String toString(boolean a){
-	// animations
-	//debug(""+rows+" "+cols);
 	String s = "Score: "+score+"\n";
 	for(int row = 0; row < rows; row++){
 	    for(int col = 0; col < cols; col++){
@@ -90,7 +93,8 @@ public class Snake{
 	    }else if(dir==3){
 		move('r');
 	    }
-	    check();
+	}
+	if(!done){
 	    wait(100);
 	    System.out.println("\033[2J");
 	    System.out.println(toString(true));
@@ -98,66 +102,59 @@ public class Snake{
     }
 
     public static void move(int i){
-	//debug("HERE");
-	started = true;
+	//started = true;
 	if(i==0x77){
-	    //debug("MOVING UP");
 	    move('u');
 	    dir = 0;
 	}else if(i==0x73){
-	    //debug("MOVING DOWN");
 	    move('d');
 	    dir = 1;
 	}else if(i==0x61){
-	    //debug("MOVING LEFT");
 	    move('l');
 	    dir = 2;
 	}else if(i==0x64){
-	    //debug("MOVING RIGHT");
 	    move('r');
 	    dir = 3;
 	}
     }
 
     public static boolean move(char c){ // udlr - up down left right
-	//debug(""+snake.getLast());
 	int xx = 1;
 	int yy = 1;
 	if(snake.getLast()!=null){
-	    //debug("AQUI");
 	    xx = snake.getLast()%cols;
 	    yy = snake.getLast()/cols;
 	}
-	int d = dir;
-	if(c=='u' && ok(x,y-1)){
+	//int d = dir;
+	
+	if(c=='u'){
 	    y--;
 	    dir = 0;
 	    moves++;
-	}else if(c=='d' && ok(x,y+1)){
+	}else if(c=='d'){
 	    y++;
 	    dir = 1;
 	    moves++;
-	}else if(c=='l' && ok(x-1,y)){
+	}else if(c=='l'){
 	    x--;
 	    dir = 2;
 	    moves++;
-	}else if(c=='r' && ok(x+1,y)){
+	}else if(c=='r'){
 	    x++;
 	    dir = 3;
 	    moves++;
-	}else{
-	    gameOver();
-	    return false;
 	}
-	if(snake.getLast()!=null){
+	if(snake.getLast()!=null && check()==0){// 0 = ' ', 1 = '!', 2 = '#', 3 = 'S'
 	    snake.removeLast();
+	    board[yy][xx] = ' ';
 	}
-	//System.out.println(snake);
-	snake.addFirst(y*cols+x);
-	check();
-	board[y][x] = 'S';
-	//debug(""+yy+" "+xx);
-	board[yy][xx] = ' ';
+	if(!ok(y,x)&&dir>=0){
+	    System.out.println("NOT OK");
+	    gameOver();
+	}else{
+	    snake.addFirst(y*cols+x);
+	    board[y][x] = 'S';
+	}
 	if(moves==2){
             wait(10);
 	    board[1][2]=' ';
@@ -165,23 +162,61 @@ public class Snake{
 	}
         return true;
     }
-
+    
     private static boolean ok(int y, int x){
-	//debug(""+board[y][x]);
-	//debug(""+moves);
-	return (board[y][x]!='#' && board[y][x]!='S');
-    }
-
-    private static void check(){ // checks for hitting the wall / obstacles
-	if((board[y][x]=='#')){// || board[y][x]=='S') && moves>0){
-	    gameOver();
-	}else if(board[y][x]=='!'){	    // found obstacle thing
-	    score++;
-	    addObstacle();
+	if(board[y][x]=='#'){
+	    return false;
+	}else if(board[y][x]=='S' && dir >= 0){
+	    return false;
+	}else{
+	    return true;
 	}
     }
 
+    private static int check(){ // checks for hitting the wall / obstacles
+	if((board[y][x]=='#')){
+	    debug("POUND");
+	    gameOver();
+	    return 2;
+	}else if(board[y][x]=='!'){	    // found obstacle thing
+	    score++;
+	    addObstacle();
+	    return 1;
+	}else if(board[y][x]=='S' && dir >= 0){
+	    debug("S CHECK");
+	    gameOver();
+	    return 3;
+	}else if(board[y][x]==' '){
+	    return 0;
+	}
+	return -1;
+	// 0 = ' ', 1 = '!', 2 = '#', 3 = 'S'
+    }
+
+    private static int check(int y, int x){ // checks for hitting the wall / obstacles
+	if((board[y][x]=='#')){
+	    debug("POUND TWO");
+	    gameOver();
+	    return 2;
+	}else if(board[y][x]=='!'){	   
+	    score++;
+	    addObstacle();
+	    return 1;
+	}else if(board[y][x]=='S' && dir >= 0){
+	    debug("S CHECK TWO");
+	    gameOver();
+	    return 3;
+	}else if(board[y][x]==' '){
+	    return 0;
+	}
+	return -1;
+	// 0 = ' ', 1 = '!', 2 = '#', 3 = 'S'
+    }
+
     private static void gameOver(){
+	System.out.println("x,y"+x+"   "+y);
+	System.out.println("coord val"+board[y][x]);
+	System.out.println("dir= "+dir);
         System.out.println("\033[2J");
 	//board = null;
 	System.out.println("GAME OVER.");
@@ -276,7 +311,7 @@ public class Snake{
 		System.out.println("Exception restoring tty config");
 	    }
 	}
-    return score;
+	return score;
     }
     
 }

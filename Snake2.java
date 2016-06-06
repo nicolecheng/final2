@@ -94,8 +94,11 @@ public class Snake{
 	    }else if(dir==3){
 		move('r');
 	    }
+<<<<<<< HEAD
 	}
 	if(!done){
+=======
+>>>>>>> d799846393b50598868b3b9fac043b2fd3b26f09
 	    wait(100);
 	    System.out.println("\033[2J");
 	    System.out.println(toString(true));
@@ -194,8 +197,14 @@ public class Snake{
 	// 0 = ' ', 1 = '!', 2 = '#', 3 = 'S'
     }
 
+<<<<<<< HEAD
     private static int check(int x, int y){ // checks for hitting the wall / obstacles
+	if(board[y][x]=='#'){
+	    System.out.println("x,y: "+x+", "+y);
+=======
+    private static int check(int y, int x){ // checks for hitting the wall / obstacles
 	if((board[y][x]=='#')){
+>>>>>>> d799846393b50598868b3b9fac043b2fd3b26f09
 	    debug("POUND TWO");
 	    gameOver();
 	    return 2;
