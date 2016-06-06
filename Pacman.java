@@ -668,6 +668,9 @@ public class Pacman {
 		    move(3);
 		}
 	    }
+	    System.out.println("dir:"+direction);
+	    System.out.println("x:"+ghostX);
+	    System.out.println("y:"+ghostY);
 	}
 	
 	public int atIntersection() {
