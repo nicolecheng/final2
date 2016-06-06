@@ -156,6 +156,10 @@ public class Pacman {
 		board[r][c] = '*';
 	    }
 	}
+	board[6][2] = 'o';
+	board[6][26] = 'o';
+	board[28][2] = 'o';
+	board[28][26] = 'o';
 	//clear areas that shouldn't have *s
 	for (int r = 0; r < 3; r++) {
 	    for (int c = 0; c < 28; c++) {
@@ -393,6 +397,14 @@ public class Pacman {
 	    pacX = 0;
 	    board[pacY][pacX] = '<';
 	}
+	for (Ghost g : ghosts) {
+	    if (g.getX() == 0 && g.getY() == 17 && g.getDirection() == 2) {
+	        g.setDirection(0);
+	    }
+	    if (g.getX() == 27 && g.getY() == 17 && g.getDirection() == 0) {
+		g.setDirection(2);
+	    }
+	}
     }
     public void checkTime() {		
 	ghosts[0].setFreedom(true);
@@ -524,7 +536,11 @@ public class Pacman {
                 if (board[r][c] == '=') {
 		    ret += color(30,47)+String.valueOf(board[r][c]) + " " +color(30,47);
 		} else if (board[r][c] == '<' || board[r][c] == 'v' || board[r][c] == '>' || board[r][c] == '^') {
-		    ret += color(33,40)+String.valueOf(board[r][c]) + " "+color(30,47);
+		    if (r < 34) {
+			ret += color(33,40)+String.valueOf(board[r][c]) + " "+color(30,47);
+		    } else {
+			ret += String.valueOf(board[r][c]);
+		    }
 		} else {
 		    ret += color(37,44)+String.valueOf(board[r][c]) + " "+color(30,47);
 		}
@@ -562,6 +578,9 @@ public class Pacman {
 	}
 	public void setDirection(int direction) {
 	    this.direction = direction;
+	}
+	public int getDirection() {
+	    return direction;
 	}
 	
 	public int getX() {
