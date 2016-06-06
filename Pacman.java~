@@ -24,32 +24,19 @@ public class Pacman {
     public Pacman() {
 	score = 0;
 	lives = 3;
-	pacX = 13;
-	pacY = 26;
-	timer = 0;
-	direction = 0;
-	red = new Ghost(14,14);
-	blue = new Ghost(12,17);
-	pink = new Ghost(14,17);
-	orange = new Ghost(16,17);
-	ghosts = new Ghost[4];
-	ghosts[0] = red;
-	ghosts[1] = blue;
-	ghosts[2] = pink;
-	ghosts[3] = orange;
-	superPac = false;
 	//board setup
 	board = new char[36][28];
 	setup();
     }
 
-    public void play(long time) {
+    public boolean play() {
 	System.out.println("\033[2J");
 	System.out.println(this);
-	updateScore();
-	updateLives();
+	for (Ghost g : ghosts) {
+	    g.go();
+	}
 	checkTeleport();
-	checkTime(time);
+	checkTime();
 	try {
 	    Thread.sleep(1000);
 	} catch (InterruptedException e) {
@@ -58,7 +45,9 @@ public class Pacman {
 	try {
 	    if (System.in.available() != 0) {
 		int key = System.in.read();
-		direction = move(getDir(key));
+		if (Math.abs(getDir(key)-direction) != 2) {
+		    direction = move(getDir(key));
+		}
 	    }
 	    else {
 		move(direction);
@@ -66,12 +55,17 @@ public class Pacman {
 	} catch (IOException e) {
 	    System.out.println("IOException");
 	}
+	timer++;
+	updateScore();
+        updateLives();
+        return checkGameOver();
     }
 
     public void updateScore() {
         board[2][14] = Character.forDigit(score/10,10);
 	board[2][15] = Character.forDigit(score%10,10);
     }
+    
     public void updateLives() {
         for (Ghost g : ghosts) {
 	    if (g.getX() == pacX && g.getY() == pacY) {
@@ -79,6 +73,7 @@ public class Pacman {
 	    }
 	}
     }
+    
     public void die() {
 	try {
 	    Thread.sleep(3000);
@@ -100,9 +95,25 @@ public class Pacman {
 	catch (InterruptedException e) {
 	    System.out.println("InterruptedException");
 	}
+	lives--;
 	setup();
     }
+    
     public void setup() {
+	pacX = 13;
+	pacY = 26;
+	timer = 0;
+	direction = 0;
+	superPac = false;
+	red = new Ghost(14,14);
+	blue = new Ghost(12,17);
+	pink = new Ghost(14,17);
+	orange = new Ghost(16,17);
+	ghosts = new Ghost[4];
+	ghosts[0] = red;
+	ghosts[1] = blue;
+	ghosts[2] = pink;
+	ghosts[3] = orange;
 	for (int r = 0; r < 36; r++) {
 	    for (int c = 0; c < 28; c++) {
 		board[r][c] = '*';
@@ -181,9 +192,17 @@ public class Pacman {
 	    board[35][10] = '<';
 	    board[35][11] = '3';
 	}
+	else {
+	    board[35][10] = ' ';
+	    board[35][11] = ' ';
+	}
 	if (lives == 3) {
 	    board[35][13] = '<';
 	    board[35][14] = '3';
+	}
+	else {
+	    board[35][13] = ' ';
+	    board[35][14] = ' ';
 	}
 	//outsides
 	for (int c = 0; c < 28; c++) {
@@ -263,8 +282,8 @@ public class Pacman {
 	    board[15][c] = '=';
 	    board[19][c] = '=';
 	}
-	board[15][13] = '-';
-	board[15][14] = '-';
+	board[15][13] = '=';
+	board[15][14] = '=';
 	for (int r = 18; r < 23; r++) {
 	    board[r][7] = '=';
 	    board[r][8] = '=';
@@ -308,10 +327,12 @@ public class Pacman {
 	    }
 	}
     }
-    public void checkGameOver() {
+    public boolean checkGameOver() { //true if player can continue playing, false otherwise
 	if (lives == 0) {
 	    gameOver();
+	    return false;
 	}
+	return true;
     }
     public void gameOver() {
         System.out.println("\033[2J");
@@ -336,14 +357,27 @@ public class Pacman {
 	    board[pacY][pacX] = '<';
 	}
     }
-    public void checkTime(long time) {
-	if (System.currentTimeMillis()-time > 5000) {
+    public void checkTime() {		
+	ghosts[0].setFreedom(true);
+	if (timer > 5) {
 	    board[20][11] = ' ';
 	    board[20][12] = ' ';
 	    board[20][13] = ' ';
 	    board[20][14] = ' ';
 	    board[20][15] = ' ';
 	    board[20][16] = ' ';
+	}
+	if (timer > 10) {
+	    ghosts[1].setFreedom(true);
+	    ghosts[1].setYX(14,14);
+	}
+	if (timer > 20) {
+	    ghosts[2].setFreedom(true);
+	    ghosts[2].setYX(14,14);
+	}
+	if (timer > 30) {
+	    ghosts[3].setFreedom(true);
+	    ghosts[3].setYX(14,14);
 	}
     }
     public int move(int dir) {
@@ -374,7 +408,7 @@ public class Pacman {
 	    board[pacY][pacX] = '>';
 	    return 2;
 	}
-	else if (dir == 3 && pacY < 35 && board[pacY+1][pacX] != '=') {
+	else if (dir == 3 && pacY < 35 && board[pacY+1][pacX] != '=' && board[pacY+1][pacX] != '-') {
 	    board[pacY][pacX] = ' ';
 	    pacY++;
 	    if (board[pacY][pacX] == '*') {
@@ -465,13 +499,18 @@ public class Pacman {
 	private int ghostY;
 	private int direction; //house: 0, up: 1, right: 2, down: 3, left: 4
 	private boolean freedom;
+	private boolean onEdible;
 	private int movementMode; //scatter: 0, chase: 1, frightened: 2
 
 	public Ghost(int ghostX, int ghostY) {
 	    this.ghostX = ghostX;
 	    this.ghostY = ghostY;
-	    direction = 0;
+	    direction = (int)(Math.random()*2);
+	    if (direction == 1) {
+		direction = 2;
+	    }
 	    freedom = false;
+	    onEdible = false;
 	    movementMode = 0;
 	}
 
@@ -484,45 +523,147 @@ public class Pacman {
 	public void setDirection(int direction) {
 	    this.direction = direction;
 	}
+	
 	public int getX() {
 	    return ghostX;
 	}
+	
 	public int getY() {
 	    return ghostY;
 	}
+
+	public void setYX(int y, int x) {
+	    board[ghostY][ghostX] = ' ';
+	    ghostY = y;
+	    ghostX = x;
+	}
 	
-	public void move() {
-	    if (direction == 1) {
-		ghostY--;
+	public int move(int dir) {
+	    if (freedom) {
+		if (onEdible) {
+		    board[ghostY][ghostX] = '*';
+		}
+		else {
+		    board[ghostY][ghostX] = ' ';
+		}
+		if (dir == 0 && ghostX < 27 && board[ghostY][ghostX+1] != '=') {
+		    if (board[ghostY][ghostX+1] == '*') {
+			onEdible = true;
+		    }
+		    else {
+			onEdible = false;
+		    }
+		    ghostX++;
+		    return 0;
+		}
+		if (dir == 1 && ghostY > 0 && board[ghostY-1][ghostX] != '=') {
+		    if (board[ghostY-1][ghostX] == '*') {
+			onEdible = true;
+		    }
+		    else {
+			onEdible = false;
+		    }
+		    ghostY--;
+		    return 1;
+		}
+		if (dir == 2 && ghostX > 0 && board[ghostY][ghostX-1] != '=') {
+		    if (board[ghostY][ghostX-1] == '*') {
+			onEdible = true;
+		    }
+		    else {
+			onEdible = false;
+		    }
+		    ghostX--;
+		    return 2;
+		}
+		if (dir == 3 && ghostY < 35 && board[ghostY+1][ghostX] != '=' && board[ghostY+1][ghostX] != '-') {
+		    if (board[ghostY+1][ghostX] == '*') {
+			onEdible = true;
+		    }
+		    else {
+			onEdible = false;
+		    }
+		    ghostY++;
+		    return 3;
+		}
 	    }
-	    if (direction == 2) {
-		ghostX++;
+	    return dir;
+	}
+	
+	public void go() {
+	    if (!atIntersection()) {
+		direction = move(direction);
 	    }
-	    if (direction == 3) {
-		ghostY++;
+	    else if (board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') {
+		if (direction == 0) {
+		    move(1);
+		}
+		if (direction == 1) {
+		    move(0);
+		}
 	    }
-	    if (direction == 4) {
-		ghostX--;
+	    else if (board[ghostY-1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') {
+		if (direction == 1) {
+		    move(2);
+		}
+		if (direction == 2) {
+		    move(1);
+		}
 	    }
+	    else if (board[ghostY][ghostX-1] != '=' && board[ghostY+1][ghostX] != '=') {
+		if (direction == 2) {
+		    move(3);
+		}
+		if (direction == 3) {
+		    move(2);
+		}
+	    }
+	    else if (board[ghostY+1][ghostX] != '=' && board[ghostY][ghostX+1] != '=') {
+		if (direction == 3) {
+		    move(0);
+		}
+		if (direction == 0) {
+		    move(3);
+		}
+	    }
+	    else {
+		int holddir = direction;
+		while (direction == holddir) {
+		    direction = (int)(Math.random()*4);
+		}
+		direction = move(direction);
+	    }
+	    board[ghostY][ghostX] = 'G';
+	}
+	
+	public boolean atIntersection() {
+	    int moves = 0;
+	    if (board[ghostY][ghostX+1] != '=') {
+		moves++;
+	    }
+	    if (board[ghostY][ghostX-1] != '=') {
+		moves++;
+	    }
+	    if (board[ghostY+1][ghostX] != '=' && board[ghostY+1][ghostX] != '-') {
+		moves++;
+	    }
+	    if (board[ghostY-1][ghostX] != '=') {
+		moves++;
+	    }
+	    if (moves >= 3) {
+		return true;
+	    }
+	    return false;
 	}
     }
     
     public int pacman() {
 	try {
-	    long time = System.currentTimeMillis();
 	    setTerminalToCBreak();
-	    while (System.currentTimeMillis() - time < 40000) {
-		play(time);
-		try {
-		    Thread.sleep(100);
+	    while (true) {
+		if (!play()) {
+		    return score;
 		}
-		catch (InterruptedException e) {
-		}
-	    }
-	    if (score > 2) {
-		return score-2;
-	    } else {
-		return score;
 	    }
 	} catch (IOException e) {
 	    System.out.println("IOException");
