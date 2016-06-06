@@ -32,25 +32,25 @@ public class Pacman {
     public boolean play() {
 	System.out.println("\033[2J");
 	System.out.println(this);
-        ghosts[0].go();
+        red.go();
 	try {
 	    Thread.sleep(10);
 	} catch (InterruptedException e) {
 	    System.out.println("InterruptedException");
 	}
-	ghosts[1].go();
+	blue.go();
 	try {
 	    Thread.sleep(10);
 	} catch (InterruptedException e) {
 	    System.out.println("InterruptedException");
 	}
-	ghosts[2].go();
+	pink.go();
 	try {
 	    Thread.sleep(10);
 	} catch (InterruptedException e) {
 	    System.out.println("InterruptedException");
 	}
-	ghosts[3].go();
+	orange.go();
 	try {
 	    Thread.sleep(10);
 	} catch (InterruptedException e) {
@@ -661,7 +661,7 @@ public class Pacman {
 		}
 	    }
 	    else if (atIntersection() == 2) {
-		if (board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') {
+		if (board[ghostY][ghostX-1] != '=' && board[ghostY+1][ghostX] != '=') {
 		    if (direction == 0) {
 			direction = move(1);
 		    }
@@ -669,7 +669,7 @@ public class Pacman {
 			direction = move(0);
 		    }
 		}
-		if (board[ghostY-1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') {
+		if (board[ghostY+1][ghostX] != '=' && board[ghostY][ghostX+1] != '=') {
 		    if (direction == 1) {
 			direction = move(2);
 		    }
@@ -677,7 +677,7 @@ public class Pacman {
 			direction = move(1);
 		    }
 		}
-		if (board[ghostY][ghostX-1] != '=' && board[ghostY+1][ghostX] != '=') {
+		if (board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') {
 		    if (direction == 2) {
 			direction = move(3);
 		    }
@@ -685,7 +685,7 @@ public class Pacman {
 			direction = move(2);
 		    }
 		}
-		if (board[ghostY+1][ghostX] != '=' && board[ghostY][ghostX+1] != '=') {
+		if (board[ghostY-1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') {
 		    if (direction == 3) {
 			direction = move(0);
 		    }
