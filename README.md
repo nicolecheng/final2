@@ -100,6 +100,9 @@ Development Log <br><ul>
      <li>
      	06/05/16: Nicole - added interactions with the dog -- eat, sleep and play; Doggie.java done; Tutorial.java almost done (just needs to integrate Pong and Pacman)
      </li>
+     <li>
+     	06/06/16: Nicole - debugged Snake completely i think!
+     </li>
  </ul><br><br>
 
  Project plan/outline including your goals prioritized by importance and chronology <br>
