@@ -653,13 +653,10 @@ public class Pacman {
 		    else if (holddir == 3) {
 			holddir = 1;
 		    }
+		    direction = (int)(Math.random()*4);
 		    while (direction == holddir || direction == 3) {
 			direction = (int)(Math.random()*4);
-			System.out.println(direction);
 		    }
-		    System.out.println(holddir);
-		    System.out.println(direction);
-		    direction = 1;
 		    direction = move(direction);
 		}
 		if (board[ghostY][ghostX+1] != '=' && board[ghostY+1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') {
@@ -676,6 +673,7 @@ public class Pacman {
 		    else if (holddir == 3) {
 			holddir = 1;
 		    }
+		    direction = (int)(Math.random()*4);
 		    while (direction == holddir || direction == 1) {
 			direction = (int)(Math.random()*4);
 		    }
@@ -695,6 +693,7 @@ public class Pacman {
 		    else if (holddir == 3) {
 			holddir = 1;
 		    }
+		    direction = (int)(Math.random()*4);
 		    while (direction == holddir || direction == 2) {
 			direction = (int)(Math.random()*4);
 		    }
@@ -714,6 +713,7 @@ public class Pacman {
 		    else if (holddir == 3) {
 			holddir = 1;
 		    }
+		    direction = (int)(Math.random()*4);
 		    while (direction == holddir || direction == 0) {
 			direction = (int)(Math.random()*4);
 		    }
