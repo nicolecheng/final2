@@ -236,7 +236,8 @@ public class Pacman {
 	board[0][13] = 'O';
 	board[0][14] = 'R';
 	board[0][15] = 'E';
-	board[2][14] = Character.forDigit(score/10,10);
+	board[2][13] = Character.forDigit(score/100,10);
+	board[2][14] = Character.forDigit((score/10)%10,10);
 	board[2][15] = Character.forDigit(score%10,10);
 	board[20][11] = 'R';
 	board[20][12] = 'E';
