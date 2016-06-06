@@ -404,17 +404,17 @@ public class Pacman {
 	    board[20][15] = ' ';
 	    board[20][16] = ' ';
 	}
-	if (timer > 10) {
+	if (timer == 10) {
 	    ghosts[1].setFreedom(true);
 	    ghosts[1].setDirection((int)(Math.random()*2)*2);
 	    ghosts[1].setYX(14,14);
 	}
-	if (timer > 20) {
+	if (timer == 20) {
 	    ghosts[2].setFreedom(true);
 	    ghosts[2].setDirection((int)(Math.random()*2)*2);
 	    ghosts[2].setYX(14,14);
 	}
-	if (timer > 30) {
+	if (timer == 30) {
 	    ghosts[3].setFreedom(true);
 	    ghosts[3].setDirection((int)(Math.random()*2)*2);
 	    ghosts[3].setYX(14,14);
@@ -593,7 +593,6 @@ public class Pacman {
 		    else { //and here
 			onEdible = false;
 		    }
-		    System.out.println("here1");
 		    ghostX++;
 		    return 0;
 		}
@@ -614,7 +613,6 @@ public class Pacman {
 		    else { //and here
 			onEdible = false;
 		    }
-		    System.out.println("here3");
 		    ghostX--;
 		    return 2;
 		}
