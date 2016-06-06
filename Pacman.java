@@ -13,6 +13,7 @@ public class Pacman {
     private int pacY;
     private int timer;
     private int direction;
+    private int speed;
     private int[][] regCoords;
     private char[][] board;
     private Ghost[] ghosts;
@@ -25,6 +26,7 @@ public class Pacman {
     public Pacman() {
 	score = 0;
 	lives = 3;
+	speed = 1000;
 	//board setup
 	board = new char[36][28];
 	setup();
@@ -74,7 +76,7 @@ public class Pacman {
 	checkTeleport();
 	updateGhosts();
 	checkTime();
-        return checkGameOver();
+        return !(checkGameOver() || checkLevelComplete());
     }
 
     public void updateScore() {
@@ -372,6 +374,7 @@ public class Pacman {
 	    }
 	}
     }
+    
     public boolean checkGameOver() { //true if player can continue playing, false otherwise
 	if (lives == 0) {
 	    gameOver();
@@ -379,6 +382,7 @@ public class Pacman {
 	}
 	return true;
     }
+    
     public void gameOver() {
         System.out.println("\033[2J");
 	for (int i = 0; i < 18; i++) {
@@ -390,6 +394,7 @@ public class Pacman {
 	    System.out.println();
 	}
     }
+    
     public void checkTeleport() {
 	if (pacX == 0 && pacY == 17 && direction == 2) {
 	    board[pacY][pacX] = ' ';
@@ -410,6 +415,7 @@ public class Pacman {
 	    }
 	}
     }
+    
     public void checkTime() {		
 	ghosts[0].setFreedom(true);
 	if (timer == 5) {
@@ -436,6 +442,30 @@ public class Pacman {
 	    ghosts[3].setYX(14,14);
 	}
     }
+
+    public boolean checkLevelComplete() {
+	if (score % 245 == 0 && timer != 0) {
+	    speed -= 200;
+	    if (speed == 0) {
+		gameOver2();
+		return false;
+	    }
+	}
+	return true;
+    }
+
+     public void gameOver2() {
+        System.out.println("\033[2J");
+	for (int i = 0; i < 18; i++) {
+	    System.out.println();
+	}
+	System.out.println("YOU WIN!");
+	System.out.println("SCORE: "+score);
+	for (int i = 20; i < 36; i++) {
+	    System.out.println();
+	}
+    }
+    
     public int move(int dir) {
 	if (dir == 0 && pacX < 27 && board[pacY][pacX+1] != '=') {
 	    board[pacY][pacX] = ' ';
