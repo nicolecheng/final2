@@ -579,18 +579,18 @@ public class Pacman {
 	}
 	
 	public int move(int dir) {
-	    if (freedom) { //yep
+	    if (freedom) {
 		if (onEdible) {
 		    board[ghostY][ghostX] = '*';
 		}
-		else { //yep
+		else {
 		    board[ghostY][ghostX] = ' ';
 		}
-		if (dir == 0 && ghostX < 27 && board[ghostY][ghostX+1] != '=') {//either here
+		if (dir == 0 && ghostX < 27 && board[ghostY][ghostX+1] != '=') (
 		    if (board[ghostY][ghostX+1] == '*') {
 			onEdible = true;
 		    }
-		    else { //and here
+		    else {
 			onEdible = false;
 		    }
 		    ghostX++;
@@ -606,11 +606,11 @@ public class Pacman {
 		    ghostY--;
 		    return 1;
 		}
-		if (dir == 2 && ghostX > 0 && board[ghostY][ghostX-1] != '=') {//or here
+		if (dir == 2 && ghostX > 0 && board[ghostY][ghostX-1] != '=') {
 		    if (board[ghostY][ghostX-1] == '*') {
 			onEdible = true;
 		    }
-		    else { //and here
+		    else {
 			onEdible = false;
 		    }
 		    ghostX--;
@@ -639,6 +639,7 @@ public class Pacman {
 		direction = move(direction);
 	    }
 	    else if (atIntersection() == 1) {
+		System.out.println("here");
 		if (board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') {
 		    int holddir = direction;
 		    if (holddir == 0) {
@@ -750,7 +751,7 @@ public class Pacman {
 		    }
 		}
 	    }
-	    else { //they're all getting stuck here
+	    else {
 		direction = move(direction);
 	    }
 	    System.out.println("dir:"+direction);
