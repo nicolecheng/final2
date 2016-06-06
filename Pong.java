@@ -269,7 +269,7 @@ public class Pong {
 	    if (System.in.available() != 0) {
 		int key = System.in.read();
 		move(key);
-		fixPos();
+		//fixPos();
 	    }
 	    reset();
 	    board[3][3] = Character.forDigit(score1,10);
