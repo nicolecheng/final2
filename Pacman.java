@@ -37,6 +37,7 @@ public class Pacman {
 	}
 	checkTeleport();
 	checkTime();
+	updateGhosts();
 	try {
 	    Thread.sleep(1000);
 	} catch (InterruptedException e) {
@@ -71,6 +72,12 @@ public class Pacman {
 	    if (g.getX() == pacX && g.getY() == pacY) {
 		die();
 	    }
+	}
+    }
+
+    public void updateGhosts() {
+	for (Ghost g : ghosts) {
+	    board[g.getY()][g.getX()] = 'G';
 	}
     }
     
