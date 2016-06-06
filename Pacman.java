@@ -12,8 +12,8 @@ public class Pacman {
     private int pacX;
     private int pacY;
     private int timer;
-    private int counts;
     private int direction;
+    private int[][] regCoords;
     private char[][] board;
     private Ghost[] ghosts;
     private Ghost red;
@@ -28,11 +28,15 @@ public class Pacman {
 	//board setup
 	board = new char[36][28];
 	setup();
-        counts = 0;
+	//245 to start
+	int[][] regCoords = new int[245][2];
+	int pos = 0;
 	for (int r = 0; r < board.length; r++) {
 	    for (int c = 0; c < board[0].length; c++) {
 		if (board[r][c] == '*') {
-		    counts++;
+		    regCoords[pos][0] = r;
+		    regCoords[pos][1] = c;
+		    pos++;
 		}
 	    }
 	}
@@ -41,7 +45,6 @@ public class Pacman {
     public boolean play() {
 	System.out.println("\033[2J");
 	System.out.println(this);
-	System.out.println(counts);
         red.go();
 	blue.go();
 	pink.go();
@@ -123,17 +126,19 @@ public class Pacman {
 		}
 	    }
 	}
-	int[][] coords = new int[countStars][2];
+	int[][] coords = new int[245-countStars][2];
 	int pos = 0;
-	for (int r = 0; r < board.length; r++) {
-	    for (int c = 0; c < board[0].length; c++) {
-		if (board[r][c] == '*') {
-		    coords[pos][0] = r;
-		    coords[pos][1] = c;
-		}
+	for (int i = 0; i < 245; i++) {
+	    if (board[regCoords[i][0]][regCoords[i][1]) != '*') {
+		coords[pos][0] = regCoords[i][0];
+		coords[pos][1] = regCoords[i][1];
+		pos++;
 	    }
 	}
 	setup();
+	for (int i = 0; i < coords.length; i++) {
+	    board[coords[i][0]][coords[i][1]] = ' ';
+	}
     }
     
     public void setup() {
