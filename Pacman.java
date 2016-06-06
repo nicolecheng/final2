@@ -81,7 +81,13 @@ public class Pacman {
 	checkTeleport();
 	updateGhosts();
 	checkTime();
-        return !(checkGameOver() || checkLevelComplete());
+        if (checkGameOver()) {
+	    return false;
+	}
+	else if (checkLevelComplete()) {
+	    return false;
+	}
+	return true;
     }
 
     public void updateScore() {
