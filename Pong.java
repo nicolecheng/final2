@@ -129,12 +129,13 @@ public class Pong {
 
     public void move(int key) {
         if (key == 0x77 && pos1 > 0) {
-	    System.out.println(pos1);
             board[pos1][0] = '#';
 	    if (inBounds(pos1+3,board) && pos1+3 != 14) {
 		board[pos1+3][0] = ' ';
 	    }
+	    System.out.println(pos1);
             pos1--;
+	    System.out.println(pos1);
         }
         if (key == 0x73 && pos1 < board.length-4) {
 	    if (pos1 != 0) {
