@@ -97,9 +97,10 @@ public class Pacman {
     }
 
     public void updateGhosts() {
-	for (Ghost g : ghosts) {
-	    board[g.getY()][g.getX()] = 'G';
-	}
+        board[red.getY()][red.getX()] = 'R';
+	board[blue.getY()][blue.getX()] = 'B';
+	board[pink.getY()][pink.getX()] = 'P';
+	board[orange.getY()][orange.getX()] = 'O';
     }
     
     public void die() {
