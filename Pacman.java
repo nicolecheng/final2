@@ -586,7 +586,6 @@ public class Pacman {
 			onEdible = false;
 		    }
 		    ghostX++;
-		    board[ghostY][ghostX] = 'G';
 		    return 0;
 		}
 		if (dir == 1 && ghostY > 0 && board[ghostY-1][ghostX] != '=') {
@@ -597,7 +596,6 @@ public class Pacman {
 			onEdible = false;
 		    }
 		    ghostY--;
-		    board[ghostY][ghostX] = 'G';
 		    return 1;
 		}
 		if (dir == 2 && ghostX > 0 && board[ghostY][ghostX-1] != '=') {
@@ -608,7 +606,6 @@ public class Pacman {
 			onEdible = false;
 		    }
 		    ghostX--;
-		    board[ghostY][ghostX] = 'G';
 		    return 2;
 		}
 		if (dir == 3 && ghostY < 35 && board[ghostY+1][ghostX] != '=' && board[ghostY+1][ghostX] != '-') {
@@ -619,56 +616,86 @@ public class Pacman {
 			onEdible = false;
 		    }
 		    ghostY++;
-		    board[ghostY][ghostX] = 'G';
 		    return 3;
 		}
 	    }
-	    board[ghostY][ghostX] = 'G';
 	    return dir;
 	}
 	
 	public void go() {
 	    if (atIntersection() == 0) {
-		direction = move(direction);
-	    }
-	    else if (atIntersection() == 1) {
-		int holddir = direction;
+	        int holddir = direction;
 		while (direction == holddir || Math.abs(holddir-direction) == 2) {
 		    direction = (int)(Math.random()*4);
 		}
-		direction = move(direction);move(direction);
+		direction = move(direction);
 	    }
-	    else if (atIntersection() == 2 && board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') {
-		if (direction == 0) {
-		    direction = move(1);
+	    else if (atIntersection() == 1) {
+		if (board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') {
+		    int holddir = direction;
+		    while (direction == holddir || direction == 3) {
+			direction = (int)(Math.random()*4);
+		    }
+		    direction = move(direction);
 		}
-		if (direction == 1) {
-		    direction = move(0);
+		if (board[ghostY][ghostX+1] != '=' && board[ghostY+1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') {
+		    int holddir = direction;
+		    while (direction == holddir || direction == 3) {
+			direction = (int)(Math.random()*4);
+		    }
+		    direction = move(direction);
+		}
+		if (board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=' && board[ghostY+1][ghostX] != '=') {
+		    int holddir = direction;
+		    while (direction == holddir || direction == 3) {
+			direction = (int)(Math.random()*4);
+		    }
+		    direction = move(direction);
+		}
+		if (board[ghostY][ghostX-1] != '=' && board[ghostY-1][ghostX] != '=' && board[ghostY+1][ghostX] != '=') {
+		    int holddir = direction;
+		    while (direction == holddir || direction == 3) {
+			direction = (int)(Math.random()*4);
+		    }
+		    direction = move(direction);
 		}
 	    }
-	    else if (board[ghostY-1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') {
-		if (direction == 1) {
-		    direction = move(2);
+	    else if (atIntersection() == 2) {
+		if (board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') {
+		    if (direction == 0) {
+			direction = move(1);
+		    }
+		    if (direction == 1) {
+			direction = move(0);
+		    }
 		}
-		if (direction == 2) {
-		    direction = move(1);
+		if (board[ghostY-1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') {
+		    if (direction == 1) {
+			direction = move(2);
+		    }
+		    if (direction == 2) {
+			direction = move(1);
+		    }
+		}
+		if (board[ghostY][ghostX-1] != '=' && board[ghostY+1][ghostX] != '=') {
+		    if (direction == 2) {
+			direction = move(3);
+		    }
+		    if (direction == 3) {
+			direction = move(2);
+		    }
+		}
+		if (board[ghostY+1][ghostX] != '=' && board[ghostY][ghostX+1] != '=') {
+		    if (direction == 3) {
+			direction = move(0);
+		    }
+		    if (direction == 0) {
+			direction = move(3);
+		    }
 		}
 	    }
-	    else if (board[ghostY][ghostX-1] != '=' && board[ghostY+1][ghostX] != '=') {
-		if (direction == 2) {
-		    direction = move(3);
-		}
-		if (direction == 3) {
-		    direction = move(2);
-		}
-	    }
-	    else if (board[ghostY+1][ghostX] != '=' && board[ghostY][ghostX+1] != '=') {
-		if (direction == 3) {
-		    direction = move(0);
-		}
-		if (direction == 0) {
-		    direction = move(3);
-		}
+	    else {
+		direction = move(direction);
 	    }
 	    
 	    System.out.println("dir:"+direction);
@@ -676,27 +703,25 @@ public class Pacman {
 	    System.out.println("y:"+ghostY);
 	}
 	
-	public int atIntersection() { //0 = complete intersection, 1 = elbow, 2 = straightaway
-	    int moves = 0;
-	    if (board[ghostY][ghostX+1] != '=') {
-		moves++;
-	    }
-	    if (board[ghostY][ghostX-1] != '=') {
-		moves++;
-	    }
-	    if (board[ghostY+1][ghostX] != '=' && board[ghostY+1][ghostX] != '-') {
-		moves++;
-	    }
-	    if (board[ghostY-1][ghostX] != '=') {
-		moves++;
-	    }
-	    if (moves >= 3) {
+	public int atIntersection() { //0 = complete intersection, 1 = 3 choices, 2 = elbow, 3 = straightaway
+	    if (board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=' && board[ghostY][ghostX-1] != '=' && board[ghostY+1][ghostX] != '=') {
 		return 0;
 	    }
-	    if (moves == 2) {
+	    else if ((board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') ||
+		     (board[ghostY][ghostX+1] != '=' && board[ghostY+1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') || 
+		     (board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=' && board[ghostY+1][ghostX] != '=') || 
+		     (board[ghostY][ghostX-1] != '=' && board[ghostY-1][ghostX] != '=' && board[ghostY+1][ghostX] != '=')) {
 		return 1;
 	    }
-	    return 2;
+	    else if ((board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') ||
+		     (board[ghostY-1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') ||
+		     (board[ghostY][ghostX-1] != '=' && board[ghostY+1][ghostX] != '=') ||
+		     (board[ghostY+1][ghostX] != '=' && board[ghostY][ghostX+1] != '=')) {
+		return 2;
+	    }
+	    else {
+		return 3;
+	    }
 	}
     }
     
