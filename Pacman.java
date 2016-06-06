@@ -396,7 +396,7 @@ public class Pacman {
     }
     public void checkTime() {		
 	ghosts[0].setFreedom(true);
-	if (timer > 5) {
+	if (timer == 5) {
 	    board[20][11] = ' ';
 	    board[20][12] = ' ';
 	    board[20][13] = ' ';
