@@ -636,34 +636,34 @@ public class Pacman {
 	    }
 	    else if (atIntersection() == 2 && board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') {
 		if (direction == 0) {
-		    move(1);
+		    direction = move(1);
 		}
 		if (direction == 1) {
-		    move(0);
+		    direction = move(0);
 		}
 	    }
 	    else if (board[ghostY-1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') {
 		if (direction == 1) {
-		    move(2);
+		    direction = move(2);
 		}
 		if (direction == 2) {
-		    move(1);
+		    direction = move(1);
 		}
 	    }
 	    else if (board[ghostY][ghostX-1] != '=' && board[ghostY+1][ghostX] != '=') {
 		if (direction == 2) {
-		    move(3);
+		    direction = move(3);
 		}
 		if (direction == 3) {
-		    move(2);
+		    direction = move(2);
 		}
 	    }
 	    else if (board[ghostY+1][ghostX] != '=' && board[ghostY][ghostX+1] != '=') {
 		if (direction == 3) {
-		    move(0);
+		    direction = move(0);
 		}
 		if (direction == 0) {
-		    move(3);
+		    direction = move(3);
 		}
 	    }
 	    
@@ -672,7 +672,7 @@ public class Pacman {
 	    System.out.println("y:"+ghostY);
 	}
 	
-	public int atIntersection() {
+	public int atIntersection() { //0 = complete intersection, 1 = elbow, 2 = straightaway
 	    int moves = 0;
 	    if (board[ghostY][ghostX+1] != '=') {
 		moves++;
