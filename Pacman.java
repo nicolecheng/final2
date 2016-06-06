@@ -575,6 +575,7 @@ public class Pacman {
 		    board[ghostY][ghostX] = ' ';
 		}
 		if (dir == 0 && ghostX < 27 && board[ghostY][ghostX+1] != '=') {
+		    System.out.println("1");
 		    if (board[ghostY][ghostX+1] == '*') {
 			onEdible = true;
 		    }
@@ -586,6 +587,7 @@ public class Pacman {
 		    return 0;
 		}
 		if (dir == 1 && ghostY > 0 && board[ghostY-1][ghostX] != '=') {
+		    System.out.println("2");
 		    if (board[ghostY-1][ghostX] == '*') {
 			onEdible = true;
 		    }
@@ -597,6 +599,7 @@ public class Pacman {
 		    return 1;
 		}
 		if (dir == 2 && ghostX > 0 && board[ghostY][ghostX-1] != '=') {
+		    System.out.println("3");
 		    if (board[ghostY][ghostX-1] == '*') {
 			onEdible = true;
 		    }
@@ -608,6 +611,7 @@ public class Pacman {
 		    return 2;
 		}
 		if (dir == 3 && ghostY < 35 && board[ghostY+1][ghostX] != '=' && board[ghostY+1][ghostX] != '-') {
+		    System.out.println("4");
 		    if (board[ghostY+1][ghostX] == '*') {
 			onEdible = true;
 		    }
@@ -626,14 +630,15 @@ public class Pacman {
 	public void go() {
 	    if (atIntersection() == 0) {
 		direction = move(direction);
-		System.out.println("1");
 	    }
 	    else if (atIntersection() == 1) {
-		move(direction);
-		System.out.println("2");
+		int holddir = direction;
+		while (direction == holddir || Math.abs(holddir-direction) == 2) {
+		    direction = (int)(Math.random()*4);
+		}
+		direction = move(direction);move(direction);
 	    }
 	    else if (atIntersection() == 2 && board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') {
-		System.out.println("3");
 		if (direction == 0) {
 		    move(1);
 		}
@@ -642,7 +647,6 @@ public class Pacman {
 		}
 	    }
 	    else if (board[ghostY-1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') {
-		System.out.println("4");
 		if (direction == 1) {
 		    move(2);
 		}
@@ -651,7 +655,6 @@ public class Pacman {
 		}
 	    }
 	    else if (board[ghostY][ghostX-1] != '=' && board[ghostY+1][ghostX] != '=') {
-		System.out.println("5");
 		if (direction == 2) {
 		    move(3);
 		}
@@ -660,7 +663,6 @@ public class Pacman {
 		}
 	    }
 	    else if (board[ghostY+1][ghostX] != '=' && board[ghostY][ghostX+1] != '=') {
-		System.out.println("6");
 		if (direction == 3) {
 		    move(0);
 		}
@@ -668,6 +670,7 @@ public class Pacman {
 		    move(3);
 		}
 	    }
+	    
 	    System.out.println("dir:"+direction);
 	    System.out.println("x:"+ghostX);
 	    System.out.println("y:"+ghostY);
