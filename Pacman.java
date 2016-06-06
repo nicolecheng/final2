@@ -450,6 +450,7 @@ public class Pacman {
 		gameOver2();
 		return false;
 	    }
+	    setup();
 	}
 	return true;
     }
