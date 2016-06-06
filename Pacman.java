@@ -663,34 +663,34 @@ public class Pacman {
 	    else if (atIntersection() == 2) {
 		if (board[ghostY][ghostX-1] != '=' && board[ghostY+1][ghostX] != '=') {
 		    if (direction == 0) {
-			direction = move(1);
+			direction = move(3);
 		    }
 		    if (direction == 1) {
-			direction = move(0);
+			direction = move(2);
 		    }
 		}
 		if (board[ghostY+1][ghostX] != '=' && board[ghostY][ghostX+1] != '=') {
 		    if (direction == 1) {
-			direction = move(2);
+			direction = move(0);
 		    }
 		    if (direction == 2) {
-			direction = move(1);
+			direction = move(3);
 		    }
 		}
 		if (board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') {
 		    if (direction == 2) {
-			direction = move(3);
+			direction = move(1);
 		    }
 		    if (direction == 3) {
-			direction = move(2);
+			direction = move(0);
 		    }
 		}
 		if (board[ghostY-1][ghostX] != '=' && board[ghostY][ghostX-1] != '=') {
 		    if (direction == 3) {
-			direction = move(0);
+			direction = move(2);
 		    }
 		    if (direction == 0) {
-			direction = move(3);
+			direction = move(1);
 		    }
 		}
 	    }
