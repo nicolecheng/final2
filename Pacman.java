@@ -156,10 +156,6 @@ public class Pacman {
 		board[r][c] = '*';
 	    }
 	}
-	board[6][2] = 'o';
-	board[6][26] = 'o';
-	board[28][2] = 'o';
-	board[28][26] = 'o';
 	//clear areas that shouldn't have *s
 	for (int r = 0; r < 3; r++) {
 	    for (int c = 0; c < 28; c++) {
@@ -181,6 +177,8 @@ public class Pacman {
 	board[12][15] = ' ';
 	board[13][12] = ' ';
 	board[13][15] = ' ';
+	board[22][9] = ' ';
+	board[22][18] = ' ';
 	for (int c = 9; c < 19; c++) {
 	    board[14][c] = ' ';
 	    board[20][c] = ' ';
@@ -367,6 +365,10 @@ public class Pacman {
 		board[31][c] = '=';
 	    }
 	}
+	board[6][2] = 'o';
+	board[6][26] = 'o';
+	board[28][2] = 'o';
+	board[28][26] = 'o';
     }
     public boolean checkGameOver() { //true if player can continue playing, false otherwise
 	if (lives == 0) {
@@ -539,7 +541,7 @@ public class Pacman {
 		    if (r < 34) {
 			ret += color(33,40)+String.valueOf(board[r][c]) + " "+color(30,47);
 		    } else {
-			ret += String.valueOf(board[r][c]);
+			ret += color(37,44)+String.valueOf(board[r][c]) + " "+color(30,47);
 		    }
 		} else {
 		    ret += color(37,44)+String.valueOf(board[r][c]) + " "+color(30,47);
