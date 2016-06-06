@@ -365,10 +365,6 @@ public class Pacman {
 		board[31][c] = '=';
 	    }
 	}
-	board[6][1] = 'o';
-	board[6][26] = 'o';
-	board[26][1] = 'o';
-	board[26][26] = 'o';
     }
     public boolean checkGameOver() { //true if player can continue playing, false otherwise
 	if (lives == 0) {
