@@ -655,6 +655,7 @@ public class Pacman {
 		    }
 		    while (direction == holddir || direction == 3) {
 			direction = (int)(Math.random()*4);
+			System.out.println(direction);
 		    }
 		    System.out.println(holddir);
 		    System.out.println(direction);
