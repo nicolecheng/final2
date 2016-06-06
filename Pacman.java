@@ -41,7 +41,7 @@ public class Pacman {
     public boolean play() {
 	System.out.println("\033[2J");
 	System.out.println(this);
-	System.out.println(count);
+	System.out.println(counts);
         red.go();
 	blue.go();
 	pink.go();
