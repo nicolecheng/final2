@@ -625,7 +625,10 @@ public class Pacman {
 		}
 	    }
 	    else {
-		direction = (int)(Math.random()*4);
+		int holddir = direction;
+		while (direction == holddir) {
+		    direction = (int)(Math.random()*4);
+		}
 		direction = move(direction);
 	    }
 	    board[ghostY][ghostX] = 'G';
