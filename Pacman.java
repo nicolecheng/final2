@@ -12,6 +12,7 @@ public class Pacman {
     private int pacX;
     private int pacY;
     private int timer;
+    private int counts;
     private int direction;
     private char[][] board;
     private Ghost[] ghosts;
@@ -27,52 +28,24 @@ public class Pacman {
 	//board setup
 	board = new char[36][28];
 	setup();
-	int count = 0;
+        counts = 0;
 	for (int r = 0; r < board.length; r++) {
 	    for (int c = 0; c < board[0].length; c++) {
 		if (board[r][c] == '*') {
-		    count++;
+		    counts++;
 		}
 	    }
 	}
-	System.out.println(count);
     }
 
     public boolean play() {
 	System.out.println("\033[2J");
 	System.out.println(this);
-	System.out.println();
-	System.out.println("red");
+	System.out.println(count);
         red.go();
-	try {
-	    Thread.sleep(10);
-	} catch (InterruptedException e) {
-	    System.out.println("InterruptedException");
-	}
-	System.out.println();
-	System.out.println("blue");
 	blue.go();
-	try {
-	    Thread.sleep(10);
-	} catch (InterruptedException e) {
-	    System.out.println("InterruptedException");
-	}
-	System.out.println();
-	System.out.println("pink");
 	pink.go();
-	try {
-	    Thread.sleep(10);
-	} catch (InterruptedException e) {
-	    System.out.println("InterruptedException");
-	}
-	System.out.println();
-	System.out.println("orange");
 	orange.go();
-	try {
-	    Thread.sleep(10);
-	} catch (InterruptedException e) {
-	    System.out.println("InterruptedException");
-	}
 	checkTeleport();
 	checkTime();
 	updateGhosts();
