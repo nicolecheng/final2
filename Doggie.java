@@ -82,7 +82,7 @@ public class Doggie{
 	System.out.println("\nGot it? (y/n)");
 	Scanner in = new Scanner(System.in);
 	String n = in.nextLine();
-	if(n.contains("y")){
+	if(n.toLowerCase().contains("y")){
 	    
 	}else{
 	    begin();
@@ -155,24 +155,24 @@ public class Doggie{
 	System.out.println("1) feed "+name+"\n2) play with "+name+"\n3) tuck "+name+" into bed\n4) mystery option (CAREFUL WITH THIS ONE!)\n");
 	Scanner in = new Scanner(System.in);
 	String n = in.nextLine();
-	if(n.contains("1") || n.contains("feed")){
+	if(n.contains("1") || n.toLowerCase().contains("feed")){
 	    if(feed()){
 		bored+=20;
 		tired+=20;
 		hours+=1;
 	    }
-	}else if(n.contains("2") || n.contains("play")){
+	}else if(n.contains("2") || n.toLowerCase().contains("play")){
 	    if(play()){
 		hunger+=30;
 		tired+=40;
 		hours+=1;
 	    }
-	}else if(n.contains("3") || n.contains("tuck") || n.contains("sleep")){
+	}else if(n.contains("3") || n.toLowerCase().contains("tuck") || n.toLowerCase().contains("sleep")){
 	    if(tuck()){
 		hunger+=30;
 		hours+=1;
 	    }
-	}else if(n.contains("4") || n.contains("mystery")){
+	}else if(n.toLowerCase().contains("4") || n.toLowerCase().contains("mystery")){
 	    if(mystery()){
 		hours+=1;
 	    }
@@ -197,28 +197,28 @@ public class Doggie{
 	    Scanner in = new Scanner(System.in);
 	    String n = in.nextLine();
 	    System.out.println();
-	    if(n.contains("1") || n.contains("kibble")){
+	    if(n.contains("1") || n.toLowerCase().contains("kibble")){
 		System.out.println(name+" nibbles on the kibble. Delicious.");
 		if(hunger>=30){
 		    hunger-=30;
 		}else{
 		    hunger=0;
 		}
-	    }else if(n.contains("2") || n.contains("chow")){
+	    }else if(n.contains("2") || n.toLowerCase().contains("chow")){
 		System.out.println(name+" chows down on the chow. Yum.");
 		if(hunger>=40){
 		    hunger-=40;
 		}else{
 		    hunger=0;
 		}
-	    }else if(n.contains("3") || n.contains("steak")){
+	    }else if(n.contains("3") || n.toLowerCase().contains("steak")){
 		System.out.println(name+" is overjoyed with this meal, reassuring you that feeding your dog a gourmet steak was not a mis-steak.");
 		if(hunger>=50){
 		    hunger-=50;
 		}else{
 		    hunger=0;
 		}
-	    }else if(n.contains("4") || n.contains("random")){
+	    }else if(n.contains("4") || n.toLowerCase().contains("random")){
 		int i = (int)(Math.random()*5);
 		System.out.println("You decide to feed "+name+" some "+foods[i][0]+".\n");
 		wait(2700);
@@ -357,7 +357,7 @@ public class Doggie{
 	System.out.println("Ready to give it another shot? (y)");
 	Scanner in = new Scanner(System.in);
 	String n = in.nextLine();
-	if(n.contains("y")){
+	if(n.toLowerCase().contains("y")){
 	    System.out.println();
 	    System.out.println("Alright! Let's do this!\n\n");
 	    wait(2500);
