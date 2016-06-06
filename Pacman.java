@@ -42,6 +42,7 @@ public class Pacman {
 		}
 	    }
 	}
+	score--;
 	try {
 	    Thread.sleep(5000);
 	}
@@ -81,10 +82,10 @@ public class Pacman {
 	checkTeleport();
 	updateGhosts();
 	checkTime();
-        if (checkGameOver()) {
+        if (!checkGameOver()) {
 	    return false;
 	}
-	else if (checkLevelComplete()) {
+	else if (!checkLevelComplete()) {
 	    return false;
 	}
 	return true;
