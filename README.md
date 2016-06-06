@@ -92,7 +92,13 @@ Development Log <br><ul>
      	06/03/16: Noah - continued Pacman board, began movement basics
      </li>
      <li>
+     	06/03/16: Nicole - worked on skeleton of Doggie.java; instructions of Doggie.java done
+     </li>
+     <li>
      	06/04/16: Noah - added lives and death sequence to Pacman
+     </li>
+     <li>
+     	06/05/16: Nicole - added interactions with the dog -- eat, sleep and play; Doggie.java done; Tutorial.java almost done (just needs to integrate Pong and Pacman)
      </li>
  </ul><br><br>
 
@@ -117,19 +123,19 @@ Development Log <br><ul>
 	   Snake
 	 </li>
 	 <li>
-	   Tutorial outline
+	   Tutorial
 	 </li>
 	 <li>
-	   Pong basics
+	   Pong
 	 </li>
 	 <li>
-	   Platformer basics
+	   Platformer
 	 </li>
 	 <li>
 	   Pacman board + movement basics
 	 </li>
 	 <li>
-	   Doggie game basics and outline
+	   Doggie game
 	 </li>
 </ul><br><br>
 
@@ -139,9 +145,11 @@ Directions on how to compile/run each version. <br>
 (e.g. what to do to clone the right version) <br> <br>
 <ul>
 	<li>
+	  Clone final2: https://github.com/nicolecheng/final2.git
+	</li>
+	<li>
 	  Compile and run Tutorial.java.
 	</li>
 </ul>
 
-- tetris / snake / nintendogs / pacman / space invaders / pingpong / pinball
 </html>
