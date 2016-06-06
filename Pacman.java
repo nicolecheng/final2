@@ -636,7 +636,7 @@ public class Pacman {
 	    board[ghostY][ghostX] = 'G';
 	    System.out.println("ghostY:"+ghostY);
 	    System.out.println("ghostX:"+ghostX);
-	    System.out.println("dir:"+dir);
+	    System.out.println("dir:"+direction);
 	}
 	
 	public boolean atIntersection() {
