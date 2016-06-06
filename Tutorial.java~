@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Tutorial{
 
-    private static boolean testMode = false; // with waits or nah?
+    //private static boolean testMode = false; // with waits or nah?
 
     static String name, snakeName, dinoName;
     static int snakeScore, dinoScore;
@@ -118,7 +118,7 @@ public class Tutorial{
 
     private static void playSnake(){
 	snakeScore = Snake.snakeGame();
-	if(snakeScore > 12 || testMode){
+	if(snakeScore > 12){// || testMode){
 	    scene2();
 	}else{
 	    System.out.println("You didn't beat the high score. Please try again.");
@@ -467,13 +467,13 @@ public class Tutorial{
     }
 
     private static void wait(int millis){
-	if(!testMode && !Snake.started){ // only wait if not on testMode
+	//if(!testMode && !Snake.started){ // only wait if not on testMode
 	    try {
 		Thread.sleep(millis);
 	    }
 	    catch (InterruptedException e) {
 	    }
-	}
+	    //}
     }
 
 }
