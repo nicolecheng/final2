@@ -579,40 +579,38 @@ public class Pacman {
 	}
 	
 	public int move(int dir) {
-	    if (freedom) {
-		System.out.println("here1");
+	    if (freedom) { //yep
 		if (onEdible) {
-		    System.out.println("here2");
 		    board[ghostY][ghostX] = '*';
 		}
-		else {
-		    System.out.println("here3");
+		else { //yep
 		    board[ghostY][ghostX] = ' ';
 		}
-		if (dir == 0 && ghostX < 27 && board[ghostY][ghostX+1] != '=') {
-		    System.out.println("here4");
+		if (dir == 0 && ghostX < 27 && board[ghostY][ghostX+1] != '=') {//either here
 		    if (board[ghostY][ghostX+1] == '*') {
+			System.out.println("here1");
 			onEdible = true;
 		    }
 		    else {
+			System.out.println("here2");
 			onEdible = false;
 		    }
 		    ghostX++;
 		    return 0;
 		}
 		if (dir == 1 && ghostY > 0 && board[ghostY-1][ghostX] != '=') {
-		    System.out.println("here5");
 		    if (board[ghostY-1][ghostX] == '*') {
+			System.out.println("here3");
 			onEdible = true;
 		    }
 		    else {
+			System.out.println("here4");
 			onEdible = false;
 		    }
 		    ghostY--;
 		    return 1;
 		}
-		if (dir == 2 && ghostX > 0 && board[ghostY][ghostX-1] != '=') {
-		    System.out.println("here6");
+		if (dir == 2 && ghostX > 0 && board[ghostY][ghostX-1] != '=') {//or here
 		    if (board[ghostY][ghostX-1] == '*') {
 			onEdible = true;
 		    }
@@ -623,7 +621,6 @@ public class Pacman {
 		    return 2;
 		}
 		if (dir == 3 && ghostY < 35 && board[ghostY+1][ghostX] != '=' && board[ghostY+1][ghostX] != '-') {
-		    System.out.println("here7");
 		    if (board[ghostY+1][ghostX] == '*') {
 			onEdible = true;
 		    }
