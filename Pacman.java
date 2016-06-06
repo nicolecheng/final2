@@ -70,7 +70,18 @@ public class Pacman {
 	    if (System.in.available() != 0) {
 		int key = System.in.read();
 		if (Math.abs(getDir(key)-direction) != 2) {
-		    direction = move(getDir(key));
+		    if (getDir(key) == 0 && board[pacY][pacX+1] != '=') {
+			direction = move(0);
+		    }
+		    if (getDir(key) == 1 && board[pacY-1][pacX] != '=') {
+			direction = move(1);
+		    }
+		    if (getDir(key) == 2 && board[pacY][pacX-1] != '=') {
+			direction = move(2);
+		    }
+		    if (getDir(key)== 3 && board[pacY+1][pacX] != '=') {
+			direction = move(3);
+		    }
 		}
 	    }
 	    else {
