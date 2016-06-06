@@ -591,10 +591,10 @@ public class Pacman {
 	}
 	
 	public void go() {
-	    if (!atIntersection()) {
+	    if (atIntersection() == 0) {
 		direction = move(direction);
 	    }
-	    else if (atIntersection()) {
+	    else if (atIntersection() == 1) {
 		int holddir = direction;
 		while (direction == holddir) {
 		    direction = (int)(Math.random()*4);
@@ -654,9 +654,12 @@ public class Pacman {
 		moves++;
 	    }
 	    if (moves >= 3) {
-		return true;
+		return 0;
 	    }
-	    return false;
+	    if (moves == 2) {
+		return 1;
+	    }
+	    return 2;
 	}
     }
     
