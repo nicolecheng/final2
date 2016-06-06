@@ -571,7 +571,7 @@ public class Pacman {
 		if (onEdible) {
 		    board[ghostY][ghostX] = '*';
 		}
-		else {
+		else if (board[ghostY][ghostX] != 'G') {
 		    board[ghostY][ghostX] = ' ';
 		}
 		if (dir == 0 && ghostX < 27 && board[ghostY][ghostX+1] != '=') {
