@@ -624,17 +624,17 @@ public class Pacman {
 	}
 	
 	public void go() {
-	    if (atIntersection() == 0) {
+	    if (atIntersection() == 2) {
 		direction = move(direction);
 	    }
-	    else if (atIntersection() == 1) {
+	    else if (atIntersection() == 0) {
 		int holddir = direction;
 		while (direction == holddir || Math.abs(holddir-direction) == 2) {
 		    direction = (int)(Math.random()*4);
 		}
 		direction = move(direction);move(direction);
 	    }
-	    else if (atIntersection() == 2 && board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') {
+	    else if (atIntersection() == 1 && board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') {
 		if (direction == 0) {
 		    direction = move(1);
 		}
