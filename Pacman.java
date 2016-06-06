@@ -397,14 +397,17 @@ public class Pacman {
 	}
 	if (timer > 10) {
 	    ghosts[1].setFreedom(true);
+	    ghosts[1].setDirection((int)(Math.random()*2)*2);
 	    ghosts[1].setYX(14,14);
 	}
 	if (timer > 20) {
 	    ghosts[2].setFreedom(true);
+	    ghosts[2].setDirection((int)(Math.random()*2)*2);
 	    ghosts[2].setYX(14,14);
 	}
 	if (timer > 30) {
 	    ghosts[3].setFreedom(true);
+	    ghosts[3].setDirection((int)(Math.random()*2)*2);
 	    ghosts[3].setYX(14,14);
 	}
     }
@@ -624,17 +627,17 @@ public class Pacman {
 	}
 	
 	public void go() {
-	    if (atIntersection() == 2) {
+	    if (atIntersection() == 0) {
 		direction = move(direction);
 	    }
-	    else if (atIntersection() == 0) {
+	    else if (atIntersection() == 1) {
 		int holddir = direction;
 		while (direction == holddir || Math.abs(holddir-direction) == 2) {
 		    direction = (int)(Math.random()*4);
 		}
 		direction = move(direction);move(direction);
 	    }
-	    else if (atIntersection() == 1 && board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') {
+	    else if (atIntersection() == 2 && board[ghostY][ghostX+1] != '=' && board[ghostY-1][ghostX] != '=') {
 		if (direction == 0) {
 		    direction = move(1);
 		}
