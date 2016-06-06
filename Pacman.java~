@@ -45,7 +45,9 @@ public class Pacman {
 	try {
 	    if (System.in.available() != 0) {
 		int key = System.in.read();
-		direction = move(getDir(key));
+		if (Math.abs(getDir(key)-direction) != 2) {
+		    direction = move(getDir(key));
+		}
 	    }
 	    else {
 		move(direction);
@@ -503,7 +505,10 @@ public class Pacman {
 	public Ghost(int ghostX, int ghostY) {
 	    this.ghostX = ghostX;
 	    this.ghostY = ghostY;
-	    direction = (int)(Math.random()*4);
+	    direction = (int)(Math.random()*2);
+	    if (direction == 1) {
+		direction = 2;
+	    }
 	    freedom = false;
 	    onEdible = false;
 	    movementMode = 0;
@@ -534,13 +539,13 @@ public class Pacman {
 	}
 	
 	public int move(int dir) {
-	    if (onEdible) {
-		board[ghostY][ghostX] = '*';
-	    }
-	    else {
-		board[ghostY][ghostX] = ' ';
-	    }
 	    if (freedom) {
+		if (onEdible) {
+		    board[ghostY][ghostX] = '*';
+		}
+		else {
+		    board[ghostY][ghostX] = ' ';
+		}
 		if (dir == 0 && ghostX < 27 && board[ghostY][ghostX+1] != '=') {
 		    if (board[ghostY][ghostX+1] == '*') {
 			onEdible = true;
@@ -622,7 +627,10 @@ public class Pacman {
 		}
 	    }
 	    else {
-		direction = (int)(Math.random()*4);
+		int holddir = direction;
+		while (direction == holddir) {
+		    direction = (int)(Math.random()*4);
+		}
 		direction = move(direction);
 	    }
 	    board[ghostY][ghostX] = 'G';
