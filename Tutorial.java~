@@ -72,7 +72,9 @@ public class Tutorial{
 	    wait(3400);
 	    System.out.println("The high score is only a 7, currently being held by someone by the alias, Noah Constricter.");
 	    wait(3000);
-	    System.out.println("Easy peasy, right? You're going to take this fella down. Are you ready? (y/n)");
+	    System.out.println("Easy peasy, right? You're going to take this fella down.");
+	    wait(2800);
+	    System.out.println("Use the A-W-S-D keys to start and turn, and submit your moves one square prior. Are you ready? (y/n)");
 	    Scanner in = new Scanner(System.in);
 	    String n = in.nextLine();
 	    if(n.toLowerCase().contains("y")){
@@ -155,7 +157,7 @@ public class Tutorial{
 		spacing+=" ";
 	    }
 	    spacing+="   ";
-	    System.out.println("1. "+snakeName.substring(2)+spacing+"HI: "+snakeScore);
+	    System.out.println("1. "+snakeName+spacing+"HI: "+snakeScore);//.substring(2)+spacing+"HI: "+snakeScore);
 	    wait(2000);
 	    System.out.println("2. Noah Constricter          HI: 7");
 	    wait(2000);
@@ -294,10 +296,10 @@ public class Tutorial{
 	wait(2200);
 	System.out.println("You see what appears to be an arcade troll crouching under a gross table.");
 	wait(2900);
-	System.out.println("You reluctantly approach it.");
+	System.out.println("You reluctantly approach him.");
 	System.out.println();
 	wait(2200);
-	System.out.println("Hello. I see that you are fresh out of tokens. Luckily for you, I have a proposition you...");
+	System.out.println("Hello. I see that you are fresh out of tokens. Luckily for you, I have a proposition for you...");
 	wait(3900);
 	System.out.println("Answer 2 of these 4 questions correctly, and I will give you 10 beautiful tokens.");
 	wait(3000);
@@ -442,7 +444,7 @@ public class Tutorial{
 	wait(3000);
 	System.out.println("You rush over, and this time, you actually have tokens.");
 	wait(3000);
-	System.out.println("The high score right now is a 240, held by Mr. PaKman"); //************************************************
+	System.out.println("The high score right now is a 100, held by Mr. PaKman"); //************************************************
 	wait(2600);
 	System.out.println("Yeah, you can beat that.");
 	wait(2000);
@@ -493,9 +495,9 @@ public class Tutorial{
 	    spacing+=" ";
 	    System.out.println("1. "+pacmanName+spacing+"HI: "+pacmanScore);
 	    wait(2000);
-	    System.out.println("2. Mr. PaKman                HI: 240"); 
+	    System.out.println("2. Mr. PaKman                HI: 100"); 
 	    wait(2000);
-	    System.out.println("3. PackYourBags              HI: 235"); //******CHANGE NAMES******************************************************
+	    System.out.println("3. PackYourBags              HI: 99"); //******CHANGE NAMES******************************************************
 	    wait(2000);
 	}
     }
@@ -511,7 +513,7 @@ public class Tutorial{
 	    Pacman p = new Pacman();
 	    pacmanScore = p.pacman();
 	    //insert pacman game here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!****************************************************************
-	    if(pacmanScore>240){
+	    if(pacmanScore>100){
 		pacmanName();
 		scene4();
 	    }else{
