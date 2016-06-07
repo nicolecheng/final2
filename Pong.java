@@ -56,7 +56,7 @@ public class Pong {
 	ballY = board.length/2;
 	lastDir = 4;
         timer = 0;
-	speed = 0;
+	speed = 200;
         this.difficulty = difficulty; //set difficulty
     }
     
