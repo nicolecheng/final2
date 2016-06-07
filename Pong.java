@@ -151,29 +151,21 @@ public class Pong {
     }
 
     public void botMove() {
-	if (dir2 == 1) {
-	    if (pos2 > 1) {
-		board[pos2-1][board[0].length-1] = '#';
-	    }
-	    if (inBounds(pos2+5,board) && pos2+3 != 14) {
-		board[pos2+2][board[0].length-1] = ' ';
-	    }
-	    pos2--;
-	}
-	if (dir2 == -1) {
-	    if (pos2 != 0) {
-		board[pos2][board[0].length-1] = ' ';
-	    }
-	    if (inBounds(pos2+5,board)) {
-		board[pos2+5][board[0].length-1] = '#';
-	    }
-	    pos2++;
-	}
 	if (pos2 == 1) {
 	    dir2 = -1;
 	}
 	if (pos2 == board.length-6) {
 	    dir2 = 1;
+	}
+	if (dir2 == 1) {
+	    pos2--;
+	    board[pos2][board[0].length-1] = '#';
+	    board[pos2+6] = ' ';
+	}
+	if (dir2 == -1) {
+	    pos2++;
+	    board[pos2][board[0].length-1] = ' ';
+	    board[pos2+6] = '#';
 	}
     }
 
