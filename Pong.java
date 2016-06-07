@@ -151,7 +151,7 @@ public class Pong {
     }
 
     public void botMove() {
-	if (dir == 1) {
+	if (dir2 == 1) {
 	    if (pos2 > 1) {
 		board[pos2-1][board[0].length-1] = '#';
 	    }
@@ -160,7 +160,7 @@ public class Pong {
 	    }
 	    pos2--;
 	}
-	if (dir == -1) {
+	if (dir2 == -1) {
 	    if (pos2 != 0) {
 		board[pos2][board[0].length-1] = ' ';
 	    }
@@ -170,10 +170,10 @@ public class Pong {
 	    pos2++;
 	}
 	if (pos2 == 1) {
-	    dir == -1;
+	    dir2 = -1;
 	}
 	if (pos2 == board.length-2) {
-	    dir == 1;
+	    dir2 = 1;
 	}
     }
 
