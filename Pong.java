@@ -306,6 +306,7 @@ public class Pong {
 	    board[3][3] = Character.forDigit(score1,10);
 	    board[3][board[0].length-4] = Character.forDigit(score2,10);
 	    lastDir = ballMove(getDir(lastDir));
+	    botMove();
 	    return true;
 	}
 	catch (IOException e) {
