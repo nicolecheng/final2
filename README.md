@@ -109,6 +109,9 @@ Development Log <br><ul>
      <li>
      	06/06/16: Nicole - debugged Snake completely i think!
      </li>
+     <li>
+     	06/07/16: Nicole - Snake, Doggie, Tutorial finally DONE. Tutorial includes all components.
+     </li>
  </ul><br><br>
 
  Project plan/outline including your goals prioritized by importance and chronology <br>
@@ -118,13 +121,9 @@ Development Log <br><ul>
 		 which games are we going to recreate?</li><li>
 		 tetris: create class of shapes, user terminal input / controls, score keeping </li><li>
 		 pacman: series of boards, class of pacman and other little monster thingies</li><li>
-		 space invaders: class of alien ships, damage/score records, shooting</li><li>
 		 nintendogs: def need to keep track of user's dog and whatnot</li><li>
-		 pingpong: AI of some sort?</li><li>
-		 pinball: utilize physics! perhaps a simplified board with less controls</li></li><li>
+		 pingpong: AI of some sort?</li></li><li>
 	 a welding factor for the various components</li><li>
-	 mechanism to output scores and names into a file</li><li>
-	 user accounts</li><li>
 	 powerups and cheat codes</li>
  </ul><br>
  Things already done:<br><ul>
@@ -141,10 +140,16 @@ Development Log <br><ul>
 	   Platformer
 	 </li>
 	 <li>
-	   Pacman board + movement basics
+	   Pacman 
 	 </li>
 	 <li>
-	   Doggie game
+	   Doggie
+	 </li>
+	 <li>
+	   Lowered thresholds and special K (ha!) options to skip the tedious task of playing games (how dreadful!)
+	 </li>
+	 <li>
+	   DONE.
 	 </li>
 </ul><br><br>
 
