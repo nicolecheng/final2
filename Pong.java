@@ -160,12 +160,12 @@ public class Pong {
 	if (dir2 == 1) {
 	    pos2--;
 	    board[pos2][board[0].length-1] = '#';
-	    board[pos2+6] = ' ';
+	    board[pos2+6][board[0].length-1] = ' ';
 	}
 	if (dir2 == -1) {
 	    pos2++;
 	    board[pos2][board[0].length-1] = ' ';
-	    board[pos2+6] = '#';
+	    board[pos2+6][board[0].length-1] = '#';
 	}
     }
 
