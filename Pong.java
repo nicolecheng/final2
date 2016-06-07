@@ -129,9 +129,9 @@ public class Pong {
 
     public void move(int key) {
         if (key == 0x77 && pos1 > 0) {
-            board[pos1][0] = '#';
+            board[pos1-1][0] = '#';
 	    if (inBounds(pos1+3,board) && pos1+3 != 14) {
-		board[pos1+3][0] = ' ';
+		board[pos1+2][0] = ' ';
 	    }
             pos1--;
         }
