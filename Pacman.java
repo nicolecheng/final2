@@ -873,14 +873,11 @@ public class Pacman {
 		if (!play()) {
 		    return score;
 		}
-<<<<<<< HEAD
 		catch (InterruptedException e) {
 		}
 	    }
 	    return score;
-=======
 	    }
->>>>>>> refs/remotes/origin/noah
 	} catch (IOException e) {
 	    System.out.println("IOException");
 	} catch (InterruptedException e) {
