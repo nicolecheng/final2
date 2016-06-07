@@ -37,7 +37,7 @@ public class Pong {
 	}
         //create the paddles at each end of the board
         pos1 = 6;
-        pos2 = 7;
+        pos2 = 6;
         for (int i = pos1; i < pos1+3; i++) {
             board[i][0] = '#';
         }
@@ -133,9 +133,7 @@ public class Pong {
 	    if (inBounds(pos1+3,board) && pos1+3 != 14) {
 		board[pos1+3][0] = ' ';
 	    }
-	    System.out.println(pos1);
             pos1--;
-	    System.out.println(pos1);
         }
         if (key == 0x73 && pos1 < board.length-4) {
 	    if (pos1 != 0) {
