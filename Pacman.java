@@ -868,10 +868,6 @@ public class Pacman {
 		if (!play()) {
 		    return score;
 		}
-		catch (InterruptedException e) {
-		}
-	    }
-	    return score;
 	    }
 	} catch (IOException e) {
 	    System.out.println("IOException");
