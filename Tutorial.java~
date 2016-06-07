@@ -391,7 +391,9 @@ public class Tutorial{
 	    System.out.println("Oh, look at that. Tyrannicole has a sorry-looking high score of 10.");
 	    wait(3600);
 	    System.out.println("You can do so much better.");
-	    wait(2800);
+	    wait(2700);
+	    System.out.println("Instructions:\nTyrannicole is throwing blocks at you! \nAnticipate them and hold the jump (W) key for half a second before they come, but be sure to land ahead of them! \nJump over 10 blocks (but don't give up there!) to defeat them.");
+	    wait(3500)
 	    System.out.println("Ready? (y)");
 	    Scanner inn = new Scanner(System.in);
 	    String n = inn.nextLine();
@@ -448,6 +450,7 @@ public class Tutorial{
 	wait(2600);
 	System.out.println("Yeah, you can beat that.");
 	wait(2000);
+	System.out.println("Instructions:\nMr. PaKman has unleashed his ghosts on you! \nUse your WASD keys to eat the pellets so you can be strong enough to defeat the ghosts in hand-to-hand combat. \nOr not. I don't care. Defeat one level by eating enough pellets to move on!");
 	pacmanGame();
     }
 

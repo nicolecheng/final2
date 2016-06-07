@@ -393,7 +393,7 @@ public class Tutorial{
 	    System.out.println("You can do so much better.");
 	    wait(2700);
 	    System.out.println("Instructions:\nTyrannicole is throwing blocks at you! \nAnticipate them and hold the jump (W) key for half a second before they come, but be sure to land ahead of them! \nJump over 10 blocks (but don't give up there!) to defeat them.");
-	    wait(3500)
+	    wait(3500);
 	    System.out.println("Ready? (y)");
 	    Scanner inn = new Scanner(System.in);
 	    String n = inn.nextLine();
