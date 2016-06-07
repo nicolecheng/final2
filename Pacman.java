@@ -60,11 +60,6 @@ public class Pacman {
 	orange.go();
 	updateScore();
         updateLives();
-	System.out.println("pac " + pacX + " " + pacY);
-	System.out.println("red " + red.getX() + " " + red.getY());
-	System.out.println("blu " + blue.getX() + " " + blue.getY());
-	System.out.println("pnk " + pink.getX() + " " + pink.getY());
-	System.out.println("org " + orange.getX() + " " + orange.getY());
 	try {
 	    Thread.sleep(speed);
 	} catch (InterruptedException e) {
