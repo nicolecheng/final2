@@ -103,7 +103,8 @@ public class Pacman {
     }
 
     public void updateScore() {
-        board[2][14] = Character.forDigit(score/10,10);
+        board[2][13] = Character.forDigit(score/100,10);
+	board[2][14] = Character.forDigit((score/10)%10,10);
 	board[2][15] = Character.forDigit(score%10,10);
     }
     

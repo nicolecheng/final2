@@ -98,7 +98,13 @@ Development Log <br><ul>
      	06/04/16: Noah - added lives and death sequence to Pacman
      </li>
      <li>
+     	06/05/16: Noah - made it so all the ghosts move pseudo-randomly in Pacman
+     </li>
+     <li>
      	06/05/16: Nicole - added interactions with the dog -- eat, sleep and play; Doggie.java done; Tutorial.java almost done (just needs to integrate Pong and Pacman)
+     </li>
+     <li>
+     	06/06/16: Noah - completed Pacman, Pong, and Dino fully!
      </li>
      <li>
      	06/06/16: Nicole - debugged Snake completely i think!

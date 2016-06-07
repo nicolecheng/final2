@@ -868,13 +868,6 @@ public class Pacman {
 		if (!play()) {
 		    return score;
 		}
-<<<<<<< HEAD
-		catch (InterruptedException e) {
-		}
-	    }
-	    return score;
-=======
->>>>>>> refs/remotes/origin/master
 	    }
 	} catch (IOException e) {
 	    System.out.println("IOException");
