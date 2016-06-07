@@ -13,6 +13,7 @@ public class Pong {
     private char[][] board;
     private int pos1;
     private int pos2;
+    private int dir2;
     private int difficulty;
     private int ballX;
     private int ballY;
@@ -23,6 +24,7 @@ public class Pong {
     
     public Pong(int difficulty) {
 	DEBUG = false;
+	dir2 = 1;
         //initialize the board to by an empty 9 by 25 board
         board = new char[15][75];
         for (int r = 0; r < board.length; r++) {
@@ -129,7 +131,9 @@ public class Pong {
 
     public void move(int key) {
         if (key == 0x77 && pos1 > 0) {
-            board[pos1-1][0] = '#';
+	    if (pos1 > 1) {
+		board[pos1-1][0] = '#';
+	    }
 	    if (inBounds(pos1+3,board) && pos1+3 != 14) {
 		board[pos1+2][0] = ' ';
 	    }
@@ -139,9 +143,38 @@ public class Pong {
 	    if (pos1 != 0) {
 		board[pos1][0] = ' ';
 	    }
-            board[pos1+3][0] = '#';
+	    if (inBounds(pos1+3,board)) {
+		board[pos1+3][0] = '#';
+	    }
             pos1++;
         }
+    }
+
+    public void botMove() {
+	if (dir == 1) {
+	    if (pos2 > 1) {
+		board[pos2-1][board[0].length-1] = '#';
+	    }
+	    if (inBounds(pos2+3,board) && pos2+3 != 14) {
+		board[pos2+2][board[0].length-1] = ' ';
+	    }
+	    pos2--;
+	}
+	if (dir == -1) {
+	    if (pos2 != 0) {
+		board[pos2][board[0].length-1] = ' ';
+	    }
+	    if (inBounds(pos2+3,board)) {
+		board[pos2+3][board[0].length-1] = '#';
+	    }
+	    pos2++;
+	}
+	if (pos2 == 1) {
+	    dir == -1;
+	}
+	if (pos2 == board.length-2) {
+	    dir == 1;
+	}
     }
 
     public int ballMove(int dir) {
