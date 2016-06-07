@@ -13,6 +13,7 @@ public class Pong {
     private char[][] board;
     private int pos1;
     private int timer;
+    private int speed;
     private int pos2;
     private int dir2;
     private int difficulty;
@@ -54,7 +55,8 @@ public class Pong {
 	ballX = board[0].length/2;
 	ballY = board.length/2;
 	lastDir = 4;
-        
+        timer = 0;
+	speed = 0;
         this.difficulty = difficulty; //set difficulty
     }
     
