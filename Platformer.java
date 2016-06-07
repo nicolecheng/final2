@@ -20,7 +20,7 @@ public class Platformer {
 	jump = 0;
 	timeSinceLastObs = 0;
 	timeSinceLastJump = 11;
-	timeToReach = (int)(Math.random()*40)+20;
+	timeToReach = (int)(Math.random()*40)+40;
 	//init board
 	board = new char[15][75];
         for (int r = 0; r < board.length; r++) {
