@@ -54,13 +54,12 @@ public class Pacman {
     public boolean play() {
 	System.out.println("\033[2J");
 	System.out.println(this);
+        red.go();
+	blue.go();
+	pink.go();
+	orange.go();
 	updateScore();
         updateLives();
-	System.out.println("pac " + pacX + " " + pacY);
-	System.out.println("red " + red.getX() + " " + red.getY());
-	System.out.println("blu " + blue.getX() + " " + blue.getY());
-	System.out.println("pnk " + pink.getX() + " " + pink.getY());
-	System.out.println("org " + orange.getX() + " " + orange.getY());
 	try {
 	    Thread.sleep(speed);
 	} catch (InterruptedException e) {
@@ -91,10 +90,6 @@ public class Pacman {
 	    System.out.println("IOException");
 	}
 	timer++;
-        red.go();
-	blue.go();
-	pink.go();
-	orange.go();
 	checkTeleport();
 	updateGhosts();
 	checkTime();
@@ -873,10 +868,13 @@ public class Pacman {
 		if (!play()) {
 		    return score;
 		}
+<<<<<<< HEAD
 		catch (InterruptedException e) {
 		}
 	    }
 	    return score;
+=======
+>>>>>>> refs/remotes/origin/master
 	    }
 	} catch (IOException e) {
 	    System.out.println("IOException");
