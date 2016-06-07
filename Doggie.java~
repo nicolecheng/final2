@@ -155,7 +155,7 @@ public class Doggie{
     private static void instruct(){
 	System.out.println("What would you like to do?");
 	System.out.println();
-	System.out.println("1) feed "+name+"\n2) play with "+name+"\n3) tuck "+name+" into bed\n4) mystery option (CAREFUL WITH THIS ONE!)\n5) skip to the end (this is for you, mr k)");
+	System.out.println("1) feed "+name+"\n2) play with "+name+"\n3) tuck "+name+" into bed\n4) mystery option (CAREFUL WITH THIS ONE!)\n5) skip a day (this is for you, mr k)");
 	Scanner in = new Scanner(System.in);
 	String n = in.nextLine();
 	if(n.contains("1") || n.toLowerCase().contains("feed")){

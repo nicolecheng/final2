@@ -148,22 +148,18 @@ public class Tutorial{
 	System.out.println();
 	System.out.println();
 	String spacing = "";
-	if(snakeName.length()>25){
-	    System.out.println("That nickname has too many characters.");
-	    wait(1700);
-	    snakeName();
-	}else{
-	    for(int i = 0; i < 25-snakeName.length(); i++){
-		spacing+=" ";
-	    }
-	    spacing+=" ";//  ";
-	    System.out.println("1. "+snakeName+spacing+"HI: "+snakeScore);//.substring(2)+spacing+"HI: "+snakeScore);
-	    wait(2000);
-	    System.out.println("2. Noah Constricter          HI: 7");
-	    wait(2000);
-	    System.out.println("3. MyAnacondaDo              HI: 6");
-	    wait(2000);
+
+	for(int i = 0; i < 25-snakeName.length(); i++){
+	    spacing+=" ";
 	}
+	spacing+=" ";//  ";
+	System.out.println("1. "+snakeName+spacing+"HI: "+snakeScore);//.substring(2)+spacing+"HI: "+snakeScore);
+	wait(2000);
+	System.out.println("2. Noah Constricter          HI: 7");
+	wait(2000);
+	System.out.println("3. MyAnacondaDo              HI: 6");
+	wait(2000);
+	
     }
 
     private static void scene2(){
@@ -313,7 +309,7 @@ public class Tutorial{
 	String[] door0 = {"If I drink, I die. If I eat, I'm fine. What am I?","What gets more wet the more it dries?","What's brown and sticky?","What has a face and two hands but no arms or legs?"};
 	String[] door1 = {"Poor people have it, rich people need it, if you eat it you die. What is it?","What goes up and does not come back down?","Brothers and sisters I have none, but this man's father is my father's son. Who is this man?","A man walks into the bar, goes up to the bartender, the bartender scares him, the man says thank you and walks out. What happened?" };
 	String[] door2 = {"Where is most of the world's fresh water located?","What is the capital of Canada?","What's the capital of California?","What is the capital of Australia?"};
-	String[] door3 = {"What is converted into alcohol during brewing?","In which city was Martin Luther King assasinated?","What day of the week are you most likely to have a heart attack?","What do you call an infant whale?"};
+	String[] door3 = {"What is converted into alcohol during brewing?","In which city was Martin Luther King assassinated?","What day of the week are you most likely to have a heart attack?","What do you call an infant whale?"};
 	//answers
 	String[] door0ans = {"fire","towel","stick","clock"};
 	String[] door1ans = {"nothing","age","my son","hiccup"};
@@ -448,9 +444,9 @@ public class Tutorial{
 	wait(3000);
 	System.out.println("The high score right now is a 100, held by Mr. PaKman"); //************************************************
 	wait(2600);
-	System.out.println("Yeah, you can beat that.");
+	System.out.println("Yeah, you can beat that.\n\n");
 	wait(2000);
-	System.out.println("Instructions:\nMr. PaKman has unleashed his ghosts on you! \nUse your WASD keys to eat the pellets so you can be strong enough to defeat the ghosts in hand-to-hand combat. \nOr not. I don't care. Defeat one level by eating enough pellets to move on!");
+	System.out.println("Instructions:\nMr. PaKman has unleashed his ghosts on you! \nUse your WASD keys to eat the pellets so you can be strong enough to defeat the ghosts in hand-to-hand combat. \nOr not. I don't care. Defeat one level by eating enough pellets to move on!\n");
 	pacmanGame();
     }
 
@@ -461,22 +457,18 @@ public class Tutorial{
 	System.out.println();
 	System.out.println();
 	String spacing = "";
-	if(dinoName.length()>25){
-	    System.out.println("That nickname has too many characters.");
-	    wait(1700);
-	    dinoName();
-	}else{
-	    for(int i = 0; i < 25-dinoName.length(); i++){
-		spacing+=" ";
-	    }
+
+	for(int i = 0; i < 25-dinoName.length(); i++){
 	    spacing+=" ";
-	    System.out.println("1. "+dinoName+spacing+"HI: "+dinoScore);
-	    wait(2000);
-	    System.out.println("2. Tyrannicole               HI: 10");
-	    wait(2000);
-	    System.out.println("3. TexMex                    HI: 9");
-	    wait(2000);
 	}
+	spacing+=" ";
+	System.out.println("1. "+dinoName+spacing+"HI: "+dinoScore);
+	wait(2000);
+	System.out.println("2. Tyrannicole               HI: 10");
+	wait(2000);
+	System.out.println("3. TexMex                    HI: 9");
+	wait(2000);
+	
     }
 
     private static void pacmanName(){
@@ -487,22 +479,16 @@ public class Tutorial{
 	System.out.println();
 	System.out.println();
 	String spacing = "";
-	if(pacmanName.length()>25){
-	    System.out.println("That nickname has too many characters.");
-	    wait(1700);
-	    pacmanName();
-	}else{
-	    for(int i = 0; i < 25-pacmanName.length(); i++){
-		spacing+=" ";
-	    }
+	for(int i = 0; i < 25-pacmanName.length(); i++){
 	    spacing+=" ";
-	    System.out.println("1. "+pacmanName+spacing+"HI: "+pacmanScore);
-	    wait(2000);
-	    System.out.println("2. Mr. PaKman                HI: 100"); 
-	    wait(2000);
-	    System.out.println("3. PackYourBags              HI: 99"); //******CHANGE NAMES******************************************************
-	    wait(2000);
 	}
+	spacing+=" ";
+	System.out.println("1. "+pacmanName+spacing+"HI: "+pacmanScore);
+	wait(2000);
+	System.out.println("2. Mr. PaKman                HI: 100"); 
+	wait(2000);
+	System.out.println("3. PackYourBags              HI: 99"); //******CHANGE NAMES******************************************************
+	wait(2000);
     }
 
     
@@ -531,6 +517,8 @@ public class Tutorial{
 
     private static void scene4(){
 	System.out.println();
+	System.out.println("Good job! However, you stumble a bit when you see the clock.\n");
+	wait(3000);
 	System.out.println("You realize how much time you've wasted, so you try to scurry out of the arcade before you're stuck there forever.");
 	wait(4000);
 	System.out.println("On your way out, you see <INSERT PONG NAME> in front of the entrance.\n"); //****************************************************
@@ -597,7 +585,7 @@ public class Tutorial{
 	wait(2700);
 	System.out.println("\nWe hope you enjoyed this adventure as much as we enjoyed crafting it!");
 	wait(2800);
-	System.out.println("\n'til next time, "+name+"! :)");
+	System.out.println("\n'til next time, "+name+"! :)\n");
 	wait(1700);
         System.out.println(" _______  __   __  _______     _______  __    _  ______  ");
 	wait(1000);
@@ -611,7 +599,7 @@ public class Tutorial{
 	wait(1000);
 	System.out.println("  |   |  |   _   ||   |___    |   |___ | | |   ||       |");
 	wait(1000);
-	System.out.println("  |___|  |__| |__||_______|   |_______||_|  |__||______| ");
+	System.out.println("  |___|  |__| |__||_______|   |_______||_|  |__||______| \n");
     }
     
     private static void wait(int millis){
