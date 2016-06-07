@@ -64,6 +64,45 @@ Development Log <br><ul>
      <li>
        05/24/16: Nicole - put everything together to be run from Tutorial.java; couple of bug fixes done; added to tutorial
      </li>
+     <li>
+     	05/26/16: Noah - fixed infinite jumping, changed score to be every obstacle rather than time, everything working without BUGS but could be optimized
+     </li>
+     <li>
+     	05/26/16: Nicole - added length to snake, but it's triggering gameOver() at wrong times
+     </li>
+     <li>
+     	05/29/16: Noah - finished up lasting errors in Pong (still need to fix certain key errors e.g. w key not registering) no official bugs as of now
+     </li>
+     <li>
+       05/29/16: Nicole - fixed the bug in Snake that didn't let anyone win; found a new bug, which triggers the gameOver() at wrong times.
+     </li>
+     <li>
+     	05/30/16: Noah - began Pacman! setting up board, Ghosts, player
+     </li>
+     <li>
+     	06/01/16: Nicole - did some debugging; began Doggie.java, with its basic outlines and scanners.
+     </li>
+     <li>
+     	06/02/16: Nicole - finally got the ascii dog down (without those tedious "illegal characters"; made the toString() to return the doggie and its stats to the user via the terminal.
+     </li>
+     <li>
+     	06/02/16: Noah - continued Pacman board
+     </li>
+     <li>
+     	06/03/16: Noah - continued Pacman board, began movement basics
+     </li>
+     <li>
+     	06/03/16: Nicole - worked on skeleton of Doggie.java; instructions of Doggie.java done
+     </li>
+     <li>
+     	06/04/16: Noah - added lives and death sequence to Pacman
+     </li>
+     <li>
+     	06/05/16: Nicole - added interactions with the dog -- eat, sleep and play; Doggie.java done; Tutorial.java almost done (just needs to integrate Pong and Pacman)
+     </li>
+     <li>
+     	06/06/16: Nicole - debugged Snake completely i think!
+     </li>
  </ul><br><br>
 
  Project plan/outline including your goals prioritized by importance and chronology <br>
@@ -84,16 +123,22 @@ Development Log <br><ul>
  </ul><br>
  Things already done:<br><ul>
 	 <li>
-	 Snake basics down (interaction, running snake, obstacles, etc.) 
+	   Snake
 	 </li>
 	 <li>
-	 Tutorial outline
+	   Tutorial
 	 </li>
 	 <li>
-	   Pong basics
+	   Pong
 	 </li>
 	 <li>
-	   Platformer basics
+	   Platformer
+	 </li>
+	 <li>
+	   Pacman board + movement basics
+	 </li>
+	 <li>
+	   Doggie game
 	 </li>
 </ul><br><br>
 
@@ -101,6 +146,13 @@ Links to the Demo versions, <br>
 what they show about the state of your project, <br> 
 Directions on how to compile/run each version. <br>
 (e.g. what to do to clone the right version) <br> <br>
+<ul>
+	<li>
+	  Clone final2: https://github.com/nicolecheng/final2.git
+	</li>
+	<li>
+	  Compile and run Tutorial.java.
+	</li>
+</ul>
 
-- tetris / snake / nintendogs / pacman / space invaders / pingpong / pinball
 </html>

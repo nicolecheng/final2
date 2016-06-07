@@ -12,14 +12,14 @@ public class Platformer {
     private int score;
     private int timeSinceLastObs;
     private int timeToReach;
-    private boolean keyReady;
+    private int timeSinceLastJump;
     private boolean DEBUG;
     
     public Platformer() {
 	DEBUG = false;
 	jump = 0;
-	keyReady = true;
 	timeSinceLastObs = 0;
+	timeSinceLastJump = 11;
 	timeToReach = (int)(Math.random()*40)+20;
 	//init board
 	board = new char[15][75];
@@ -50,6 +50,16 @@ public class Platformer {
 	obs = new Obstacle[10];
 	obs[0] = new Obstacle((int)(Math.random()*4)+1,(int)(Math.random()*4)+1);
 	obsCreated = 1;
+    }
+
+    public void dump() {
+	try {
+	    for (int i = 0; i < 1000; i++) {
+		int key = System.in.read();
+	    }
+	} catch (IOException e) {
+	    System.out.println("IOException line 61");
+	}
     }
 
     public void updateScore() {
@@ -88,61 +98,33 @@ public class Platformer {
     }
 
     public boolean play() {
-	try {
-	    System.out.println("\033[2J");
-	    System.out.println(this);
-	    for (Obstacle obsX : obs) {
-		if (obsX != null) {
-		    if (obsX.getBotLeft() > 0) {
-			obsX.moveLeft();
-		    } else {
-			remakeFirstObs();
-		    }
-		}
-	    }
-	    if (System.in.available() != 0) {
-		int key = System.in.read();
-		if (keyReady) {
-		    move(key);
-		    keyReady = false;
+	System.out.println("\033[2J");
+	System.out.println(this);
+	for (Obstacle obsX : obs) {
+	    if (obsX != null) {
+		if (obsX.getBotLeft() > 0) {
+		    obsX.moveLeft();
 		} else {
-		    for (int i = 0; i < 1000; i++) {
-			key = System.in.read();
-		    }
+		    remakeFirstObs();
+		    score++;
 		}
 	    }
-	    else {
-		if (jump != 0) {
-		    board[board.length-1-jump][2] = ' ';
-		    board[board.length-1-jump][4] = ' ';
-		    board[board.length-2-jump][3] = ' ';
-		    board[board.length-3-jump][3] = ' ';
-		    board[board.length-4-jump][3] = ' ';
-		    board[board.length-4-jump][2] = ' ';
-		    board[board.length-4-jump][4] = ' ';
-		    jump--;
-		    board[board.length-1-jump][2] = '|';
-		    board[board.length-1-jump][4] = '|';
-		    board[board.length-2-jump][3] = '-';
-		    board[board.length-3-jump][3] = '|';
-		    board[board.length-4-jump][3] = 'v';
-		    board[board.length-4-jump][2] = '.';
-		    board[board.length-4-jump][4] = '.';
-		}
-	    }
-	    timeSinceLastObs++;
-	    checkTime();
-	    score++;
-	    updateScore();
-	    return checkCollision();
-	} catch (IOException e) {
-	    System.out.println("IOException");
 	}
-	return false;
+	timeSinceLastJump++;
+	if (timeSinceLastJump < 10) {
+	    moveUp();
+	}
+	if (timeSinceLastJump > 10 && timeSinceLastJump < 20) {
+	    moveDown();
+	}
+	timeSinceLastObs++;
+	checkTime();
+	updateScore();
+	return checkCollision();
     }
 
-    public void move(int key) {
-	if (key == 0x77 && (jump == 0 || jump == 1 || jump == 2 || jump == 3)) {
+    public void moveUp() {
+	if (jump < 9) {
 	    board[board.length-1-jump][2] = ' ';
 	    board[board.length-1-jump][4] = ' ';
 	    board[board.length-2-jump][3] = ' ';
@@ -151,6 +133,26 @@ public class Platformer {
 	    board[board.length-4-jump][2] = ' ';
 	    board[board.length-4-jump][4] = ' ';
 	    jump++;
+	    board[board.length-1-jump][2] = '|';
+	    board[board.length-1-jump][4] = '|';
+	    board[board.length-2-jump][3] = '-';
+	    board[board.length-3-jump][3] = '|';
+	    board[board.length-4-jump][3] = 'v';
+	    board[board.length-4-jump][2] = '.';
+	    board[board.length-4-jump][4] = '.';
+	}
+    }
+
+    public void moveDown() {
+	if (jump > 0) {
+	    board[board.length-1-jump][2] = ' ';
+	    board[board.length-1-jump][4] = ' ';
+	    board[board.length-2-jump][3] = ' ';
+	    board[board.length-3-jump][3] = ' ';
+	    board[board.length-4-jump][3] = ' ';
+	    board[board.length-4-jump][2] = ' ';
+	    board[board.length-4-jump][4] = ' ';
+	    jump--;
 	    board[board.length-1-jump][2] = '|';
 	    board[board.length-1-jump][4] = '|';
 	    board[board.length-2-jump][3] = '-';
@@ -220,12 +222,14 @@ public class Platformer {
 	}
     }
 
-    public void setReady() {
-	keyReady = true;
-    }
-
     public int getScore() {
 	return score;
+    }
+    public int tSLJ() {
+	return timeSinceLastJump;
+    }
+    public void setTSLJ(int TSLJ) {
+	timeSinceLastJump = TSLJ;
     }
     
     //Thanks to Graham King from darkcoding.net for the lesson on making the terminal interactive
@@ -243,10 +247,18 @@ public class Platformer {
 			break;
 		    }
 		}
-		while (!wait(100,x)) {}
-		p.setReady();
+		if (p.tSLJ() >= 30 && System.in.available() != 0) {
+		    int key = System.in.read();
+		    if (key == 0x77) {
+			p.moveUp();
+			p.setTSLJ(0);
+		    }
+		}
+		//while (!wait(100,x)) {}
+		Thread.sleep(100);
 	        if (p.play()) {
-		    while (!wait(1000,x)) {}
+		    //while (!wait(1000,x)) {}
+		    Thread.sleep(1000);
 		    System.out.println("\033[2J");
 		    System.out.println("GAME OVER");
 		    return p.getScore();

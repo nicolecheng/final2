@@ -9,7 +9,7 @@ public class Tutorial{
     //private static boolean testMode = false; // with waits or nah?
 
     static String name, snakeName, dinoName, pacmanName;
-    static int snakeScore, dinoScore;
+    static int snakeScore, dinoScore, pacmanScore, pongScore;
   
     public static void main(String [] args){
 	//intro
@@ -70,7 +70,7 @@ public class Tutorial{
 	    wait(2500);
 	    System.out.println("It's an arcade machine! You walk over and see that it's a Snake game.");
 	    wait(3400);
-	    System.out.println("The high score is only a 12, currently being held by someone by the alias, Noah Constricter.");
+	    System.out.println("The high score is only a 7, currently being held by someone by the alias, Noah Constricter.");
 	    wait(3000);
 	    System.out.println("Easy peasy, right? You're going to take this fella down. Are you ready? (y/n)");
 	    Scanner in = new Scanner(System.in);
@@ -118,7 +118,7 @@ public class Tutorial{
 
     private static void playSnake(){
 	snakeScore = Snake.snakeGame();
-	if(snakeScore > 12){// || testMode){
+	if(snakeScore > 7){// || testMode){
 	    scene2();
 	}else{
 	    System.out.println("You didn't beat the high score. Please try again.");
@@ -157,9 +157,9 @@ public class Tutorial{
 	    spacing+="   ";
 	    System.out.println("1. "+snakeName.substring(2)+spacing+"HI: "+snakeScore);
 	    wait(2000);
-	    System.out.println("2. Noah Constricter          HI: 12");
+	    System.out.println("2. Noah Constricter          HI: 7");
 	    wait(2000);
-	    System.out.println("3. MyAnacondaDo              HI: 10");
+	    System.out.println("3. MyAnacondaDo              HI: 6");
 	    wait(2000);
 	}
     }
@@ -386,7 +386,7 @@ public class Tutorial{
 	    wait(3300);	    
 	    System.out.println("Finally, you and Dino Run can have some alone time.");
 	    wait(3300);
-	    System.out.println("Oh, look at that. Tyrannicole has a sorry-looking high score of 17.");
+	    System.out.println("Oh, look at that. Tyrannicole has a sorry-looking high score of 10.");
 	    wait(3600);
 	    System.out.println("You can do so much better.");
 	    wait(2800);
@@ -417,7 +417,7 @@ public class Tutorial{
 
     private static void playDino(){
 	dinoScore = Platformer.dino();
-	if(dinoScore > 17){
+	if(dinoScore > 10){
 	    scene3();
 	}else{
 	    System.out.println("Oof, sorry, you didn't beat the high score. Please try again.");
@@ -442,7 +442,7 @@ public class Tutorial{
 	wait(3000);
 	System.out.println("You rush over, and this time, you actually have tokens.");
 	wait(3000);
-	System.out.println("The high score right now is a 20, held by <ENTER PUNNY NAME HERE>"); //************************************************
+	System.out.println("The high score right now is a 240, held by Mr. PaKman"); //************************************************
 	wait(2600);
 	System.out.println("Yeah, you can beat that.");
 	wait(2000);
@@ -453,7 +453,6 @@ public class Tutorial{
 	System.out.println("Please enter a nickname to record this high score.");
 	Scanner in = new Scanner(System.in);
 	dinoName = in.nextLine();
-	// output data
 	System.out.println();
 	System.out.println();
 	String spacing = "";
@@ -468,9 +467,9 @@ public class Tutorial{
 	    spacing+=" ";
 	    System.out.println("1. "+dinoName+spacing+"HI: "+dinoScore);
 	    wait(2000);
-	    System.out.println("2. Tyrannicole               HI: 17");
+	    System.out.println("2. Tyrannicole               HI: 10");
 	    wait(2000);
-	    System.out.println("3. TexMex                    HI: 16");
+	    System.out.println("3. TexMex                    HI: 9");
 	    wait(2000);
 	}
     }
@@ -492,15 +491,16 @@ public class Tutorial{
 		spacing+=" ";
 	    }
 	    spacing+=" ";
-	    System.out.println("1. "+pacmanName+spacing+"HI: "+dinoScore);
+	    System.out.println("1. "+pacmanName+spacing+"HI: "+pacmanScore);
 	    wait(2000);
-	    System.out.println("2. Tyrannicole               HI: 17"); //***********************************************************************
+	    System.out.println("2. Mr. PaKman                HI: 240"); 
 	    wait(2000);
-	    System.out.println("3. TexMex                    HI: 16"); //******CHANGE NAMES******************************************************
+	    System.out.println("3. PackYourBags              HI: 235"); //******CHANGE NAMES******************************************************
 	    wait(2000);
 	}
     }
 
+    
     private static void pacmanGame(){
 	System.out.println("Are you ready? <y>");
 	Scanner in = new Scanner(System.in);
@@ -508,14 +508,16 @@ public class Tutorial{
 	if(n.toLowerCase().contains("y")){
 	    System.out.println("Great. Let's begin.");
 	    wait(1900);
+	    pacmanScore = Pacman.pacman();
 	    //insert pacman game here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!****************************************************************
-	    //if(pacmanScore>20){
-	    pacmanName();
-	    scene4();
-	    //}else{
-	    //System.out.println("\nShucks, you did not beat the high score. Try again.\n");
-	    //wait(2000);
-	    //}
+	    if(pacmanScore>240){
+		pacmanName();
+		scene4();
+	    }else{
+	    System.out.println("\nShucks, you did not beat the high score. Try again.\n");
+	    wait(2000);
+	    pacmanGame();
+	    }
 	}else{
 	    pacmanGame();
 	}
@@ -542,16 +544,18 @@ public class Tutorial{
 	    System.out.println("Great. Let's begin.");
 	    wait(1900);
 	    //insert pong game here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!****************************************************************
-	    //if(pongScore>opponent){
-	    System.out.println("\nWOOHOO you beat him!");
-	    wait(1500);
-	    System.out.println("He walks away in shame, as you are instantly relieved.");
-	    wait(2000);
-	    scene5();
-	    //}else{
-	    //System.out.println("\nShucks, you did not beat him. Rematch time.\n");
-	    //wait(2000);
-	    //}
+	    pongScore = Pong.pong();
+	    if(pongScore==5){
+		System.out.println("\nWOOHOO you beat him!");
+		wait(1500);
+		System.out.println("He walks away in shame, as you are instantly relieved.");
+		wait(2000);
+		scene5();
+	    }else{
+		System.out.println("\nShucks, you did not beat him. Rematch time.\n");
+		wait(2000);
+		pongGame();
+	    }
 	}else{
 	    pongGame();
 	}
