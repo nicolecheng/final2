@@ -39,11 +39,11 @@ public class Pong {
 	}
         //create the paddles at each end of the board
         pos1 = 6;
-        pos2 = 6;
+        pos2 = 5;
         for (int i = pos1; i < pos1+3; i++) {
             board[i][0] = '#';
         }
-        for (int i = pos2; i < pos2+3; i++) {
+        for (int i = pos2; i < pos2+5; i++) {
             board[i][board[0].length-1] = '#';
         }
 	score1 = 0;
@@ -240,16 +240,22 @@ public class Pong {
 		return 7;
 	    }
 	} else if (ballX == board[0].length-2) {
+	    if (ballY-2 == pos2) {
+		return 3;
+	    }
 	    //dead on
 	    if (ballY-1 == pos2) {
 		return 4;
 	    }
 	    //top
 	    if (ballY == pos2) {
-		return 3;
+		return 4;
 	    }
 	    //bottom
-	    if (ballY-2 == pos2) {
+	    if (ballY+1 == pos2) {
+		return 4;
+	    }
+	    if (ballY+2 == pos2) {
 		return 5;
 	    }
 	}
