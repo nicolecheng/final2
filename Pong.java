@@ -154,7 +154,7 @@ public class Pong {
 	if (pos2 == 1) {
 	    dir2 = -1;
 	}
-	if (pos2 == board.length-6) {
+	if (pos2 == board.length-7) {
 	    dir2 = 1;
 	}
 	if (dir2 == 1) {
@@ -164,8 +164,8 @@ public class Pong {
 	}
 	if (dir2 == -1) {
 	    pos2++;
-	    board[pos2][board[0].length-1] = ' ';
-	    board[pos2+6][board[0].length-1] = '#';
+	    board[pos2-1][board[0].length-1] = ' ';
+	    board[pos2+5][board[0].length-1] = '#';
 	}
     }
 
