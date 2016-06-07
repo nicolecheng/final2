@@ -361,6 +361,9 @@ public class Pong {
 	try {
 	    setTerminalToCBreak();
 	    while (score1 < 5 && score2 < 5) {
+		if (speed == 0) {
+		    return score1;
+		}
 		if (!play()) {
 		    return score1;
 		}
