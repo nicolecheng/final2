@@ -12,6 +12,7 @@ import java.util.*;
 public class Pong {
     private char[][] board;
     private int pos1;
+    private int timer;
     private int pos2;
     private int dir2;
     private int difficulty;
@@ -305,6 +306,8 @@ public class Pong {
 	    board[3][board[0].length-4] = Character.forDigit(score2,10);
 	    lastDir = ballMove(getDir(lastDir));
 	    botMove();
+	    checkTimer();
+	    timer++;
 	    return true;
 	}
 	catch (IOException e) {
@@ -313,6 +316,13 @@ public class Pong {
 	return false;
     }
 
+    public void checkTimer() {
+	if (timer == 10) {
+	    speed--;
+	    timer = 0;
+	}
+    }
+    
     public void fixPos() {
 	int r = 0;
 	boolean changed = false;
@@ -348,12 +358,12 @@ public class Pong {
     public int pong() {
 	try {
 	    setTerminalToCBreak();
-	    while (score1 < 10 && score2 < 10) {
+	    while (score1 < 5 && score2 < 5) {
 		if (!play()) {
 		    return score1;
 		}
 		try {
-		    Thread.sleep(100);
+		    Thread.sleep(speed);
 		}
 		catch (InterruptedException e) {
 		}
