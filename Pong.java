@@ -12,7 +12,10 @@ import java.util.*;
 public class Pong {
     private char[][] board;
     private int pos1;
+    private int timer;
+    private int speed;
     private int pos2;
+    private int dir2;
     private int difficulty;
     private int ballX;
     private int ballY;
@@ -23,6 +26,7 @@ public class Pong {
     
     public Pong(int difficulty) {
 	DEBUG = false;
+	dir2 = 1;
         //initialize the board to by an empty 9 by 25 board
         board = new char[15][75];
         for (int r = 0; r < board.length; r++) {
@@ -37,11 +41,11 @@ public class Pong {
 	}
         //create the paddles at each end of the board
         pos1 = 6;
-        pos2 = 7;
+        pos2 = 5;
         for (int i = pos1; i < pos1+3; i++) {
             board[i][0] = '#';
         }
-        for (int i = pos2; i < pos2+3; i++) {
+        for (int i = pos2; i < pos2+5; i++) {
             board[i][board[0].length-1] = '#';
         }
 	score1 = 0;
@@ -51,7 +55,8 @@ public class Pong {
 	ballX = board[0].length/2;
 	ballY = board.length/2;
 	lastDir = 4;
-        
+        timer = 0;
+	speed = 200;
         this.difficulty = difficulty; //set difficulty
     }
     
@@ -113,11 +118,11 @@ public class Pong {
 		board[i][0] = ' ';
 	    }
 	    pos1 = 6;
-	    pos2 = 6;
+	    pos2 = 4;
 	    for (int i = pos1; i < pos1+3; i++) {
 		board[i][0] = '#';
 	    }
-	    for (int i = pos2; i < pos2+3; i++) {
+	    for (int i = pos2; i < pos2+5; i++) {
 		board[i][board[0].length-1] = '#';
 	    }
 	    board[board.length/2][board[0].length/2] = '*';
@@ -129,9 +134,11 @@ public class Pong {
 
     public void move(int key) {
         if (key == 0x77 && pos1 > 0) {
-            board[pos1][0] = '#';
+	    if (pos1 > 1) {
+		board[pos1-1][0] = '#';
+	    }
 	    if (inBounds(pos1+3,board) && pos1+3 != 14) {
-		board[pos1+3][0] = ' ';
+		board[pos1+2][0] = ' ';
 	    }
             pos1--;
         }
@@ -139,9 +146,30 @@ public class Pong {
 	    if (pos1 != 0) {
 		board[pos1][0] = ' ';
 	    }
-            board[pos1+3][0] = '#';
+	    if (inBounds(pos1+3,board)) {
+		board[pos1+3][0] = '#';
+	    }
             pos1++;
         }
+    }
+
+    public void botMove() {
+	if (pos2 == 1) {
+	    dir2 = -1;
+	}
+	if (pos2 == board.length-7) {
+	    dir2 = 1;
+	}
+	if (dir2 == 1) {
+	    pos2--;
+	    board[pos2][board[0].length-1] = '#';
+	    board[pos2+6][board[0].length-1] = ' ';
+	}
+	if (dir2 == -1) {
+	    pos2++;
+	    board[pos2-1][board[0].length-1] = ' ';
+	    board[pos2+5][board[0].length-1] = '#';
+	}
     }
 
     public int ballMove(int dir) {
@@ -207,16 +235,22 @@ public class Pong {
 		return 7;
 	    }
 	} else if (ballX == board[0].length-2) {
+	    if (ballY-2 == pos2) {
+		return 3;
+	    }
 	    //dead on
 	    if (ballY-1 == pos2) {
 		return 4;
 	    }
 	    //top
 	    if (ballY == pos2) {
-		return 3;
+		return 4;
 	    }
 	    //bottom
-	    if (ballY-2 == pos2) {
+	    if (ballY+1 == pos2) {
+		return 4;
+	    }
+	    if (ballY+2 == pos2) {
 		return 5;
 	    }
 	}
@@ -267,12 +301,15 @@ public class Pong {
 	    if (System.in.available() != 0) {
 		int key = System.in.read();
 		move(key);
-		fixPos();
+		//fixPos();
 	    }
 	    reset();
 	    board[3][3] = Character.forDigit(score1,10);
 	    board[3][board[0].length-4] = Character.forDigit(score2,10);
 	    lastDir = ballMove(getDir(lastDir));
+	    botMove();
+	    checkTimer();
+	    timer++;
 	    return true;
 	}
 	catch (IOException e) {
@@ -281,6 +318,13 @@ public class Pong {
 	return false;
     }
 
+    public void checkTimer() {
+	if (timer == 10) {
+	    speed--;
+	    timer = 0;
+	}
+    }
+    
     public void fixPos() {
 	int r = 0;
 	boolean changed = false;
@@ -316,12 +360,15 @@ public class Pong {
     public int pong() {
 	try {
 	    setTerminalToCBreak();
-	    while (score1 < 10 && score2 < 10) {
+	    while (score1 < 5 && score2 < 5) {
+		if (speed == 0) {
+		    return score1;
+		}
 		if (!play()) {
 		    return score1;
 		}
 		try {
-		    Thread.sleep(100);
+		    Thread.sleep(speed);
 		}
 		catch (InterruptedException e) {
 		}

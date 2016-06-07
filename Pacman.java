@@ -13,6 +13,7 @@ public class Pacman {
     private int pacY;
     private int timer;
     private int direction;
+    private int speed;
     private int[][] regCoords;
     private char[][] board;
     private Ghost[] ghosts;
@@ -25,11 +26,12 @@ public class Pacman {
     public Pacman() {
 	score = 0;
 	lives = 3;
+	speed = 500;
 	//board setup
 	board = new char[36][28];
 	setup();
 	//245 to start
-	int[][] regCoords = new int[245][2];
+	regCoords = new int[245][2];
 	int pos = 0;
 	for (int r = 0; r < board.length; r++) {
 	    for (int c = 0; c < board[0].length; c++) {
@@ -40,20 +42,27 @@ public class Pacman {
 		}
 	    }
 	}
+	score--;
+	try {
+	    Thread.sleep(5000);
+	}
+	catch (InterruptedException e) {
+	    System.out.println("InterruptedException");
+	}
     }
 
     public boolean play() {
 	System.out.println("\033[2J");
 	System.out.println(this);
-        red.go();
-	blue.go();
-	pink.go();
-	orange.go();
-	checkTeleport();
-	checkTime();
-	updateGhosts();
+	updateScore();
+        updateLives();
+	System.out.println("pac " + pacX + " " + pacY);
+	System.out.println("red " + red.getX() + " " + red.getY());
+	System.out.println("blu " + blue.getX() + " " + blue.getY());
+	System.out.println("pnk " + pink.getX() + " " + pink.getY());
+	System.out.println("org " + orange.getX() + " " + orange.getY());
 	try {
-	    Thread.sleep(1000);
+	    Thread.sleep(speed);
 	} catch (InterruptedException e) {
 	    System.out.println("InterruptedException");
 	}
@@ -61,7 +70,18 @@ public class Pacman {
 	    if (System.in.available() != 0) {
 		int key = System.in.read();
 		if (Math.abs(getDir(key)-direction) != 2) {
-		    direction = move(getDir(key));
+		    if (getDir(key) == 0 && board[pacY][pacX+1] != '=') {
+			direction = move(0);
+		    }
+		    if (getDir(key) == 1 && board[pacY-1][pacX] != '=') {
+			direction = move(1);
+		    }
+		    if (getDir(key) == 2 && board[pacY][pacX-1] != '=') {
+			direction = move(2);
+		    }
+		    if (getDir(key)== 3 && board[pacY+1][pacX] != '=') {
+			direction = move(3);
+		    }
 		}
 	    }
 	    else {
@@ -71,9 +91,20 @@ public class Pacman {
 	    System.out.println("IOException");
 	}
 	timer++;
-	updateScore();
-        updateLives();
-        return checkGameOver();
+        red.go();
+	blue.go();
+	pink.go();
+	orange.go();
+	checkTeleport();
+	updateGhosts();
+	checkTime();
+        if (!checkGameOver()) {
+	    return false;
+	}
+	else if (!checkLevelComplete()) {
+	    return false;
+	}
+	return true;
     }
 
     public void updateScore() {
@@ -216,7 +247,8 @@ public class Pacman {
 	board[0][13] = 'O';
 	board[0][14] = 'R';
 	board[0][15] = 'E';
-	board[2][14] = Character.forDigit(score/10,10);
+	board[2][13] = Character.forDigit(score/100,10);
+	board[2][14] = Character.forDigit((score/10)%10,10);
 	board[2][15] = Character.forDigit(score%10,10);
 	board[20][11] = 'R';
 	board[20][12] = 'E';
@@ -371,6 +403,7 @@ public class Pacman {
 	    }
 	}
     }
+    
     public boolean checkGameOver() { //true if player can continue playing, false otherwise
 	if (lives == 0) {
 	    gameOver();
@@ -378,6 +411,7 @@ public class Pacman {
 	}
 	return true;
     }
+    
     public void gameOver() {
         System.out.println("\033[2J");
 	for (int i = 0; i < 18; i++) {
@@ -389,6 +423,7 @@ public class Pacman {
 	    System.out.println();
 	}
     }
+    
     public void checkTeleport() {
 	if (pacX == 0 && pacY == 17 && direction == 2) {
 	    board[pacY][pacX] = ' ';
@@ -401,14 +436,15 @@ public class Pacman {
 	    board[pacY][pacX] = '<';
 	}
 	for (Ghost g : ghosts) {
-	    if (g.getX() == 0 && g.getY() == 17 && g.getDirection() == 2) {
+	    if (g.getX() == 1 && g.getY() == 17 && g.getDirection() == 2) {
 	        g.setDirection(0);
 	    }
-	    if (g.getX() == 27 && g.getY() == 17 && g.getDirection() == 0) {
+	    if (g.getX() == 26 && g.getY() == 17 && g.getDirection() == 0) {
 		g.setDirection(2);
 	    }
 	}
     }
+    
     public void checkTime() {		
 	ghosts[0].setFreedom(true);
 	if (timer == 5) {
@@ -435,6 +471,31 @@ public class Pacman {
 	    ghosts[3].setYX(14,14);
 	}
     }
+
+    public boolean checkLevelComplete() {
+	if (score % 245 == 0 && timer != 0) {
+	    speed -= 100;
+	    if (speed == 0) {
+		gameOver2();
+		return false;
+	    }
+	    setup();
+	}
+	return true;
+    }
+
+     public void gameOver2() {
+        System.out.println("\033[2J");
+	for (int i = 0; i < 18; i++) {
+	    System.out.println();
+	}
+	System.out.println("YOU WIN!");
+	System.out.println("SCORE: "+score);
+	for (int i = 20; i < 36; i++) {
+	    System.out.println();
+	}
+    }
+    
     public int move(int dir) {
 	if (dir == 0 && pacX < 27 && board[pacY][pacX+1] != '=') {
 	    board[pacY][pacX] = ' ';
@@ -806,6 +867,8 @@ public class Pacman {
     public int pacman() {
 	try {
 	    setTerminalToCBreak();
+	    System.out.println("YOU HAVE 5 SECONDS TO EXPAND YOUR TERMINAL SCREEN SO IT FITS AT LEAST 36 LINES");
+	    System.out.println("                             (ROUGHLY HALF THE SCREEN)");
 	    while (true) {
 		if (!play()) {
 		    return score;
