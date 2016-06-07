@@ -172,7 +172,7 @@ public class Pong {
 	if (pos2 == 1) {
 	    dir2 = -1;
 	}
-	if (pos2 == board.length-2) {
+	if (pos2 == board.length-4) {
 	    dir2 = 1;
 	}
     }
