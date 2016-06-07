@@ -156,7 +156,7 @@ public class Tutorial{
 	    for(int i = 0; i < 25-snakeName.length(); i++){
 		spacing+=" ";
 	    }
-	    spacing+="   ";
+	    spacing+=" ";//  ";
 	    System.out.println("1. "+snakeName+spacing+"HI: "+snakeScore);//.substring(2)+spacing+"HI: "+snakeScore);
 	    wait(2000);
 	    System.out.println("2. Noah Constricter          HI: 7");
