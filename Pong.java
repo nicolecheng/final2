@@ -115,11 +115,11 @@ public class Pong {
 		board[i][0] = ' ';
 	    }
 	    pos1 = 6;
-	    pos2 = 6;
+	    pos2 = 4;
 	    for (int i = pos1; i < pos1+3; i++) {
 		board[i][0] = '#';
 	    }
-	    for (int i = pos2; i < pos2+3; i++) {
+	    for (int i = pos2; i < pos2+5; i++) {
 		board[i][board[0].length-1] = '#';
 	    }
 	    board[board.length/2][board[0].length/2] = '*';
@@ -155,7 +155,7 @@ public class Pong {
 	    if (pos2 > 1) {
 		board[pos2-1][board[0].length-1] = '#';
 	    }
-	    if (inBounds(pos2+3,board) && pos2+3 != 14) {
+	    if (inBounds(pos2+5,board) && pos2+3 != 14) {
 		board[pos2+2][board[0].length-1] = ' ';
 	    }
 	    pos2--;
@@ -164,15 +164,15 @@ public class Pong {
 	    if (pos2 != 0) {
 		board[pos2][board[0].length-1] = ' ';
 	    }
-	    if (inBounds(pos2+3,board)) {
-		board[pos2+3][board[0].length-1] = '#';
+	    if (inBounds(pos2+5,board)) {
+		board[pos2+5][board[0].length-1] = '#';
 	    }
 	    pos2++;
 	}
 	if (pos2 == 1) {
 	    dir2 = -1;
 	}
-	if (pos2 == board.length-4) {
+	if (pos2 == board.length-6) {
 	    dir2 = 1;
 	}
     }
