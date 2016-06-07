@@ -54,6 +54,10 @@ public class Pacman {
     public boolean play() {
 	System.out.println("\033[2J");
 	System.out.println(this);
+        red.go();
+	blue.go();
+	pink.go();
+	orange.go();
 	updateScore();
         updateLives();
 	System.out.println("pac " + pacX + " " + pacY);
@@ -91,10 +95,6 @@ public class Pacman {
 	    System.out.println("IOException");
 	}
 	timer++;
-        red.go();
-	blue.go();
-	pink.go();
-	orange.go();
 	checkTeleport();
 	updateGhosts();
 	checkTime();
