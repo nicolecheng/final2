@@ -8,7 +8,7 @@ public class Tutorial{
 
     //private static boolean testMode = false; // with waits or nah?
 
-    static String name, snakeName, dinoName;
+    static String name, snakeName, dinoName, pacmanName;
     static int snakeScore, dinoScore;
   
     public static void main(String [] args){
@@ -34,7 +34,7 @@ public class Tutorial{
 	Scanner in = new Scanner(System.in);
 	s = in.nextLine();
 	getWater(s);
-	System.out.println("The End!");
+	//System.out.println("The End!");
 	// output stats?
     }
   
@@ -436,8 +436,17 @@ public class Tutorial{
 	System.out.println();
 	wait(1500);
 	// cont with scene
-	System.out.println();
-	System.out.println();
+	System.out.println("ALRIGGHHHT. Nice. You beat the high!\n");
+	wait(2200);
+	System.out.println("You look around, and see another one of your absolute favorite games: PACMAN!\n");
+	wait(3000);
+	System.out.println("You rush over, and this time, you actually have tokens.");
+	wait(3000);
+	System.out.println("The high score right now is a 20, held by <ENTER PUNNY NAME HERE>"); //************************************************
+	wait(2600);
+	System.out.println("Yeah, you can beat that.");
+	wait(2000);
+	pacmanGame();
     }
 
      private static void dinoName(){
@@ -466,6 +475,134 @@ public class Tutorial{
 	}
     }
 
+    private static void pacmanName(){
+	System.out.println("Please enter a nickname to record this high score.");
+	Scanner in = new Scanner(System.in);
+	pacmanName = in.nextLine();
+	// output data
+	System.out.println();
+	System.out.println();
+	String spacing = "";
+	if(pacmanName.length()>25){
+	    System.out.println("That nickname has too many characters.");
+	    wait(1700);
+	    pacmanName();
+	}else{
+	    for(int i = 0; i < 25-pacmanName.length(); i++){
+		spacing+=" ";
+	    }
+	    spacing+=" ";
+	    System.out.println("1. "+pacmanName+spacing+"HI: "+dinoScore);
+	    wait(2000);
+	    System.out.println("2. Tyrannicole               HI: 17"); //***********************************************************************
+	    wait(2000);
+	    System.out.println("3. TexMex                    HI: 16"); //******CHANGE NAMES******************************************************
+	    wait(2000);
+	}
+    }
+
+    private static void pacmanGame(){
+	System.out.println("Are you ready? <y>");
+	Scanner in = new Scanner(System.in);
+	String n = in.nextLine();
+	if(n.toLowerCase().contains("y")){
+	    System.out.println("Great. Let's begin.");
+	    wait(1900);
+	    //insert pacman game here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!****************************************************************
+	    //if(pacmanScore>20){
+	    pacmanName();
+	    scene4();
+	    //}else{
+	    //System.out.println("\nShucks, you did not beat the high score. Try again.\n");
+	    //wait(2000);
+	    //}
+	}else{
+	    pacmanGame();
+	}
+    }
+
+    private static void scene4(){
+	System.out.println();
+	System.out.println("You realize how much time you've wasted, so you try to scurry out of the arcade before you're stuck there forever.");
+	wait(4000);
+	System.out.println("On your way out, you see <INSERT PONG NAME> in front of the entrance.\n"); //****************************************************
+	wait(3000);
+	System.out.println("Drat. You really hate this guy...\n");
+	wait(2200);
+	System.out.println("He challenges you to a game of ping pong, and  you know that in order to protect your title, you had to accept the challenge.\n");
+	wait(4000);
+	pongGame();
+    }
+
+     private static void pongGame(){
+	System.out.println("Are you ready to play? <y>");
+	Scanner in = new Scanner(System.in);
+	String n = in.nextLine();
+	if(n.toLowerCase().contains("y")){
+	    System.out.println("Great. Let's begin.");
+	    wait(1900);
+	    //insert pong game here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!****************************************************************
+	    //if(pongScore>opponent){
+	    System.out.println("\nWOOHOO you beat him!");
+	    wait(1500);
+	    System.out.println("He walks away in shame, as you are instantly relieved.");
+	    wait(2000);
+	    scene5();
+	    //}else{
+	    //System.out.println("\nShucks, you did not beat him. Rematch time.\n");
+	    //wait(2000);
+	    //}
+	}else{
+	    pongGame();
+	}
+    }
+
+    private static void scene5(){
+	System.out.println();
+	System.out.println("You finallly get home, but you see a box with a letter attached to it.");
+	wait(2700);
+	System.out.println("Being the type of person you are, you open the box before reading the letter.");
+	wait(2800);
+	System.out.println("In it, you find a puppy... Weird. This isn't the box of Insomnia Cookies that you ordered...");
+	wait(3000);
+	System.out.println();
+	System.out.println("OK, now that you're utterly confused (and quite concerned), you open up the letter and begin reading.\n");
+	wait(3400);
+	Doggie.doggieDayCare();
+	System.out.println();
+	closing();
+    }
+
+    private static void closing(){
+	System.out.println("AH, congratulations, "+name+". You have completed this adventure with flying colors.");
+	wait(2800);
+	System.out.println("Nikoahla would like to express our kudos.");
+	wait(2600);
+	System.out.println("\nAnyway, now that you have beaten all of these high scores, become ping-pong champion, and nurtured a puppy...");
+	wait(3000);
+	System.out.println("We are proud to declare you coolest of the cool!!");
+	wait(2600);
+	System.out.println("\nYou have completed what you set our to do, which is admirable.");
+	wait(2700);
+	System.out.println("\nWe hope you enjoyed this adventure as much as we enjoyed crafting it!");
+	wait(2800);
+	System.out.println("\n'til next time, "+name+"! :)");
+	wait(1700);
+        System.out.println(" _______  __   __  _______     _______  __    _  ______  ");
+	wait(1000);
+	System.out.println("|       ||  | |  ||       |   |       ||  |  | ||      | ");
+	wait(1000);
+	System.out.println("|_     _||  |_|  ||    ___|   |    ___||   |_| ||  _    |");
+	wait(1000);
+	System.out.println("  |   |  |       ||   |___    |   |___ |       || | |   |");
+	wait(1000);
+	System.out.println("  |   |  |       ||    ___|   |    ___||  _    || |_|   |");
+	wait(1000);
+	System.out.println("  |   |  |   _   ||   |___    |   |___ | | |   ||       |");
+	wait(1000);
+	System.out.println("  |___|  |__| |__||_______|   |_______||_|  |__||______| ");
+    }
+    
     private static void wait(int millis){
 	//if(!testMode && !Snake.started){ // only wait if not on testMode
 	    try {

@@ -221,7 +221,7 @@ public class Snake{
 	//board = null;
 	System.out.println("GAME OVER.");
 	wait(1800);
-	System.out.println("Press the up arrow key to continue.");
+	System.out.println("Hold down the up arrow key to continue.");
 	wait(2800);
 	done=true;
     }
