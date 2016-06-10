@@ -290,7 +290,7 @@ public class Snake{
 		if (System.in.available() != 0) { //if a button is pressed:
 		    int key = System.in.read();
 		    //System.out.println(key);
-		    if (key == 0x1B) { //if the button pressed is the esc key:
+		    if (key == 0x6B) { //if the button pressed is the esc key:
 			break; //stop the loop
 		    }
 		    m.move(key);

@@ -361,6 +361,10 @@ public class Pong {
 	try {
 	    setTerminalToCBreak();
 	    while (score1 < 5 && score2 < 5) {
+            int key = System.in.read();
+            if (key == 0x6B) {
+                break;   
+            }
 		if (speed == 0) {
 		    return score1;
 		}

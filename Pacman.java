@@ -866,6 +866,10 @@ public class Pacman {
 	    System.out.println("YOU HAVE 5 SECONDS TO EXPAND YOUR TERMINAL SCREEN SO IT FITS AT LEAST 36 LINES");
 	    System.out.println("                             (ROUGHLY HALF THE SCREEN)");
 	    while (true) {
+            int key = System.in.read();
+            if (key == 0x6B) {
+                break;   
+            }
 		if (!play()) {
 		    return score;
 		}

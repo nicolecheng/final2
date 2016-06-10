@@ -246,7 +246,7 @@ public class Platformer {
 		long x = System.currentTimeMillis();
 		if (System.in.available() != 0) {
 		    int key = System.in.read();
-		    if (key == 0x73) {
+		    if (key == 0x6B) {
 			break;
 		    }
 		}
