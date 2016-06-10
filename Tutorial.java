@@ -540,7 +540,7 @@ public class Tutorial{
 	    //insert pong game here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!****************************************************************
 	    Pong po = new Pong(0);
 	    pongScore = po.pong();
-	    if(pongScore==5){
+	    if(pongScore>=5){
 		System.out.println("\nWOOHOO you beat him!");
 		wait(1500);
 		System.out.println("He walks away in shame, as you are instantly relieved.");
