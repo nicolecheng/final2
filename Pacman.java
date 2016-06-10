@@ -868,7 +868,7 @@ public class Pacman {
 	    while (true) {
             int key = System.in.read();
             if (key == 0x6B) {
-                break;   
+                return 999;   
             }
 		if (!play()) {
 		    return score;

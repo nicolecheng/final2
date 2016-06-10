@@ -247,7 +247,7 @@ public class Platformer {
 		if (System.in.available() != 0) {
 		    int key = System.in.read();
 		    if (key == 0x6B) {
-			break;
+			return 999;
 		    }
 		}
 		if (p.tSLJ() >= 30 && System.in.available() != 0) {

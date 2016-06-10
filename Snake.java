@@ -291,7 +291,7 @@ public class Snake{
 		    int key = System.in.read();
 		    //System.out.println(key);
 		    if (key == 0x6B) { //if the button pressed is the esc key:
-			break; //stop the loop
+			return 999; //stop the loop
 		    }
 		    m.move(key);
 		}
